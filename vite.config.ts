@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 export default defineConfig({
-  // GitHub Pages serves the app at https://bookshelf-web.github.io/bookshelf-frontend/.
+  // GitHub Pages serves the app at https://tsundoku-books.github.io/bookshelf-frontend/.
   // Everywhere else (dev, Docker, E2E suites) it is served from the root.
   base: process.env.GITHUB_PAGES === 'true' ? '/bookshelf-frontend/' : '/',
   plugins: [react()],

@@ -10,7 +10,7 @@
 Single-page web app for managing a personal book library. It is the client for
 the [BookShelf API](https://github.com/bookshelf-web/bookshelf-api).
 
-**Live demo:** <https://bookshelf-web.github.io/bookshelf-frontend/>
+**Live demo:** <https://tsundoku-books.github.io/bookshelf-frontend/>
 
 > The demo API runs on Render's free tier and sleeps when idle, so the first
 > request after a period of inactivity can take up to a minute.
