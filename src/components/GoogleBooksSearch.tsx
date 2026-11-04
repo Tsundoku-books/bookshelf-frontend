@@ -40,14 +40,14 @@ export function GoogleBooksSearch({ onSelect, disabled }: GoogleBooksSearchProps
 
   return (
     <section
-      className="mb-6 rounded-xl border border-gray-200 bg-gray-50 p-4"
+      className="mb-6 rounded-xl border border-border bg-background p-4"
       aria-labelledby="google-books-title"
       data-testid="google-books-search"
     >
-      <h3 id="google-books-title" className="text-sm font-semibold text-gray-900">
+      <h3 id="google-books-title" className="text-sm font-semibold text-heading">
         {t('bookForm.import.title')}
       </h3>
-      <p className="mb-3 text-xs text-gray-500">{t('bookForm.import.hint')}</p>
+      <p className="mb-3 text-xs text-text-muted">{t('bookForm.import.hint')}</p>
 
       <div className="flex gap-2">
         <input
@@ -59,7 +59,7 @@ export function GoogleBooksSearch({ onSelect, disabled }: GoogleBooksSearchProps
           aria-label={t('bookForm.import.ariaLabel')}
           data-testid="google-books-query"
           disabled={disabled}
-          className="min-w-0 flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          className="min-w-0 flex-1 rounded-lg border border-border px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
         />
         <Button
           type="button"
@@ -74,13 +74,13 @@ export function GoogleBooksSearch({ onSelect, disabled }: GoogleBooksSearchProps
       </div>
 
       {error && (
-        <p className="mt-3 text-sm text-red-600" role="alert" data-testid="google-books-error">
+        <p className="mt-3 text-sm text-danger" role="alert" data-testid="google-books-error">
           {t('bookForm.import.error')}
         </p>
       )}
 
       {results && results.length === 0 && (
-        <p className="mt-3 text-sm text-gray-500" data-testid="google-books-empty">
+        <p className="mt-3 text-sm text-text-muted" data-testid="google-books-empty">
           {t('bookForm.import.empty')}
         </p>
       )}
@@ -94,16 +94,16 @@ export function GoogleBooksSearch({ onSelect, disabled }: GoogleBooksSearchProps
                 onClick={() => onSelect(suggestion)}
                 disabled={disabled}
                 data-testid={`google-books-result-${index}`}
-                className="flex w-full items-center gap-3 rounded-lg border border-gray-200 bg-white p-2 text-left hover:border-purple-300 hover:bg-purple-50"
+                className="flex w-full items-center gap-3 rounded-lg border border-border bg-surface p-2 text-left hover:border-accent hover:bg-primary/5"
               >
                 {suggestion.coverUrl ? (
                   <img src={suggestion.coverUrl} alt="" className="h-14 w-10 flex-shrink-0 rounded object-cover" />
                 ) : (
-                  <div className="h-14 w-10 flex-shrink-0 rounded bg-gray-100" aria-hidden="true" />
+                  <div className="h-14 w-10 flex-shrink-0 rounded bg-background" aria-hidden="true" />
                 )}
                 <span className="min-w-0">
-                  <span className="block truncate text-sm font-medium text-gray-900">{suggestion.title}</span>
-                  <span className="block truncate text-xs text-gray-500">
+                  <span className="block truncate text-sm font-medium text-text">{suggestion.title}</span>
+                  <span className="block truncate text-xs text-text-muted">
                     {suggestion.author || t('bookForm.import.unknownAuthor')}
                     {suggestion.publishedYear ? ` · ${suggestion.publishedYear}` : ''}
                   </span>

@@ -13,7 +13,7 @@ import type { Role } from '../types/auth'
 const PAGE_SIZE = 10
 const ALL_ROLES: Role[] = ['reader', 'buyer', 'seller', 'admin']
 const FIELD =
-  'rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent'
+  'ts-input w-auto'
 
 interface Loaded {
   key: string
@@ -78,18 +78,18 @@ export function AdminUsersPage() {
   const pagination = loaded?.data?.pagination
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" data-testid="admin-users-page">
+    <div className="min-h-screen bg-background" data-testid="admin-users-page">
       <AppHeader />
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-1">{t('adminUsers.title')}</h2>
-          <p className="text-gray-600">{t('adminUsers.subtitle')}</p>
+          <h2 className="text-3xl font-bold text-heading mb-1">{t('adminUsers.title')}</h2>
+          <p className="text-text-muted">{t('adminUsers.subtitle')}</p>
         </div>
 
         <div className="flex flex-col gap-3 md:flex-row md:items-center" role="search">
           <div className="relative flex-1">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" aria-hidden="true" />
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" aria-hidden="true" />
             <input
               type="search"
               value={searchInput}
@@ -100,7 +100,7 @@ export function AdminUsersPage() {
               className={`w-full pl-9 ${FIELD}`}
             />
           </div>
-          <select
+          <span className="ts-select"><select
             value={role}
             onChange={(e) => {
               setRole(e.target.value as Role | '')
@@ -116,8 +116,8 @@ export function AdminUsersPage() {
                 {t(`roles.${value}`)}
               </option>
             ))}
-          </select>
-          <select
+          </select></span>
+          <span className="ts-select"><select
             value={status}
             onChange={(e) => {
               setStatus(e.target.value as UserStatus | '')
@@ -130,23 +130,23 @@ export function AdminUsersPage() {
             <option value="">{t('adminUsers.statusAll')}</option>
             <option value="active">{t('adminUsers.statusActive')}</option>
             <option value="suspended">{t('adminUsers.statusSuspended')}</option>
-          </select>
+          </select></span>
         </div>
 
         {loaded?.error && (
-          <p className="text-sm text-red-600" role="alert" data-testid="admin-users-error">
+          <p className="text-sm text-danger" role="alert" data-testid="admin-users-error">
             {loaded.error}
           </p>
         )}
 
         {pagination && (
-          <p className="text-sm text-gray-500" data-testid="admin-users-count" aria-live="polite">
+          <p className="text-sm text-text-muted" data-testid="admin-users-count" aria-live="polite">
             {t('adminUsers.resultsCount', { count: pagination.total })}
           </p>
         )}
 
         {!loading && !loaded?.error && users.length === 0 ? (
-          <p className="text-gray-500" data-testid="admin-users-empty">
+          <p className="text-text-muted" data-testid="admin-users-empty">
             {t('adminUsers.empty')}
           </p>
         ) : (
@@ -154,27 +154,25 @@ export function AdminUsersPage() {
             {users.map((user) => (
               <li
                 key={user.id}
-                className="bg-white rounded-xl shadow-sm p-4 flex items-start justify-between gap-4"
+                className="ts-card p-4 flex items-start justify-between gap-4"
                 data-testid={`admin-user-${user.id}`}
               >
                 <div className="min-w-0">
-                  <p className="font-semibold text-gray-900">
+                  <p className="font-semibold text-text">
                     {user.name}
                     {user.id === me?.id && (
-                      <span className="ml-2 text-xs font-normal text-gray-500">({t('adminUsers.you')})</span>
+                      <span className="ml-2 text-xs font-normal text-text-muted">({t('adminUsers.you')})</span>
                     )}
                   </p>
-                  <p className="text-sm text-gray-500 truncate">{user.email}</p>
+                  <p className="text-sm text-text-muted truncate">{user.email}</p>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {user.roles.map((value) => (
-                      <span key={value} className="text-xs bg-gray-100 px-2 py-1 rounded">
+                      <span key={value} className="text-xs bg-background px-2 py-1 rounded">
                         {t(`roles.${value}`)}
                       </span>
                     ))}
                     <span
-                      className={`text-xs px-2 py-1 rounded ${
-                        user.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                      }`}
+                      className={`ts-badge ${user.status === 'active' ? 'ts-badge--success' : 'ts-badge--danger'}`}
                       data-testid={`admin-user-status-${user.id}`}
                     >
                       {user.status === 'active' ? t('adminUsers.statusActive') : t('adminUsers.statusSuspended')}
@@ -265,17 +263,17 @@ function EditUserDialog({
       aria-label={t('adminUsers.editTitle')}
       data-testid="edit-user-dialog"
     >
-      <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 m-auto space-y-4">
-        <h3 className="text-xl font-bold text-gray-900">{t('adminUsers.editTitle')}</h3>
+      <form onSubmit={handleSubmit} className="bg-surface rounded-2xl shadow-2xl max-w-md w-full p-6 m-auto space-y-4">
+        <h3 className="text-xl font-bold text-heading">{t('adminUsers.editTitle')}</h3>
 
         {error && (
-          <p className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm" role="alert" data-testid="edit-user-error">
+          <p className="p-3 bg-danger-subtle border border-danger/30 rounded-lg text-danger text-sm" role="alert" data-testid="edit-user-error">
             {error}
           </p>
         )}
 
         <div>
-          <label htmlFor="edit-user-name" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="edit-user-name" className="block text-sm font-medium text-text mb-1">
             {t('adminUsers.name')}
           </label>
           <input
@@ -289,7 +287,7 @@ function EditUserDialog({
         </div>
 
         <div>
-          <label htmlFor="edit-user-email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="edit-user-email" className="block text-sm font-medium text-text mb-1">
             {t('adminUsers.email')}
           </label>
           <input
@@ -304,10 +302,10 @@ function EditUserDialog({
         </div>
 
         <fieldset>
-          <legend className="block text-sm font-medium text-gray-700 mb-1">{t('adminUsers.roles')}</legend>
+          <legend className="block text-sm font-medium text-text mb-1">{t('adminUsers.roles')}</legend>
           <div className="space-y-1">
             {ALL_ROLES.map((value) => (
-              <label key={value} className="flex items-center gap-2 text-sm text-gray-800">
+              <label key={value} className="flex items-center gap-2 text-sm text-text">
                 <input
                   type="checkbox"
                   checked={roles.includes(value)}
@@ -321,10 +319,10 @@ function EditUserDialog({
         </fieldset>
 
         <div>
-          <label htmlFor="edit-user-status" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="edit-user-status" className="block text-sm font-medium text-text mb-1">
             {t('adminUsers.status')}
           </label>
-          <select
+          <span className="ts-select"><select
             id="edit-user-status"
             value={status}
             onChange={(e) => setStatus(e.target.value as UserStatus)}
@@ -333,7 +331,7 @@ function EditUserDialog({
           >
             <option value="active">{t('adminUsers.statusActive')}</option>
             <option value="suspended">{t('adminUsers.statusSuspended')}</option>
-          </select>
+          </select></span>
         </div>
 
         <div className="flex gap-3 pt-2">
@@ -342,7 +340,7 @@ function EditUserDialog({
           </Button>
           <Button
             type="submit"
-            className="flex-1 bg-purple-600 hover:bg-purple-700"
+            className="flex-1"
             disabled={saving || roles.length === 0}
             data-testid="edit-user-save"
           >

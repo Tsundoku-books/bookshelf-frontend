@@ -4,7 +4,7 @@ import type ptBR from './pt-BR'
 // the build.
 const en: typeof ptBR = {
   common: {
-    appName: 'BookShelf',
+    appName: 'Tsundoku',
     email: 'Email',
     emailPlaceholder: 'you@email.com',
     password: 'Password',
@@ -12,8 +12,10 @@ const en: typeof ptBR = {
     cancel: 'Cancel',
   },
   theme: {
-    toDark: 'Switch to dark mode',
-    toLight: 'Switch to light mode',
+    label: 'Theme',
+    system: 'System',
+    light: 'Light',
+    dark: 'Dark',
   },
   bookStatus: {
     to_read: 'To read',

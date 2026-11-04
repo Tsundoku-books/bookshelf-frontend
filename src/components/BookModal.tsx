@@ -1,3 +1,4 @@
+import { Alert } from './Alert'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BookOpen, X } from 'lucide-react'
@@ -18,8 +19,8 @@ interface BookModalProps {
 }
 
 const INPUT_CLASS =
-  'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent'
-const LABEL_CLASS = 'block text-sm font-medium text-gray-700 mb-1'
+  'ts-input'
+const LABEL_CLASS = 'block text-sm font-medium text-text mb-1'
 
 // Rendered only while open, so the form state starts fresh every time.
 export function BookModal({ isOpen, onClose, bookToEdit, onSuccess }: BookModalProps) {
@@ -125,10 +126,10 @@ function BookForm({ onClose, bookToEdit, onSuccess }: Omit<BookModalProps, 'isOp
   return (
     <div className="fixed inset-0 bg-black/50 flex justify-center z-50 p-4 overflow-y-auto" data-testid="book-modal">
       {/* m-auto centres the card when it fits and keeps its top reachable when it overflows. */}
-      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-6 relative animate-fadeIn m-auto">
+      <div className="bg-surface rounded-2xl shadow-2xl max-w-2xl w-full p-6 relative animate-fadeIn m-auto">
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute top-4 right-4 text-text-muted hover:text-text transition-colors"
           data-testid="modal-close-button"
           aria-label={t('bookForm.close')}
           disabled={loading}
@@ -137,19 +138,19 @@ function BookForm({ onClose, bookToEdit, onSuccess }: Omit<BookModalProps, 'isOp
         </button>
 
         <div className="mb-6">
-          <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-            <BookOpen className="w-6 h-6 text-purple-600" />
+          <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+            <BookOpen className="w-6 h-6 text-heading" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2 className="text-2xl font-bold text-heading">
             {bookToEdit ? t('bookForm.editTitle') : t('bookForm.createTitle')}
           </h2>
-          <p className="text-gray-600 text-sm mt-1">{t('bookForm.subtitle')}</p>
+          <p className="text-text-muted text-sm mt-1">{t('bookForm.subtitle')}</p>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm" role="alert">
+          <Alert tone="danger" role="alert" className="mb-4">
             {error}
-          </div>
+          </Alert>
         )}
 
         {!bookToEdit && <GoogleBooksSearch onSelect={applySuggestion} disabled={loading} />}
@@ -286,7 +287,7 @@ function BookForm({ onClose, bookToEdit, onSuccess }: Omit<BookModalProps, 'isOp
               <label htmlFor="rating" className={LABEL_CLASS}>
                 {t('bookForm.fields.rating')}
               </label>
-              <select
+              <span className="ts-select"><select
                 id="rating"
                 value={rating}
                 onChange={(e) => setRating(e.target.value)}
@@ -300,7 +301,7 @@ function BookForm({ onClose, bookToEdit, onSuccess }: Omit<BookModalProps, 'isOp
                     {t('bookForm.fields.ratingOption', { count: value })}
                   </option>
                 ))}
-              </select>
+              </select></span>
             </div>
           </div>
 
@@ -368,7 +369,7 @@ function BookForm({ onClose, bookToEdit, onSuccess }: Omit<BookModalProps, 'isOp
             </Button>
             <Button
               type="submit"
-              className="flex-1 bg-purple-600 hover:bg-purple-700"
+              className="flex-1"
               disabled={loading}
               data-testid="save-book-button"
             >

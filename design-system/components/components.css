@@ -1,0 +1,109 @@
+/* Tsundoku components. Every value comes from tokens.css; nothing here declares a token. */
+body { background: var(--background); color: var(--text); font-family: var(--font-primary); margin: 0; }
+.ts-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; padding: var(--space-4); }
+.ts-stack { display: grid; gap: var(--space-3); padding: var(--space-4); max-width: 320px; }
+
+/* Theme-specific artwork (logos) that can't recolor itself. */
+.ts-only-dark { display: none; }
+:root[data-theme="dark"] .ts-only-light { display: none; }
+:root[data-theme="dark"] .ts-only-dark { display: revert; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .ts-only-light { display: none; }
+  :root:not([data-theme="light"]) .ts-only-dark { display: revert; }
+}
+
+:where(.ts-btn, .ts-input, .ts-select select, .ts-toggle):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.ts-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 40px; padding: 0 var(--space-6);
+  border: 1px solid transparent; border-radius: var(--radius-sm);
+  font: 500 16px/24px var(--font-primary); cursor: pointer;
+}
+.ts-btn--primary { background: var(--primary); color: var(--on-primary); }
+.ts-btn--secondary { background: var(--secondary); color: var(--on-secondary); border-color: var(--accent); }
+.ts-btn--cta { background: var(--cta); color: var(--on-cta); }
+.ts-btn--ghost { background: transparent; color: var(--heading); }
+.ts-btn--danger { background: var(--danger); color: var(--on-danger); }
+.ts-btn--sm { min-height: 32px; padding: 0 var(--space-4); font-size: 14px; }
+.ts-btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+
+.ts-input, .ts-select select {
+  box-sizing: border-box; width: 100%; min-height: 40px; padding: 0 var(--space-3);
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-field);
+  font: 400 16px/24px var(--font-primary);
+}
+.ts-input::placeholder { color: var(--text-muted); }
+.ts-input--error, .ts-select--error select { border-color: var(--danger); }
+.ts-field-error {
+  display: flex; align-items: center; gap: var(--space-1); margin: var(--space-1) 0 0;
+  font: 400 12px/16px var(--font-primary); color: var(--danger);
+}
+.ts-select { position: relative; display: block; }
+.ts-select select { appearance: none; padding-right: 36px; cursor: pointer; }
+.ts-select::after {
+  content: ""; position: absolute; right: 14px; top: 50%; width: 7px; height: 7px; margin-top: -6px;
+  border-right: 2px solid var(--text); border-bottom: 2px solid var(--text);
+  transform: rotate(45deg); pointer-events: none;
+}
+
+.ts-toggle {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font: 400 16px/24px var(--font-primary); color: var(--text);
+}
+.ts-toggle__track {
+  position: relative; width: 44px; height: 24px; flex: none; box-sizing: border-box;
+  border-radius: var(--radius-pill); background: var(--surface); border: 1px solid var(--accent);
+}
+.ts-toggle__track::after {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px;
+  border-radius: var(--radius-pill); background: var(--background); box-shadow: 0 0 0 1px var(--accent);
+  transition: transform .15s ease;
+}
+.ts-toggle[aria-checked="true"] .ts-toggle__track { background: var(--primary); border-color: var(--primary); }
+.ts-toggle[aria-checked="true"] .ts-toggle__track::after { transform: translateX(20px); box-shadow: none; }
+.ts-toggle--sage[aria-checked="true"] .ts-toggle__track { background: var(--accent); border-color: var(--accent); }
+.ts-toggle--cta[aria-checked="true"] .ts-toggle__track { background: var(--cta); border-color: var(--cta); }
+
+.ts-card { background: var(--surface); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4); }
+.ts-profile { display: grid; gap: var(--space-3); max-width: 340px; }
+.ts-profile__head { display: flex; gap: var(--space-4); align-items: center; }
+.ts-profile__avatar {
+  width: 72px; height: 72px; flex: none; border-radius: var(--radius-pill); background: var(--background);
+  display: grid; place-items: center;
+}
+.ts-profile__avatar img { width: 34px; height: auto; }
+.ts-profile__title { margin: 0; font: 500 20px/28px var(--font-primary); color: var(--text); }
+.ts-profile__subtitle { margin: 0; font: 400 14px/20px var(--font-primary); color: var(--text-muted); }
+.ts-profile__toggles { display: flex; gap: var(--space-2); margin-top: var(--space-1); }
+.ts-profile__actions { display: flex; gap: var(--space-2); }
+.ts-profile__actions .ts-btn { flex: 1; }
+.ts-profile__actions .ts-btn--secondary { background: var(--background); border-color: transparent; color: var(--text); }
+
+.ts-alert {
+  display: flex; gap: var(--space-3); align-items: flex-start;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid; border-radius: var(--radius-sm);
+  font: 400 14px/20px var(--font-primary);
+}
+.ts-alert p { margin: 0; }
+.ts-alert__icon { flex: none; width: 20px; height: 20px; }
+.ts-alert__title { font-weight: 500; }
+
+.ts-badge {
+  display: inline-flex; align-items: center; gap: var(--space-1);
+  padding: 2px var(--space-2);
+  border: 1px solid; border-radius: var(--radius-pill);
+  font: 500 12px/16px var(--font-primary); white-space: nowrap;
+}
+.ts-badge__icon { width: 12px; height: 12px; }
+
+.ts-alert--danger, .ts-badge--danger { background: var(--danger-subtle); border-color: var(--danger); color: var(--danger); }
+.ts-alert--success, .ts-badge--success { background: var(--success-subtle); border-color: var(--success); color: var(--success); }
+.ts-alert--warning, .ts-badge--warning { background: var(--warning-subtle); border-color: var(--warning); color: var(--warning); }
+.ts-alert--info, .ts-badge--info { background: var(--info-subtle); border-color: var(--info); color: var(--info); }

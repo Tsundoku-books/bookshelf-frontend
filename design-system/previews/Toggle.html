@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"><link rel="stylesheet" href="../tokens/tokens.css"><link rel="stylesheet" href="../components/components.css"><script>var t = new URLSearchParams(location.search).get("theme"); if (t) document.documentElement.dataset.theme = t;</script><title>Toggle — preview</title></head>
+<body>
+<div class="ts-stack">
+  <button class="ts-toggle" role="switch" aria-checked="true"><span class="ts-toggle__track"></span>Notifications</button>
+  <button class="ts-toggle ts-toggle--sage" role="switch" aria-checked="true"><span class="ts-toggle__track"></span>Show reading progress</button>
+  <button class="ts-toggle" role="switch" aria-checked="false"><span class="ts-toggle__track"></span>Public profile</button>
+  <button class="ts-toggle ts-toggle--cta" role="switch" aria-checked="true"><span class="ts-toggle__track"></span>List this copy for sale</button>
+</div>
+<script>
+  document.querySelectorAll('.ts-toggle').forEach(function (t) {
+    t.addEventListener('click', function () {
+      t.setAttribute('aria-checked', t.getAttribute('aria-checked') === 'true' ? 'false' : 'true');
+    });
+  });
+</script>
+</body>
+</html>

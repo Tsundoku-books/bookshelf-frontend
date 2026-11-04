@@ -18,7 +18,7 @@ export function StarRating({ rating, testId }: { rating: number; testId?: string
         <Star
           key={index}
           aria-hidden="true"
-          className={`h-4 w-4 ${index < rating ? 'fill-amber-400 text-amber-400' : 'text-gray-300'}`}
+          className={`h-4 w-4 ${index < rating ? 'fill-warning text-warning' : 'text-text-muted'}`}
         />
       ))}
     </div>

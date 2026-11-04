@@ -10,14 +10,14 @@ const LABEL_KEYS: Record<SupportedLanguage, 'language.ptBR' | 'language.en'> = {
 
 const VARIANT_STYLES: Record<Variant, { group: string; active: string; inactive: string }> = {
   onLight: {
-    group: 'border-gray-200 bg-gray-50',
-    active: 'bg-white text-purple-600 shadow-sm',
-    inactive: 'text-gray-500 hover:text-gray-700',
+    group: 'border-border bg-background',
+    active: 'bg-surface text-heading shadow-sm',
+    inactive: 'text-text-muted hover:text-text',
   },
   onDark: {
-    group: 'border-white/30 bg-white/10',
-    active: 'bg-white text-purple-600 shadow-sm',
-    inactive: 'text-white/70 hover:text-white',
+    group: 'border-on-primary/30 bg-on-primary/10',
+    active: 'bg-surface text-heading shadow-sm',
+    inactive: 'text-on-primary/70 hover:text-on-primary',
   },
 }
 

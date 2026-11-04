@@ -1,3 +1,4 @@
+import { Alert } from '../components/Alert'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -10,8 +11,8 @@ import { companiesService } from '../services/companies.service'
 import type { CreateCompanyRequest } from '../types/company'
 
 const INPUT_CLASS =
-  'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent'
-const LABEL_CLASS = 'block text-sm font-medium text-gray-700 mb-1'
+  'ts-input'
+const LABEL_CLASS = 'block text-sm font-medium text-text mb-1'
 
 const EMPTY = {
   cnpj: '',
@@ -80,27 +81,23 @@ export function CompanyFormPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" data-testid="company-form-page">
+    <div className="min-h-screen bg-background" data-testid="company-form-page">
       <AppHeader />
 
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-2xl shadow-sm p-6">
+        <div className="bg-surface rounded-2xl shadow-sm p-6">
           <div className="mb-6">
-            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-              <Building2 className="w-6 h-6 text-purple-600" />
+            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+              <Building2 className="w-6 h-6 text-heading" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900">{t('companyForm.title')}</h2>
-            <p className="text-gray-600 text-sm mt-1">{t('companyForm.subtitle')}</p>
+            <h2 className="text-2xl font-bold text-heading">{t('companyForm.title')}</h2>
+            <p className="text-text-muted text-sm mt-1">{t('companyForm.subtitle')}</p>
           </div>
 
           {error && (
-            <div
-              className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm"
-              role="alert"
-              data-testid="company-form-error"
-            >
+            <Alert tone="danger" role="alert" testId="company-form-error" className="mb-4">
               {error}
-            </div>
+            </Alert>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -140,7 +137,7 @@ export function CompanyFormPage() {
             </div>
 
             <fieldset className="space-y-4">
-              <legend className="text-lg font-semibold text-gray-900">{t('companyForm.addressTitle')}</legend>
+              <legend className="text-lg font-semibold text-text">{t('companyForm.addressTitle')}</legend>
               <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
                 <div className="md:col-span-4">
                   <label htmlFor="company-street" className={LABEL_CLASS}>{t('companyForm.street')} *</label>
@@ -164,14 +161,14 @@ export function CompanyFormPage() {
                 </div>
                 <div className="md:col-span-1">
                   <label htmlFor="company-state" className={LABEL_CLASS}>{t('companyForm.state')} *</label>
-                  <select {...field('state')} className={INPUT_CLASS} required>
+                  <span className="ts-select"><select {...field('state')} className={INPUT_CLASS} required>
                     <option value="" />
                     {BRAZILIAN_STATES.map((uf) => (
                       <option key={uf} value={uf}>
                         {uf}
                       </option>
                     ))}
-                  </select>
+                  </select></span>
                 </div>
                 <div className="md:col-span-2">
                   <label htmlFor="company-zip" className={LABEL_CLASS}>{t('companyForm.zip')} *</label>
@@ -180,7 +177,7 @@ export function CompanyFormPage() {
               </div>
             </fieldset>
 
-            <p className="text-xs text-gray-500">{t('companyForm.verifyNote')}</p>
+            <p className="text-xs text-text-muted">{t('companyForm.verifyNote')}</p>
 
             <div className="flex gap-3 pt-2">
               <Button asChild variant="outline" className="flex-1">
@@ -190,7 +187,7 @@ export function CompanyFormPage() {
               </Button>
               <Button
                 type="submit"
-                className="flex-1 bg-purple-600 hover:bg-purple-700"
+                className="flex-1"
                 disabled={loading}
                 data-testid="company-submit-button"
               >

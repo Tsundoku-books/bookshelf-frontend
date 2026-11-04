@@ -1,9 +1,8 @@
 # CLAUDE.md — BookShelf Frontend
 
-> **Respond to the user in Brazilian Portuguese (pt-BR).**
-> All code, comments, identifiers, commit messages, and docs stay in **English**.
-> **User-facing UI strings go through i18n** (`pt-BR` + `en`) — never hardcode
-> them. Only the chat replies are pt-BR.
+> **User-facing UI strings go through i18n** (`pt-BR` + `en`) — never hardcode them.
+
+> **`design-system/` is the source of truth for the Tsundoku brand** — read `design-system/README.md` before any visual change, and use only its semantic tokens (`--background`, `--surface`, `--text`, `--primary`, `--cta`...) and `ts-*` classes instead of hard-coded colors, fonts or radii.
 
 ## What this is
 
@@ -64,8 +63,6 @@ public/          404.html — SPA-routing fallback for GitHub Pages
 - **Style:** `.tsx` files (pages, components) use **no semicolons**, single
   quotes, 2-space indent — match `App.tsx`. `src/services/*` and `src/types/*`
   use semicolons. Match the file you are editing.
-- **Comments:** only the *why* (a workaround, a non-obvious constraint). Delete
-  comments that restate the code.
 - **Imports:** the `@/` alias resolves in Vite but **not** in `tsc` (no `paths`
   in tsconfig). Prefer relative imports in new files so `npx tsc -b` stays usable.
 - **Roles:** accounts hold combinable roles (`reader`, `buyer`, `seller`, `admin`) carried in the JWT.
@@ -102,14 +99,8 @@ the Actions tab (`workflow_dispatch`). See the `deploy` skill.
 
 ## Git & deploy
 
-- **Conventional Commits**, in English, `type(scope): summary`, matching the
-  existing history. **Never** add `Co-Authored-By`, `Claude-Session`, or any
-  AI-attribution trailer.
-- Do not commit or push unless the user asks. `main` **auto-deploys to GitHub
-  Pages**.
-- Remote: `bookshelf-web/bookshelf-frontend` over SSH (host alias
-  `github.com-thiago8rocha`). The `gh` CLI here is a **read-only** account — it
-  cannot open PRs or Releases on that repo.
+- Conventional Commits (`type(scope): summary`), matching the existing history.
+- `main` **auto-deploys to GitHub Pages**.
 - No `CHANGELOG.md` and no version tags in this repo (the API repo has them).
   `package.json` `version` is static.
 - A `bookshelf-api` contract change can break this app. The coupling points are
@@ -128,16 +119,19 @@ the Actions tab (`workflow_dispatch`). See the `deploy` skill.
 - Data loading goes through `src/hooks/useBookLibrary.ts` (list + stats, optimistic status
   changes). The book list request carries a query string (`page`, `limit`, `sortBy`...), so E2E
   mocks must match it (regex, not an exact `**/api/books` glob).
-- Dark mode remaps the light-palette utilities under `.dark` in `src/index.css` instead of using
-  `dark:` variants. New colours need a matching rule there.
+- Theming: the design-system tokens switch on `prefers-color-scheme` unless `<html data-theme>` is
+  `light`/`dark`; the header `ThemeSelect` (System/Light/Dark, `localStorage` key `theme`) sets it and
+  the inline script in `index.html` applies it before first paint. Tailwind colours map to the
+  semantic tokens (`tailwind.config.js`), so there are no `dark:` variants. Status colours
+  (`danger`/`success`/`warning`/`info`, with `-subtle` fills) are design-system tokens;
+  use them (and `ts-alert`/`ts-badge`) instead of red/green/amber/blue utilities.
 - The service worker (`public/sw.js`) is registered only in production builds and never when
   `navigator.webdriver` is set, so E2E browsers are unaffected.
 - Google Books is called straight from the browser (`services/googleBooks.service.ts`, own axios instance so
   the API token is never sent to Google). E2E specs mock it; never let a test depend on the real service.
 - The dev server and E2E builds serve from `/`; the `/bookshelf-frontend/` base applies only when
   `GITHUB_PAGES=true` (set by the deploy workflow).
-- No local backend/DB on this machine by default. Run `bookshelf-api` separately,
-  or point `VITE_API_URL` at the Render URL, to exercise real data.
+- To exercise real data, run `bookshelf-api` separately or point `VITE_API_URL` at the Render URL.
 
 ## Skills
 

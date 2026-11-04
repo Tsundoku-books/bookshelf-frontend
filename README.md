@@ -52,7 +52,7 @@ the [BookShelf API](https://github.com/bookshelf-web/bookshelf-api).
 - Reading status (to read, reading, read) changed straight from the book card
 - Search by title or author, filter by status and rating, and sorting
 - Paginated book list
-- Dark mode: follows the OS by default, toggle persisted per browser
+- Theme: System / Light / Dark selector in the header, System by default, choice persisted per browser
 - Installable PWA with offline access to the app shell
 - Form validation with localized error messages
 - Internationalization: Brazilian Portuguese and English

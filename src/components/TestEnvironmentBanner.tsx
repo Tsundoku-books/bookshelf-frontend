@@ -8,7 +8,7 @@ export function TestEnvironmentBanner() {
   return (
     <div
       role="note"
-      className="flex items-center justify-center gap-2 rounded-lg border-2 border-dashed border-amber-500 bg-amber-100 px-3 py-2 text-sm font-bold text-amber-900"
+      className="flex items-center justify-center gap-2 rounded-lg border-2 border-dashed border-warning bg-warning-subtle px-3 py-2 text-sm font-bold text-warning"
       data-testid="test-environment-banner"
     >
       <FlaskConical className="h-4 w-4" aria-hidden="true" />

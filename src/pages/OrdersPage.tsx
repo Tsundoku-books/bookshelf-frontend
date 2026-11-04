@@ -46,20 +46,20 @@ export function OrdersPage({ mode }: { mode: 'purchases' | 'sales' }) {
   const other = (order: Order) => (mode === 'sales' ? order.buyer.name : order.seller.name)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" data-testid={`${mode}-page`}>
+    <div className="min-h-screen bg-background" data-testid={`${mode}-page`}>
       <AppHeader />
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-gray-900">{t(mode === 'sales' ? 'sales.title' : 'orders.title')}</h2>
+        <h2 className="text-3xl font-bold text-heading">{t(mode === 'sales' ? 'sales.title' : 'orders.title')}</h2>
 
         {loaded?.error && (
-          <p className="text-sm text-red-600" role="alert" data-testid="orders-error">
+          <p className="text-sm text-danger" role="alert" data-testid="orders-error">
             {loaded.error}
           </p>
         )}
 
         {ready && !loaded.error && orders.length === 0 && (
-          <p className="text-gray-500" data-testid="orders-empty">
+          <p className="text-text-muted" data-testid="orders-empty">
             {t(mode === 'sales' ? 'sales.empty' : 'orders.empty')}
           </p>
         )}
@@ -69,17 +69,17 @@ export function OrdersPage({ mode }: { mode: 'purchases' | 'sales' }) {
             <li key={order.id}>
               <Link
                 to={`/orders/${order.id}`}
-                className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm hover:shadow-md"
+                className="ts-card flex items-center justify-between gap-3 p-4 hover:shadow-md"
                 data-testid={`order-row-${order.id}`}
               >
                 <div className="min-w-0">
-                  <p className="font-medium text-gray-900">{order.items.map((item) => item.title).join(', ')}</p>
-                  <p className="text-xs text-gray-500">
+                  <p className="font-medium text-text">{order.items.map((item) => item.title).join(', ')}</p>
+                  <p className="text-xs text-text-muted">
                     {other(order)} · {new Date(order.createdAt).toLocaleDateString()}
                   </p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
-                  <span className="font-semibold text-gray-900">{formatBRL(order.totalCents)}</span>
+                  <span className="font-semibold text-text">{formatBRL(order.totalCents)}</span>
                   <OrderStatusBadge status={order.status} />
                 </div>
               </Link>

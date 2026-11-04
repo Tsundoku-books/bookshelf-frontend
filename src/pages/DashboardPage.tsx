@@ -1,3 +1,4 @@
+import { Alert } from '../components/Alert'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BookOpen, BookMarked, TrendingUp, BookOpenCheck, SearchX } from 'lucide-react'
@@ -104,115 +105,107 @@ export function DashboardPage() {
   const visibleError = error || deleteError
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" data-testid="dashboard-page">
+    <div className="min-h-screen bg-background" data-testid="dashboard-page">
       <AppHeader />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+          <h2 className="text-3xl font-bold text-heading mb-2">
             {t('dashboard.greeting', { name: user?.name || t('dashboard.greetingFallbackName') })}
           </h2>
-          <p className="text-gray-600">{t('dashboard.subtitle')}</p>
+          <p className="text-text-muted">{t('dashboard.subtitle')}</p>
         </div>
 
         {visibleError && (
-          <div
-            className="mb-6 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm"
-            data-testid="dashboard-error"
-            role="alert"
-          >
+          <Alert tone="danger" role="alert" testId="dashboard-error" className="mb-6">
             {visibleError}
-          </div>
+          </Alert>
         )}
 
         {pendingNotice && (
-          <div
-            className="mb-6 p-3 bg-amber-50 border border-amber-200 rounded-lg text-amber-800 text-sm"
-            role="status"
-            data-testid="edit-pending-notice"
-          >
+          <Alert tone="warning" role="status" testId="edit-pending-notice" className="mb-6">
             {t('pendingEdit.notice')}
-          </div>
+          </Alert>
         )}
 
         {initialLoading ? (
           <div className="text-center py-12">
-            <p className="text-gray-500">{t('dashboard.loading')}</p>
+            <p className="text-text-muted">{t('dashboard.loading')}</p>
           </div>
         ) : (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               <div
-                className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 group cursor-pointer"
+                className="ts-card p-6 hover:shadow-md transition-all border border-border group cursor-pointer"
                 data-testid="stats-total"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-gray-600 text-sm font-medium">{t('dashboard.stats.totalLabel')}</p>
-                  <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-purple-50 transition-colors">
-                    <BookOpen className="w-5 h-5 text-gray-400 group-hover:text-purple-600 transition-colors" />
+                  <p className="text-text-muted text-sm font-medium">{t('dashboard.stats.totalLabel')}</p>
+                  <div className="p-2 bg-background rounded-lg group-hover:bg-primary/5 transition-colors">
+                    <BookOpen className="w-5 h-5 text-text-muted group-hover:text-heading transition-colors" />
                   </div>
                 </div>
-                <p className="text-4xl font-bold text-gray-900 mb-2">{stats?.total || 0}</p>
-                <p className="text-xs text-gray-500">{t('dashboard.stats.totalCaption')}</p>
+                <p className="text-4xl font-bold text-text mb-2">{stats?.total || 0}</p>
+                <p className="text-xs text-text-muted">{t('dashboard.stats.totalCaption')}</p>
               </div>
 
               <div
-                className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl shadow-sm hover:shadow-md transition-all border border-blue-200 group cursor-pointer"
+                className="ts-card p-6 hover:shadow-md transition-all group cursor-pointer"
                 data-testid="stats-to-read"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-blue-700 text-sm font-medium">{t('dashboard.stats.toReadLabel')}</p>
-                  <div className="p-2 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                    <BookMarked className="w-5 h-5 text-blue-500 group-hover:text-blue-600 transition-colors" />
+                  <p className="text-text-muted text-sm font-medium">{t('dashboard.stats.toReadLabel')}</p>
+                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                    <BookMarked className="w-5 h-5 text-heading group-hover:text-heading/80 transition-colors" />
                   </div>
                 </div>
-                <p className="text-4xl font-bold text-blue-900 mb-2">{stats?.byStatus.toRead || 0}</p>
-                <p className="text-xs text-blue-600">{t('dashboard.stats.toReadCaption')}</p>
+                <p className="text-4xl font-bold text-text mb-2">{stats?.byStatus.toRead || 0}</p>
+                <p className="text-xs text-text-muted">{t('dashboard.stats.toReadCaption')}</p>
               </div>
 
               <div
-                className="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl shadow-sm hover:shadow-md transition-all border border-amber-200 group cursor-pointer"
+                className="ts-card p-6 hover:shadow-md transition-all group cursor-pointer"
                 data-testid="stats-reading"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-amber-700 text-sm font-medium">{t('dashboard.stats.readingLabel')}</p>
-                  <div className="p-2 bg-amber-100 rounded-lg group-hover:bg-amber-200 transition-colors">
-                    <BookOpenCheck className="w-5 h-5 text-amber-500 group-hover:text-amber-600 transition-colors" />
+                  <p className="text-text-muted text-sm font-medium">{t('dashboard.stats.readingLabel')}</p>
+                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                    <BookOpenCheck className="w-5 h-5 text-heading group-hover:text-heading/80 transition-colors" />
                   </div>
                 </div>
-                <p className="text-4xl font-bold text-amber-900 mb-2">{stats?.byStatus.reading || 0}</p>
-                <p className="text-xs text-amber-600">{t('dashboard.stats.readingCaption')}</p>
+                <p className="text-4xl font-bold text-text mb-2">{stats?.byStatus.reading || 0}</p>
+                <p className="text-xs text-text-muted">{t('dashboard.stats.readingCaption')}</p>
               </div>
 
               <div
-                className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl shadow-sm hover:shadow-md transition-all border border-green-200 group cursor-pointer"
+                className="ts-card p-6 hover:shadow-md transition-all group cursor-pointer"
                 data-testid="stats-read"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-green-700 text-sm font-medium">{t('dashboard.stats.readLabel')}</p>
-                  <div className="p-2 bg-green-100 rounded-lg group-hover:bg-green-200 transition-colors">
-                    <TrendingUp className="w-5 h-5 text-green-500 group-hover:text-green-600 transition-colors" />
+                  <p className="text-text-muted text-sm font-medium">{t('dashboard.stats.readLabel')}</p>
+                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                    <TrendingUp className="w-5 h-5 text-heading group-hover:text-heading/80 transition-colors" />
                   </div>
                 </div>
-                <p className="text-4xl font-bold text-green-900 mb-2">{stats?.byStatus.read || 0}</p>
-                <p className="text-xs text-green-600">{t('dashboard.stats.readCaption')}</p>
+                <p className="text-4xl font-bold text-text mb-2">{stats?.byStatus.read || 0}</p>
+                <p className="text-xs text-text-muted">{t('dashboard.stats.readCaption')}</p>
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-8 rounded-2xl shadow-xl text-white mb-8">
+            <div className="bg-primary p-8 rounded-2xl shadow-xl text-on-primary mb-8">
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="text-center md:text-left">
                   <h3 className="text-2xl font-bold mb-2">
                     {libraryEmpty ? t('dashboard.cta.titleEmpty') : t('dashboard.cta.titleMore')}
                   </h3>
-                  <p className="text-white/90 mb-4">
+                  <p className="text-on-primary/90 mb-4">
                     {libraryEmpty
                       ? t('dashboard.cta.subtitleEmpty')
                       : t('dashboard.cta.subtitleMore')}
                   </p>
                   <Button
                     onClick={handleAddBook}
-                    className="bg-white text-purple-600 hover:bg-white/90 shadow-lg"
+                    variant="cta" className="shadow-lg"
                     data-testid="add-book-button"
                   >
                     <BookOpen className="w-4 h-4 mr-2" />
@@ -222,26 +215,26 @@ export function DashboardPage() {
                   </Button>
                 </div>
                 <div className="flex-shrink-0">
-                  <div className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                    <BookOpen className="w-16 h-16 text-white" />
+                  <div className="w-32 h-32 bg-on-primary/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <BookOpen className="w-16 h-16 text-on-primary" />
                   </div>
                 </div>
               </div>
             </div>
 
             {libraryEmpty ? (
-              <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+              <div className="ts-card p-12 text-center">
                 <div className="max-w-md mx-auto">
-                  <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <BookOpen className="w-10 h-10 text-gray-400" />
+                  <div className="w-20 h-20 bg-background rounded-full flex items-center justify-center mx-auto mb-4">
+                    <BookOpen className="w-10 h-10 text-text-muted" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('dashboard.empty.title')}</h3>
-                  <p className="text-gray-600 mb-6">{t('dashboard.empty.description')}</p>
+                  <h3 className="text-xl font-semibold text-heading mb-2">{t('dashboard.empty.title')}</h3>
+                  <p className="text-text-muted mb-6">{t('dashboard.empty.description')}</p>
                 </div>
               </div>
             ) : (
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{t('dashboard.bookList.heading')}</h3>
+              <div className="ts-card p-6">
+                <h3 className="text-xl font-bold text-heading mb-4">{t('dashboard.bookList.heading')}</h3>
 
                 <BookFilters
                   search={searchInput}
@@ -266,16 +259,16 @@ export function DashboardPage() {
                 />
 
                 {pagination && (
-                  <p className="mb-4 text-sm text-gray-500" data-testid="book-results-count" aria-live="polite">
+                  <p className="mb-4 text-sm text-text-muted" data-testid="book-results-count" aria-live="polite">
                     {t('dashboard.bookList.resultsCount', { count: pagination.total })}
                   </p>
                 )}
 
                 {!loading && books.length === 0 ? (
                   <div className="py-12 text-center" data-testid="book-no-results">
-                    <SearchX className="mx-auto mb-3 h-10 w-10 text-gray-400" aria-hidden="true" />
-                    <h4 className="text-lg font-semibold text-gray-900">{t('dashboard.filters.noResultsTitle')}</h4>
-                    <p className="text-gray-600">{t('dashboard.filters.noResultsDescription')}</p>
+                    <SearchX className="mx-auto mb-3 h-10 w-10 text-text-muted" aria-hidden="true" />
+                    <h4 className="text-lg font-semibold text-text">{t('dashboard.filters.noResultsTitle')}</h4>
+                    <p className="text-text-muted">{t('dashboard.filters.noResultsDescription')}</p>
                   </div>
                 ) : (
                   <div

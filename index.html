@@ -3,22 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
-    <link rel="apple-touch-icon" href="%BASE_URL%icons/apple-touch-icon.png" />
-    <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
-    <meta name="theme-color" content="#7c3aed" />
+    <link rel="icon" href="%BASE_URL%favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
+    <link rel="manifest" href="%BASE_URL%site.webmanifest" />
+    <meta name="theme-color" content="#004D40" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0F1F1B" media="(prefers-color-scheme: dark)" />
     <script>
-      // Apply the saved (or OS) colour scheme before first paint to avoid a flash.
+      // Apply the saved theme before first paint to avoid a flash; no saved choice follows the system.
       (function () {
         try {
           var stored = localStorage.getItem('theme');
-          var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (dark) document.documentElement.classList.add('dark');
+          if (stored === 'light' || stored === 'dark') document.documentElement.setAttribute('data-theme', stored);
         } catch (e) {}
       })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="BookShelf - Gerencie sua biblioteca pessoal" />
-    <title>BookShelf - Biblioteca Pessoal</title>
+    <meta name="description" content="Tsundoku - Gerencie sua biblioteca pessoal" />
+    <title>Tsundoku</title>
   </head>
   <body>
     <script>

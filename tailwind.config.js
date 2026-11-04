@@ -1,6 +1,14 @@
+// Tailwind 3 cannot apply `/50` opacity to a plain var(), so colours go through color-mix.
+// Without a `/NN` modifier opacityValue is undefined or a var() string, both NaN here.
+const token = (name) => ({ opacityValue }) => {
+  const alpha = Number(opacityValue)
+  return Number.isNaN(alpha)
+    ? `var(${name})`
+    : `color-mix(in srgb, var(${name}) ${alpha * 100}%, transparent)`
+}
+
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: ["class"],
     content: [
       './pages/**/*.{ts,tsx}',
       './components/**/*.{ts,tsx}',
@@ -18,44 +26,47 @@ export default {
       },
       extend: {
         colors: {
-          border: "hsl(var(--border))",
-          input: "hsl(var(--input))",
-          ring: "hsl(var(--ring))",
-          background: "hsl(var(--background))",
-          foreground: "hsl(var(--foreground))",
-          primary: {
-            DEFAULT: "hsl(var(--primary))",
-            foreground: "hsl(var(--primary-foreground))",
+          background: token("--background"),
+          surface: token("--surface"),
+          text: {
+            DEFAULT: token("--text"),
+            muted: token("--text-muted"),
           },
-          secondary: {
-            DEFAULT: "hsl(var(--secondary))",
-            foreground: "hsl(var(--secondary-foreground))",
-          },
-          destructive: {
-            DEFAULT: "hsl(var(--destructive))",
-            foreground: "hsl(var(--destructive-foreground))",
-          },
-          muted: {
-            DEFAULT: "hsl(var(--muted))",
-            foreground: "hsl(var(--muted-foreground))",
-          },
-          accent: {
-            DEFAULT: "hsl(var(--accent))",
-            foreground: "hsl(var(--accent-foreground))",
-          },
-          popover: {
-            DEFAULT: "hsl(var(--popover))",
-            foreground: "hsl(var(--popover-foreground))",
-          },
-          card: {
-            DEFAULT: "hsl(var(--card))",
-            foreground: "hsl(var(--card-foreground))",
-          },
+          heading: token("--heading"),
+          primary: token("--primary"),
+          "on-primary": token("--on-primary"),
+          secondary: token("--secondary"),
+          "on-secondary": token("--on-secondary"),
+          accent: token("--accent"),
+          cta: token("--cta"),
+          "on-cta": token("--on-cta"),
+          border: token("--border"),
+          danger: token("--danger"),
+          "on-danger": token("--on-danger"),
+          "danger-subtle": token("--danger-subtle"),
+          success: token("--success"),
+          "success-subtle": token("--success-subtle"),
+          warning: token("--warning"),
+          "warning-subtle": token("--warning-subtle"),
+          info: token("--info"),
+          "info-subtle": token("--info-subtle"),
+        },
+        fontFamily: {
+          sans: ["var(--font-primary)"],
+          serif: ["var(--font-secondary)"],
         },
         borderRadius: {
-          lg: "var(--radius)",
-          md: "calc(var(--radius) - 2px)",
-          sm: "calc(var(--radius) - 4px)",
+          DEFAULT: "var(--radius-sm)",
+          sm: "var(--radius-sm)",
+          md: "var(--radius-sm)",
+          lg: "var(--radius-sm)",
+          xl: "var(--radius-md)",
+          "2xl": "var(--radius-md)",
+          full: "var(--radius-pill)",
+        },
+        boxShadow: {
+          DEFAULT: "var(--shadow-card)",
+          sm: "var(--shadow-card)",
         },
         keyframes: {
           "accordion-down": {

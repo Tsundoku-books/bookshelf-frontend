@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"><link rel="stylesheet" href="../tokens/tokens.css"><link rel="stylesheet" href="../components/components.css"><script>var t = new URLSearchParams(location.search).get("theme"); if (t) document.documentElement.dataset.theme = t;</script><title>Select — preview</title></head>
+<body>
+<div class="ts-stack">
+  <span class="ts-select">
+    <select aria-label="Shelf">
+      <option>Dropdown</option>
+      <option>Want to read</option>
+      <option>Reading</option>
+      <option>Read</option>
+    </select>
+  </span>
+  <div>
+    <span class="ts-select ts-select--error">
+      <select aria-label="Condition" aria-invalid="true" aria-describedby="condition-error">
+        <option>Choose a condition</option>
+        <option>Like new</option>
+        <option>Good</option>
+        <option>Worn</option>
+      </select>
+    </span>
+    <p class="ts-field-error" id="condition-error">Choose the copy's condition to list it.</p>
+  </div>
+</div>
+</body>
+</html>

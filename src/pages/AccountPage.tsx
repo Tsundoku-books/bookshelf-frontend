@@ -1,3 +1,4 @@
+import { Alert } from '../components/Alert'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -99,32 +100,29 @@ export function AccountPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" data-testid="account-page">
+    <div className="min-h-screen bg-background" data-testid="account-page">
       <AppHeader />
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-1">{t('account.title')}</h2>
-          <p className="text-gray-600">{t('account.subtitle')}</p>
+          <h2 className="text-3xl font-bold text-heading mb-1">{t('account.title')}</h2>
+          <p className="text-text-muted">{t('account.subtitle')}</p>
         </div>
 
         {!hasRole('reader') && (
-          <div
-            className="p-3 bg-amber-50 border border-amber-200 rounded-lg text-amber-800 text-sm"
-            data-testid="library-off-notice"
-          >
+          <Alert tone="warning" testId="library-off-notice">
             {t('account.libraryOff')}
-          </div>
+          </Alert>
         )}
 
-        <section className="bg-white rounded-xl shadow-sm p-6 space-y-6" aria-labelledby="profile-title">
+        <section className="ts-card p-6 space-y-6" aria-labelledby="profile-title">
           <div>
-            <h3 id="profile-title" className="text-xl font-bold text-gray-900 mb-4">
+            <h3 id="profile-title" className="text-xl font-bold text-heading mb-4">
               {t('profile.title')}
             </h3>
             <form onSubmit={handleSaveName} className="flex flex-col gap-3 sm:flex-row sm:items-end">
               <div className="flex-1">
-                <label htmlFor="profile-name" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="profile-name" className="block text-sm font-medium text-text mb-1">
                   {t('profile.name')}
                 </label>
                 <input
@@ -134,14 +132,13 @@ export function AccountPage() {
                     setName(e.target.value)
                     setNameStatus('idle')
                   }}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="ts-input"
                   data-testid="profile-name-input"
                   required
                 />
               </div>
               <Button
                 type="submit"
-                className="bg-purple-600 hover:bg-purple-700"
                 disabled={nameStatus === 'saving' || name.trim() === '' || name === user?.name}
                 data-testid="profile-name-save"
               >
@@ -149,22 +146,22 @@ export function AccountPage() {
               </Button>
             </form>
             {nameStatus === 'saved' && (
-              <p className="mt-2 text-sm text-green-600" role="status" data-testid="profile-name-saved">
+              <p className="mt-2 text-sm text-success" role="status" data-testid="profile-name-saved">
                 {t('profile.nameSaved')}
               </p>
             )}
             {nameError && (
-              <p className="mt-2 text-sm text-red-600" role="alert" data-testid="profile-name-error">
+              <p className="mt-2 text-sm text-danger" role="alert" data-testid="profile-name-error">
                 {nameError}
               </p>
             )}
           </div>
 
-          <form onSubmit={handleChangePassword} className="space-y-3 border-t border-gray-100 pt-6">
-            <h4 className="text-lg font-semibold text-gray-900">{t('profile.passwordTitle')}</h4>
+          <form onSubmit={handleChangePassword} className="space-y-3 border-t border-border pt-6">
+            <h4 className="text-lg font-semibold text-text">{t('profile.passwordTitle')}</h4>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div>
-                <label htmlFor="profile-current-password" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="profile-current-password" className="block text-sm font-medium text-text mb-1">
                   {t('profile.currentPassword')}
                 </label>
                 <input
@@ -172,14 +169,14 @@ export function AccountPage() {
                   type="password"
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="ts-input"
                   data-testid="profile-current-password"
                   autoComplete="current-password"
                   required
                 />
               </div>
               <div>
-                <label htmlFor="profile-new-password" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="profile-new-password" className="block text-sm font-medium text-text mb-1">
                   {t('profile.newPassword')}
                 </label>
                 <input
@@ -187,22 +184,22 @@ export function AccountPage() {
                   type="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="ts-input"
                   data-testid="profile-new-password"
                   autoComplete="new-password"
                   minLength={6}
                   required
                 />
-                <p className="mt-1 text-xs text-gray-500">{t('profile.passwordHint')}</p>
+                <p className="mt-1 text-xs text-text-muted">{t('profile.passwordHint')}</p>
               </div>
             </div>
             {passwordStatus === 'saved' && (
-              <p className="text-sm text-green-600" role="status" data-testid="profile-password-saved">
+              <p className="text-sm text-success" role="status" data-testid="profile-password-saved">
                 {t('profile.passwordSaved')}
               </p>
             )}
             {passwordError && (
-              <p className="text-sm text-red-600" role="alert" data-testid="profile-password-error">
+              <p className="text-sm text-danger" role="alert" data-testid="profile-password-error">
                 {passwordError}
               </p>
             )}
@@ -217,25 +214,25 @@ export function AccountPage() {
           </form>
         </section>
 
-        <section className="bg-white rounded-xl shadow-sm p-6" aria-labelledby="roles-title">
-          <h3 id="roles-title" className="text-xl font-bold text-gray-900 mb-4">
+        <section className="ts-card p-6" aria-labelledby="roles-title">
+          <h3 id="roles-title" className="text-xl font-bold text-heading mb-4">
             {t('account.rolesTitle')}
           </h3>
           <RoleSelector value={selected} onChange={setSelected} disabled={saving} testIdPrefix="account-role" />
 
           {saveError && (
-            <p className="mt-3 text-sm text-red-600" role="alert" data-testid="account-error">
+            <p className="mt-3 text-sm text-danger" role="alert" data-testid="account-error">
               {saveError}
             </p>
           )}
           {saved && (
-            <p className="mt-3 text-sm text-green-600" role="status" data-testid="account-saved">
+            <p className="mt-3 text-sm text-success" role="status" data-testid="account-saved">
               {t('account.saved')}
             </p>
           )}
 
           <Button
-            className="mt-4 bg-purple-600 hover:bg-purple-700"
+            className="mt-4"
             onClick={handleSave}
             disabled={saving || !changed || selected.length === 0}
             data-testid="save-roles-button"
@@ -244,15 +241,15 @@ export function AccountPage() {
           </Button>
         </section>
 
-        <section className="bg-white rounded-xl shadow-sm p-6" aria-labelledby="companies-title">
+        <section className="ts-card p-6" aria-labelledby="companies-title">
           <div className="flex items-center justify-between mb-4">
-            <h3 id="companies-title" className="text-xl font-bold text-gray-900">
+            <h3 id="companies-title" className="text-xl font-bold text-heading">
               {t('account.companiesTitle')}
             </h3>
             {hasRole('seller') && (
               <Link
                 to="/companies/new"
-                className="inline-flex items-center gap-2 text-sm font-medium text-purple-600 hover:text-purple-800"
+                className="inline-flex items-center gap-2 text-sm font-medium text-heading hover:text-heading/80"
                 data-testid="add-company-link"
               >
                 <Building2 className="w-4 h-4" aria-hidden="true" />
@@ -262,17 +259,17 @@ export function AccountPage() {
           </div>
 
           {loadError && (
-            <p className="text-sm text-red-600" role="alert">
+            <p className="text-sm text-danger" role="alert">
               {loadError}
             </p>
           )}
 
           {!hasRole('seller') ? (
-            <p className="text-sm text-gray-500" data-testid="companies-seller-only">
+            <p className="text-sm text-text-muted" data-testid="companies-seller-only">
               {t('account.companiesSellerOnly')}
             </p>
           ) : companies.length === 0 ? (
-            <p className="text-sm text-gray-500" data-testid="companies-empty">
+            <p className="text-sm text-text-muted" data-testid="companies-empty">
               {t('account.companiesEmpty')}
             </p>
           ) : (
@@ -280,25 +277,23 @@ export function AccountPage() {
               {companies.map((company) => (
                 <li
                   key={company.id}
-                  className="rounded-lg border border-gray-200 p-4"
+                  className="rounded-lg border border-border p-4"
                   data-testid={`company-${company.id}`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="font-semibold text-gray-900">{company.tradeName || company.legalName}</p>
-                      <p className="text-sm text-gray-500">
+                      <p className="font-semibold text-text">{company.tradeName || company.legalName}</p>
+                      <p className="text-sm text-text-muted">
                         {formatCnpj(company.cnpj)} · {company.address.city}/{company.address.state}
                       </p>
                       {company.myRole && (
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-text-muted">
                           {t('account.memberRole', { role: t(`companyRoles.${company.myRole}`) })}
                         </p>
                       )}
                     </div>
                     <span
-                      className={`rounded-full px-2 py-1 text-xs font-medium ${
-                        company.verified ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
-                      }`}
+                      className={`ts-badge ${company.verified ? 'ts-badge--success' : 'ts-badge--warning'}`}
                       data-testid={`company-status-${company.id}`}
                     >
                       {company.verified ? t('account.verified') : t('account.pending')}
@@ -311,13 +306,13 @@ export function AccountPage() {
         </section>
 
         {hasRole('admin') && (
-          <section className="bg-white rounded-xl shadow-sm p-6" aria-labelledby="admin-title">
-            <h3 id="admin-title" className="text-xl font-bold text-gray-900 mb-4">
+          <section className="ts-card p-6" aria-labelledby="admin-title">
+            <h3 id="admin-title" className="text-xl font-bold text-heading mb-4">
               {t('account.adminTitle')}
             </h3>
             <Link
               to="/admin/catalog"
-              className="mr-6 inline-flex items-center gap-2 text-sm font-medium text-purple-600 hover:text-purple-800"
+              className="mr-6 inline-flex items-center gap-2 text-sm font-medium text-heading hover:text-heading/80"
               data-testid="admin-catalog-link"
             >
               <BookMarked className="w-4 h-4" aria-hidden="true" />
@@ -325,7 +320,7 @@ export function AccountPage() {
             </Link>
             <Link
               to="/admin/marketplace"
-              className="mr-6 inline-flex items-center gap-2 text-sm font-medium text-purple-600 hover:text-purple-800"
+              className="mr-6 inline-flex items-center gap-2 text-sm font-medium text-heading hover:text-heading/80"
               data-testid="admin-marketplace-link"
             >
               <Store className="w-4 h-4" aria-hidden="true" />
@@ -333,7 +328,7 @@ export function AccountPage() {
             </Link>
             <Link
               to="/admin/users"
-              className="mr-6 inline-flex items-center gap-2 text-sm font-medium text-purple-600 hover:text-purple-800"
+              className="mr-6 inline-flex items-center gap-2 text-sm font-medium text-heading hover:text-heading/80"
               data-testid="admin-users-link"
             >
               <Users className="w-4 h-4" aria-hidden="true" />
@@ -341,7 +336,7 @@ export function AccountPage() {
             </Link>
             <Link
               to="/admin/companies"
-              className="inline-flex items-center gap-2 text-sm font-medium text-purple-600 hover:text-purple-800"
+              className="inline-flex items-center gap-2 text-sm font-medium text-heading hover:text-heading/80"
               data-testid="admin-companies-link"
             >
               <ShieldCheck className="w-4 h-4" aria-hidden="true" />

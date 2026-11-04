@@ -1,20 +1,14 @@
-import { useEffect, useState } from 'react'
-import { applyTheme, getInitialTheme, storeTheme, type Theme } from '../lib/theme'
+import { useState } from 'react'
+import { applyTheme, getStoredTheme, storeTheme, type ThemeChoice } from '../lib/theme'
 
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme)
+  const [theme, setThemeState] = useState<ThemeChoice>(getStoredTheme)
 
-  useEffect(() => {
-    applyTheme(theme)
-  }, [theme])
-
-  const toggleTheme = () => {
-    setTheme((current) => {
-      const next: Theme = current === 'dark' ? 'light' : 'dark'
-      storeTheme(next)
-      return next
-    })
+  const setTheme = (choice: ThemeChoice) => {
+    applyTheme(choice)
+    storeTheme(choice)
+    setThemeState(choice)
   }
 
-  return { theme, toggleTheme }
+  return { theme, setTheme }
 }

@@ -25,7 +25,7 @@ interface BookFiltersProps {
 }
 
 const CONTROL_CLASS =
-  'rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent'
+  'ts-input w-auto'
 
 export function BookFilters({
   search,
@@ -50,7 +50,7 @@ export function BookFilters({
     >
       <div className="relative flex-1">
         <Search
-          className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+          className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted"
           aria-hidden="true"
         />
         <input
@@ -64,7 +64,7 @@ export function BookFilters({
         />
       </div>
 
-      <select
+      <span className="ts-select"><select
         value={status}
         onChange={(e) => onStatusChange(e.target.value as BookStatus | '')}
         aria-label={t('dashboard.filters.statusAriaLabel')}
@@ -77,9 +77,9 @@ export function BookFilters({
             {t(`bookStatus.${value}`)}
           </option>
         ))}
-      </select>
+      </select></span>
 
-      <select
+      <span className="ts-select"><select
         value={rating}
         onChange={(e) => onRatingChange(e.target.value ? Number(e.target.value) : '')}
         aria-label={t('dashboard.filters.ratingAriaLabel')}
@@ -92,9 +92,9 @@ export function BookFilters({
             {t('dashboard.filters.ratingOption', { count: value })}
           </option>
         ))}
-      </select>
+      </select></span>
 
-      <select
+      <span className="ts-select"><select
         value={sort}
         onChange={(e) => onSortChange(e.target.value as SortKey)}
         aria-label={t('dashboard.filters.sortAriaLabel')}
@@ -106,14 +106,14 @@ export function BookFilters({
             {t(SORT_LABEL_KEYS[key])}
           </option>
         ))}
-      </select>
+      </select></span>
 
       {hasActiveFilters && (
         <button
           type="button"
           onClick={onClear}
           data-testid="book-filters-clear"
-          className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-purple-600 hover:bg-purple-50"
+          className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-heading hover:bg-primary/5"
         >
           <X className="h-4 w-4" aria-hidden="true" />
           {t('dashboard.filters.clear')}

@@ -1,24 +1,29 @@
-export type Theme = 'light' | 'dark'
+export type ThemeChoice = 'system' | 'light' | 'dark'
+
+export const THEME_CHOICES: readonly ThemeChoice[] = ['system', 'light', 'dark']
 
 const STORAGE_KEY = 'theme'
 
-export function getInitialTheme(): Theme {
+export function getStoredTheme(): ThemeChoice {
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (stored === 'light' || stored === 'dark') return stored
   } catch {
-    // Storage can be unavailable (private mode); fall back to the OS preference.
+    // Storage can be unavailable (private mode); follow the system setting.
   }
-  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  return 'system'
 }
 
-export function applyTheme(theme: Theme): void {
-  document.documentElement.classList.toggle('dark', theme === 'dark')
+export function applyTheme(choice: ThemeChoice): void {
+  const root = document.documentElement
+  if (choice === 'system') root.removeAttribute('data-theme')
+  else root.setAttribute('data-theme', choice)
 }
 
-export function storeTheme(theme: Theme): void {
+export function storeTheme(choice: ThemeChoice): void {
   try {
-    localStorage.setItem(STORAGE_KEY, theme)
+    if (choice === 'system') localStorage.removeItem(STORAGE_KEY)
+    else localStorage.setItem(STORAGE_KEY, choice)
   } catch {
     // Not persisting is acceptable; the choice still applies for this session.
   }

@@ -14,7 +14,7 @@ import type { Paginated } from '../types/catalog'
 
 const PAGE_SIZE = 12
 const FIELD =
-  'rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent'
+  'ts-input w-auto'
 
 interface Loaded {
   key: string
@@ -66,18 +66,18 @@ export function StorePage() {
   const listings = loaded?.listings ?? []
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" data-testid="store-page">
+    <div className="min-h-screen bg-background" data-testid="store-page">
       <AppHeader />
 
       <main className="mx-auto max-w-7xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
         <div>
-          <h2 className="mb-1 text-3xl font-bold text-gray-900">{t('store.title')}</h2>
-          <p className="text-gray-600">{t('store.subtitle')}</p>
+          <h2 className="mb-1 text-3xl font-bold text-heading">{t('store.title')}</h2>
+          <p className="text-text-muted">{t('store.subtitle')}</p>
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row">
           <div className="relative flex-1" role="search">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" aria-hidden="true" />
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" aria-hidden="true" />
             <input
               type="search"
               value={searchInput}
@@ -88,7 +88,7 @@ export function StorePage() {
               data-testid="store-search"
             />
           </div>
-          <select
+          <span className="ts-select"><select
             value={condition}
             onChange={(e) => {
               setCondition(e.target.value as ListingCondition | '')
@@ -104,8 +104,8 @@ export function StorePage() {
                 {t(`listingCondition.${value}`)}
               </option>
             ))}
-          </select>
-          <select
+          </select></span>
+          <span className="ts-select"><select
             value={sort}
             onChange={(e) => {
               setSort(e.target.value as NonNullable<ListingsQuery['sort']>)
@@ -118,17 +118,17 @@ export function StorePage() {
             <option value="newest">{t('store.sortNewest')}</option>
             <option value="price_asc">{t('store.sortPriceAsc')}</option>
             <option value="price_desc">{t('store.sortPriceDesc')}</option>
-          </select>
+          </select></span>
         </div>
 
         {loaded?.error && (
-          <p className="text-sm text-red-600" role="alert" data-testid="store-error">
+          <p className="text-sm text-danger" role="alert" data-testid="store-error">
             {loaded.error}
           </p>
         )}
 
         {!loading && !loaded?.error && listings.length === 0 && (
-          <p className="text-gray-500" data-testid="store-empty">
+          <p className="text-text-muted" data-testid="store-empty">
             {t('store.empty')}
           </p>
         )}
@@ -139,7 +139,7 @@ export function StorePage() {
             return (
               <li
                 key={listing.id}
-                className="flex flex-col gap-3 rounded-xl bg-white p-4 shadow-sm"
+                className="ts-card flex flex-col gap-3 p-4"
                 data-testid={`listing-card-${listing.id}`}
               >
                 <div className="flex gap-3">
@@ -147,12 +147,12 @@ export function StorePage() {
                     <BookCover url={listing.book.coverUrl} alt={listing.book.title} testId={`listing-cover-${listing.id}`} />
                   )}
                   <div className="min-w-0">
-                    <p className="font-semibold text-gray-900">{listing.book.title}</p>
-                    <p className="text-sm text-gray-600">{listing.book.author}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="font-serif font-bold text-text">{listing.book.title}</p>
+                    <p className="text-sm text-text-muted">{listing.book.author}</p>
+                    <p className="text-xs text-text-muted">
                       {t(`listingCondition.${listing.condition}`)} · {t('store.stock', { count: listing.quantity })}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-text-muted">
                       {t('store.soldBy', { seller: listing.seller.name })}
                       {listing.seller.company ? ` · ${t('store.company')}` : ''}
                     </p>
@@ -160,10 +160,10 @@ export function StorePage() {
                 </div>
                 <div className="mt-auto flex items-end justify-between gap-3">
                   <div>
-                    <p className="text-xl font-bold text-gray-900" data-testid={`listing-price-${listing.id}`}>
+                    <p className="text-xl font-bold text-text" data-testid={`listing-price-${listing.id}`}>
                       {formatBRL(listing.priceCents)}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-text-muted">
                       {t('store.shipping', { price: formatBRL(listing.shippingFeeCents) })}
                       {listing.pickupAvailable ? ` · ${t('store.pickup')}` : ''}
                     </p>

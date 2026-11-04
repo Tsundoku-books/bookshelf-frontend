@@ -14,16 +14,16 @@ interface RoleSelectorProps {
 
 const STYLES: Record<Variant, { option: string; active: string; hint: string; label: string }> = {
   onLight: {
-    option: 'border-gray-200 bg-white hover:border-purple-300',
-    active: 'border-purple-500 bg-purple-50',
-    hint: 'text-gray-500',
-    label: 'text-gray-900',
+    option: 'border-border bg-surface hover:border-accent',
+    active: 'border-primary bg-primary/5',
+    hint: 'text-text-muted',
+    label: 'text-text',
   },
   onDark: {
-    option: 'border-white/30 bg-white/10 hover:border-white/60',
-    active: 'border-white bg-white/25',
-    hint: 'text-white/70',
-    label: 'text-white',
+    option: 'border-on-primary/30 bg-on-primary/10 hover:border-on-primary/60',
+    active: 'border-on-primary bg-on-primary/25',
+    hint: 'text-on-primary/70',
+    label: 'text-on-primary',
   },
 }
 

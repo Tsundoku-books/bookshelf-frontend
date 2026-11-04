@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"><link rel="stylesheet" href="../tokens/tokens.css"><link rel="stylesheet" href="../components/components.css"><script>var t = new URLSearchParams(location.search).get("theme"); if (t) document.documentElement.dataset.theme = t;</script><title>Alert — preview</title></head>
+<body>
+<div class="ts-stack" style="max-width: 460px">
+  <div class="ts-alert ts-alert--danger" role="alert">
+    <svg class="ts-alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+    <div><p class="ts-alert__title">Payment failed</p><p>Your card was declined. Try another card or payment method.</p></div>
+  </div>
+  <div class="ts-alert ts-alert--success" role="status">
+    <svg class="ts-alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+    <div><p class="ts-alert__title">Order placed</p><p>The seller has 2 days to ship your copy.</p></div>
+  </div>
+  <div class="ts-alert ts-alert--warning" role="status">
+    <svg class="ts-alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L21.5 20h-19z"/><path d="M12 10v4M12 17v.01"/></svg>
+    <div><p class="ts-alert__title">Only one copy left</p><p>Another reader has this book in their cart.</p></div>
+  </div>
+  <div class="ts-alert ts-alert--info" role="status">
+    <svg class="ts-alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg>
+    <div><p class="ts-alert__title">Shipping is calculated at checkout</p><p>It depends on your address and the seller's.</p></div>
+  </div>
+</div>
+</body>
+</html>

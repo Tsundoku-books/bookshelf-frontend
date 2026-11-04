@@ -91,13 +91,13 @@ export function AdminCatalogPage() {
     value === null || value === undefined || value === '' ? t('adminCatalog.empty') : String(value)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" data-testid="admin-catalog-page">
+    <div className="min-h-screen bg-background" data-testid="admin-catalog-page">
       <AppHeader />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-1">{t('adminCatalog.title')}</h2>
-          <p className="text-gray-600">{t('adminCatalog.subtitle')}</p>
+          <h2 className="text-3xl font-bold text-heading mb-1">{t('adminCatalog.title')}</h2>
+          <p className="text-text-muted">{t('adminCatalog.subtitle')}</p>
         </div>
 
         <div className="flex gap-2" role="tablist">
@@ -119,7 +119,7 @@ export function AdminCatalogPage() {
 
         {tab === 'books' && (
           <div className="relative" role="search">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" aria-hidden="true" />
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" aria-hidden="true" />
             <input
               type="search"
               value={searchInput}
@@ -127,20 +127,20 @@ export function AdminCatalogPage() {
               placeholder={t('adminCatalog.searchPlaceholder')}
               aria-label={t('adminCatalog.searchPlaceholder')}
               data-testid="catalog-search"
-              className="w-full rounded-lg border border-gray-300 py-2 pl-9 pr-3 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full rounded-lg border border-border py-2 pl-9 pr-3 text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
             />
           </div>
         )}
 
         {error && (
-          <p className="text-sm text-red-600" role="alert" data-testid="catalog-error">
+          <p className="text-sm text-danger" role="alert" data-testid="catalog-error">
             {error}
           </p>
         )}
 
         {tab === 'books' &&
           (loaded && books.length === 0 && !error ? (
-            <p className="text-gray-500" data-testid="catalog-books-empty">
+            <p className="text-text-muted" data-testid="catalog-books-empty">
               {t('adminCatalog.booksEmpty')}
             </p>
           ) : (
@@ -148,18 +148,18 @@ export function AdminCatalogPage() {
               {books.map((book) => (
                 <li
                   key={book.id}
-                  className="bg-white rounded-xl shadow-sm p-4 flex items-start justify-between gap-4"
+                  className="ts-card p-4 flex items-start justify-between gap-4"
                   data-testid={`catalog-book-${book.id}`}
                 >
                   <div className="min-w-0">
-                    <p className="font-semibold text-gray-900">{book.title}</p>
-                    <p className="text-sm text-gray-600">{book.author}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="font-semibold text-text">{book.title}</p>
+                    <p className="text-sm text-text-muted">{book.author}</p>
+                    <p className="text-xs text-text-muted">
                       {book.isbn ? t('adminCatalog.isbn', { isbn: book.isbn }) : t('adminCatalog.noIsbn')}
                       {book.publisher ? ` · ${book.publisher}` : ''}
                       {book.publishedYear ? ` · ${book.publishedYear}` : ''}
                     </p>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-text-muted">
                       {t('adminCatalog.registeredBy', { date: new Date(book.createdAt).toLocaleDateString() })}
                     </p>
                   </div>
@@ -189,7 +189,7 @@ export function AdminCatalogPage() {
 
         {tab === 'revisions' &&
           (loaded && revisions.length === 0 && !error ? (
-            <p className="text-gray-500" data-testid="catalog-revisions-empty">
+            <p className="text-text-muted" data-testid="catalog-revisions-empty">
               {t('adminCatalog.revisionsEmpty')}
             </p>
           ) : (
@@ -197,12 +197,12 @@ export function AdminCatalogPage() {
               {revisions.map((revision) => (
                 <li
                   key={revision.id}
-                  className="bg-white rounded-xl shadow-sm p-4 space-y-3"
+                  className="ts-card p-4 space-y-3"
                   data-testid={`catalog-revision-${revision.id}`}
                 >
                   <div>
-                    <p className="font-semibold text-gray-900">{revision.book?.title ?? revision.catalogBookId}</p>
-                    <p className="text-xs text-gray-400">
+                    <p className="font-semibold text-text">{revision.book?.title ?? revision.catalogBookId}</p>
+                    <p className="text-xs text-text-muted">
                       {t('adminCatalog.proposedOn', { date: new Date(revision.createdAt).toLocaleDateString() })}
                     </p>
                   </div>
@@ -210,10 +210,10 @@ export function AdminCatalogPage() {
                   <dl className="space-y-1 text-sm" data-testid={`catalog-revision-changes-${revision.id}`}>
                     {Object.entries(revision.changes).map(([field, change]) => (
                       <div key={field} className="flex flex-wrap gap-x-2">
-                        <dt className="font-medium text-gray-700">
+                        <dt className="font-medium text-text">
                           {isFieldKey(field) ? t(`adminCatalog.fields.${field}`) : field}:
                         </dt>
-                        <dd className="text-gray-600">
+                        <dd className="text-text-muted">
                           {t('adminCatalog.fieldFrom')} <span className="line-through">{display(change.from)}</span>{' '}
                           {t('adminCatalog.fieldTo')} <strong>{display(change.to)}</strong>
                         </dd>
@@ -227,7 +227,7 @@ export function AdminCatalogPage() {
                       onChange={(e) => setNotes((current) => ({ ...current, [revision.id]: e.target.value }))}
                       placeholder={t('adminCatalog.noteLabel')}
                       aria-label={t('adminCatalog.noteLabel')}
-                      className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                      className="ts-input flex-1"
                       data-testid={`catalog-note-${revision.id}`}
                     />
                     <Button

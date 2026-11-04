@@ -15,10 +15,10 @@ export function BookCover({ url, alt, className = 'h-20 w-14', testId }: BookCov
   if (failedUrl === url) {
     return (
       <div
-        className={`${className} flex flex-shrink-0 items-center justify-center rounded bg-gray-100`}
+        className={`${className} flex flex-shrink-0 items-center justify-center rounded bg-background`}
         aria-hidden="true"
       >
-        <BookOpen className="h-5 w-5 text-gray-400" />
+        <BookOpen className="h-5 w-5 text-text-muted" />
       </div>
     )
   }

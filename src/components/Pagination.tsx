@@ -29,7 +29,7 @@ export function Pagination({ page, totalPages, onPageChange }: PaginationProps) 
         <ChevronLeft className="mr-1 h-4 w-4" aria-hidden="true" />
         {t('dashboard.pagination.previous')}
       </Button>
-      <span className="text-sm text-gray-600" data-testid="pagination-info" aria-live="polite">
+      <span className="text-sm text-text-muted" data-testid="pagination-info" aria-live="polite">
         {t('dashboard.pagination.info', { page, total: totalPages })}
       </span>
       <Button

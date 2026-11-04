@@ -19,7 +19,7 @@ export function BookCard({ book, onEdit, onDelete, onStatusChange }: BookCardPro
 
   return (
     <div
-      className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow flex flex-col"
+      className="border border-border rounded-lg p-4 hover:shadow-md transition-shadow flex flex-col"
       data-testid={`book-item-${book.id}`}
     >
       <div className="flex justify-between items-start mb-2">
@@ -32,14 +32,14 @@ export function BookCard({ book, onEdit, onDelete, onStatusChange }: BookCardPro
             />
           )}
           <div className="flex-1">
-            <h4 className="font-semibold text-gray-900">{book.title}</h4>
-            <p className="text-sm text-gray-600">{book.author}</p>
+            <h4 className="font-serif font-bold text-text">{book.title}</h4>
+            <p className="text-sm text-text-muted">{book.author}</p>
           </div>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => onEdit(book)}
-            className="p-1 text-blue-600 hover:bg-blue-50 rounded"
+            className="p-1 text-info hover:bg-info-subtle rounded"
             data-testid={`edit-book-${book.id}`}
             aria-label={t('dashboard.bookList.editAriaLabel')}
           >
@@ -47,7 +47,7 @@ export function BookCard({ book, onEdit, onDelete, onStatusChange }: BookCardPro
           </button>
           <button
             onClick={() => onDelete(book)}
-            className="p-1 text-red-600 hover:bg-red-50 rounded"
+            className="p-1 text-danger hover:bg-danger-subtle rounded"
             data-testid={`delete-book-${book.id}`}
             aria-label={t('dashboard.bookList.deleteAriaLabel')}
           >
@@ -58,7 +58,7 @@ export function BookCard({ book, onEdit, onDelete, onStatusChange }: BookCardPro
 
       {book.pendingRevision && (
         <p
-          className="mb-2 inline-block rounded bg-amber-100 px-2 py-1 text-xs font-medium text-amber-800"
+          className="ts-badge ts-badge--warning mb-2"
           data-testid={`book-pending-${book.id}`}
         >
           {t('pendingEdit.badge')}
@@ -72,12 +72,12 @@ export function BookCard({ book, onEdit, onDelete, onStatusChange }: BookCardPro
       ) : null}
 
       {book.description && (
-        <p className="text-sm text-gray-500 line-clamp-2 mb-2">{book.description}</p>
+        <p className="text-sm text-text-muted line-clamp-2 mb-2">{book.description}</p>
       )}
 
       {book.notes && (
         <p
-          className="text-sm text-gray-500 italic line-clamp-2 mb-2"
+          className="text-sm text-text-muted italic line-clamp-2 mb-2"
           data-testid={`book-notes-${book.id}`}
           title={t('dashboard.bookList.notesLabel')}
         >
@@ -87,28 +87,28 @@ export function BookCard({ book, onEdit, onDelete, onStatusChange }: BookCardPro
 
       <div className="flex gap-2 flex-wrap mb-3">
         {book.isbn && (
-          <span className="text-xs bg-gray-100 px-2 py-1 rounded">
+          <span className="text-xs bg-background px-2 py-1 rounded">
             {t('dashboard.bookList.isbnBadge', { isbn: book.isbn })}
           </span>
         )}
         {book.publishedYear && (
-          <span className="text-xs bg-gray-100 px-2 py-1 rounded">{book.publishedYear}</span>
+          <span className="text-xs bg-background px-2 py-1 rounded">{book.publishedYear}</span>
         )}
       </div>
 
-      <select
+      <span className="ts-select mt-auto"><select
         value={book.status}
         onChange={(e) => onStatusChange(book, e.target.value as BookStatus)}
         aria-label={t('dashboard.bookList.statusAriaLabel', { title: book.title })}
         data-testid={`book-status-${book.id}`}
-        className="mt-auto w-full rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+        className="ts-input"
       >
         {BOOK_STATUSES.map((status) => (
           <option key={status} value={status}>
             {t(`bookStatus.${status}`)}
           </option>
         ))}
-      </select>
+      </select></span>
     </div>
   )
 }

@@ -1,32 +1,37 @@
-import { afterEach, describe, expect, it, vi } from 'vitest'
-import { applyTheme, getInitialTheme, storeTheme } from './theme'
-
-function mockPrefersDark(matches: boolean) {
-  vi.stubGlobal('matchMedia', () => ({ matches }))
-}
+import { afterEach, describe, expect, it } from 'vitest'
+import { applyTheme, getStoredTheme, storeTheme } from './theme'
 
 afterEach(() => {
-  vi.unstubAllGlobals()
+  localStorage.clear()
+  document.documentElement.removeAttribute('data-theme')
 })
 
 describe('theme', () => {
-  it('prefers the stored choice over the OS setting', () => {
-    mockPrefersDark(true)
+  it('follows the system until a choice is stored', () => {
+    expect(getStoredTheme()).toBe('system')
+  })
+
+  it('stores light and dark and forgets the choice for system', () => {
+    storeTheme('dark')
+    expect(getStoredTheme()).toBe('dark')
     storeTheme('light')
-    expect(getInitialTheme()).toBe('light')
+    expect(getStoredTheme()).toBe('light')
+    storeTheme('system')
+    expect(localStorage.getItem('theme')).toBeNull()
+    expect(getStoredTheme()).toBe('system')
   })
 
-  it('falls back to the OS colour scheme', () => {
-    mockPrefersDark(true)
-    expect(getInitialTheme()).toBe('dark')
-    mockPrefersDark(false)
-    expect(getInitialTheme()).toBe('light')
+  it('ignores unknown stored values', () => {
+    localStorage.setItem('theme', 'sepia')
+    expect(getStoredTheme()).toBe('system')
   })
 
-  it('toggles the dark class on <html>', () => {
+  it('sets data-theme on <html> and removes it for system', () => {
     applyTheme('dark')
-    expect(document.documentElement).toHaveClass('dark')
+    expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
     applyTheme('light')
-    expect(document.documentElement).not.toHaveClass('dark')
+    expect(document.documentElement).toHaveAttribute('data-theme', 'light')
+    applyTheme('system')
+    expect(document.documentElement).not.toHaveAttribute('data-theme')
   })
 })

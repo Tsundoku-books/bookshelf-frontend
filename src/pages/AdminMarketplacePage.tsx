@@ -15,7 +15,7 @@ type Tab = 'orders' | 'listings'
 
 const ORDER_STATUSES: OrderStatus[] = ['awaiting_payment', 'paid', 'shipped', 'delivered', 'cancelled']
 const FIELD =
-  'rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent'
+  'ts-input w-auto'
 
 interface Loaded {
   key: string
@@ -90,13 +90,13 @@ export function AdminMarketplacePage() {
   const error = actionError || loaded?.error || ''
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" data-testid="admin-marketplace-page">
+    <div className="min-h-screen bg-background" data-testid="admin-marketplace-page">
       <AppHeader />
 
       <main className="mx-auto max-w-4xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
         <div>
-          <h2 className="mb-1 text-3xl font-bold text-gray-900">{t('adminMarket.title')}</h2>
-          <p className="text-gray-600">{t('adminMarket.subtitle')}</p>
+          <h2 className="mb-1 text-3xl font-bold text-heading">{t('adminMarket.title')}</h2>
+          <p className="text-text-muted">{t('adminMarket.subtitle')}</p>
         </div>
 
         <div className="flex gap-2" role="tablist">
@@ -121,7 +121,7 @@ export function AdminMarketplacePage() {
         {tab === 'orders' && (
           <div className="flex flex-col gap-3 sm:flex-row">
             <div className="relative flex-1" role="search">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" aria-hidden="true" />
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" aria-hidden="true" />
               <input
                 type="search"
                 value={searchInput}
@@ -132,7 +132,7 @@ export function AdminMarketplacePage() {
                 data-testid="market-search"
               />
             </div>
-            <select
+            <span className="ts-select"><select
               value={status}
               onChange={(e) => {
                 setStatus(e.target.value as OrderStatus | '')
@@ -148,23 +148,23 @@ export function AdminMarketplacePage() {
                   {t(`orderStatus.${value}`)}
                 </option>
               ))}
-            </select>
+            </select></span>
           </div>
         )}
 
         {error && (
-          <p className="text-sm text-red-600" role="alert" data-testid="market-error">
+          <p className="text-sm text-danger" role="alert" data-testid="market-error">
             {error}
           </p>
         )}
 
         {ready && !error && tab === 'orders' && orders.length === 0 && (
-          <p className="text-gray-500" data-testid="market-orders-empty">
+          <p className="text-text-muted" data-testid="market-orders-empty">
             {t('adminMarket.ordersEmpty')}
           </p>
         )}
         {ready && !error && tab === 'listings' && listings.length === 0 && (
-          <p className="text-gray-500" data-testid="market-listings-empty">
+          <p className="text-text-muted" data-testid="market-listings-empty">
             {t('adminMarket.listingsEmpty')}
           </p>
         )}
@@ -172,17 +172,17 @@ export function AdminMarketplacePage() {
         {tab === 'orders' && (
           <ul className="space-y-3" data-testid="market-orders">
             {orders.map((order) => (
-              <li key={order.id} className="rounded-xl bg-white p-4 shadow-sm" data-testid={`market-order-${order.id}`}>
+              <li key={order.id} className="ts-card p-4" data-testid={`market-order-${order.id}`}>
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="font-medium text-gray-900">{order.items.map((item) => item.title).join(', ')}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="font-medium text-text">{order.items.map((item) => item.title).join(', ')}</p>
+                    <p className="text-xs text-text-muted">
                       {t('adminMarket.parties', { buyer: order.buyer.name, seller: order.seller.name })}
                     </p>
-                    <p className="font-mono text-xs text-gray-400">{order.id}</p>
+                    <p className="font-mono text-xs text-text-muted">{order.id}</p>
                   </div>
                   <div className="flex flex-col items-end gap-1">
-                    <span className="font-semibold text-gray-900">{formatBRL(order.totalCents)}</span>
+                    <span className="font-semibold text-text">{formatBRL(order.totalCents)}</span>
                     <OrderStatusBadge status={order.status} />
                   </div>
                 </div>
@@ -194,15 +194,15 @@ export function AdminMarketplacePage() {
         {tab === 'listings' && (
           <ul className="space-y-3" data-testid="market-listings">
             {listings.map((listing) => (
-              <li key={listing.id} className="space-y-2 rounded-xl bg-white p-4 shadow-sm" data-testid={`market-listing-${listing.id}`}>
+              <li key={listing.id} className="ts-card space-y-2 p-4" data-testid={`market-listing-${listing.id}`}>
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="font-medium text-gray-900">{listing.book.title}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="font-medium text-text">{listing.book.title}</p>
+                    <p className="text-xs text-text-muted">
                       {listing.seller.name} · {formatBRL(listing.priceCents)} · {t('store.stock', { count: listing.quantity })}
                     </p>
                   </div>
-                  <span className="text-xs text-gray-600" data-testid={`market-listing-status-${listing.id}`}>
+                  <span className="text-xs text-text-muted" data-testid={`market-listing-status-${listing.id}`}>
                     {t(`adminMarket.listingStatus.${listing.status}`)}
                   </span>
                 </div>

@@ -59,12 +59,12 @@ export function OrderPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" data-testid="order-page">
+    <div className="min-h-screen bg-background" data-testid="order-page">
       <AppHeader />
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
         {loaded?.error && (
-          <p className="text-sm text-red-600" role="alert" data-testid="order-error">
+          <p className="text-sm text-danger" role="alert" data-testid="order-error">
             {loaded.error}
           </p>
         )}
@@ -72,13 +72,13 @@ export function OrderPage() {
         {order && (
           <>
             <div className="flex items-center justify-between gap-3">
-              <h2 className="text-2xl font-bold text-gray-900">{t('order.title', { id: order.id.slice(0, 8) })}</h2>
+              <h2 className="text-2xl font-bold text-heading">{t('order.title', { id: order.id.slice(0, 8) })}</h2>
               <OrderStatusBadge status={order.status} testId="order-status" />
             </div>
 
-            <section className="space-y-3 rounded-xl bg-white p-4 shadow-sm">
-              <h3 className="font-semibold text-gray-900">{t('order.items')}</h3>
-              <ul className="divide-y divide-gray-100" data-testid="order-items">
+            <section className="ts-card space-y-3 p-4">
+              <h3 className="font-semibold text-heading">{t('order.items')}</h3>
+              <ul className="divide-y divide-border" data-testid="order-items">
                 {order.items.map((item) => (
                   <li key={item.id} className="flex justify-between gap-3 py-2 text-sm">
                     <span>
@@ -104,7 +104,7 @@ export function OrderPage() {
               </dl>
             </section>
 
-            <section className="space-y-1 rounded-xl bg-white p-4 text-sm shadow-sm">
+            <section className="ts-card space-y-1 p-4 text-sm">
               <p>
                 {t('order.seller')}: {order.seller.name}
               </p>
@@ -125,12 +125,12 @@ export function OrderPage() {
                 <p data-testid="order-tracking">{t('order.tracking', { code: order.trackingCode })}</p>
               )}
               {order.cancelReason && (
-                <p className="text-gray-600" data-testid="order-cancel-reason">
+                <p className="text-text-muted" data-testid="order-cancel-reason">
                   {t(order.cancelReason === 'buyer' ? 'order.cancelReasonBuyer' : 'order.cancelReasonExpired')}
                 </p>
               )}
               {order.payment?.status === 'paid' && (
-                <p className="text-green-700" data-testid="order-paid-note">
+                <p className="text-success" data-testid="order-paid-note">
                   {t('payment.approved')}
                   {order.payment.card ? ` — ${t('payment.cardInfo', { brand: order.payment.card.brand ?? '', last4: order.payment.card.last4 })}` : ' — Pix'}
                 </p>
@@ -148,7 +148,7 @@ export function OrderPage() {
 
             {isSeller && order.status === 'paid' && order.shippingMethod === 'ship' && (
               <form
-                className="flex flex-col gap-2 rounded-xl bg-white p-4 shadow-sm sm:flex-row"
+                className="ts-card flex flex-col gap-2 p-4 sm:flex-row"
                 onSubmit={(e) => {
                   e.preventDefault()
                   act(() => marketplaceService.ship(order.id, tracking.trim()))
@@ -159,7 +159,7 @@ export function OrderPage() {
                   onChange={(e) => setTracking(e.target.value)}
                   placeholder={t('order.trackingLabel')}
                   aria-label={t('order.trackingLabel')}
-                  className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                  className="ts-input flex-1"
                   data-testid="tracking-input"
                 />
                 <Button type="submit" size="sm" disabled={busy || tracking.trim().length < 3} data-testid="ship-button">
@@ -181,14 +181,14 @@ export function OrderPage() {
             )}
 
             {actionError && (
-              <p className="text-sm text-red-600" role="alert" data-testid="order-action-error">
+              <p className="text-sm text-danger" role="alert" data-testid="order-action-error">
                 {actionError}
               </p>
             )}
           </>
         )}
 
-        <Link to={isSeller ? '/sales' : '/orders'} className="text-sm font-medium text-purple-600 hover:underline">
+        <Link to={isSeller ? '/sales' : '/orders'} className="text-sm font-medium text-heading hover:underline">
           {t('order.back')}
         </Link>
       </main>

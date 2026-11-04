@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, render, renderHook, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
@@ -9,7 +9,7 @@ import { DeleteConfirmModal } from './DeleteConfirmModal'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { RoleSelector } from './RoleSelector'
 import { StarRating } from './StarRating'
-import { ThemeToggle } from './ThemeToggle'
+import { ThemeSelect } from './ThemeSelect'
 import { useTheme } from '../hooks/useTheme'
 import type { Role, SelfServiceRole } from '../types/auth'
 
@@ -53,7 +53,7 @@ describe('AppHeader', () => {
     renderHeader()
 
     expect(screen.queryByTestId('nav-library')).not.toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /bookshelf/i })).toHaveAttribute('href', '/account')
+    expect(screen.getByRole('link', { name: /tsundoku/i })).toHaveAttribute('href', '/account')
   })
 
   it('signs out', async () => {
@@ -93,45 +93,49 @@ describe('RoleSelector', () => {
   })
 })
 
-describe('ThemeToggle and useTheme', () => {
-  it('switches between the light and dark themes and remembers the choice', async () => {
-    render(<ThemeToggle />)
-    const toggle = screen.getByTestId('theme-toggle')
-    expect(toggle).toHaveAttribute('aria-pressed', 'false')
+describe('ThemeSelect and useTheme', () => {
+  afterEach(() => {
+    localStorage.clear()
+    document.documentElement.removeAttribute('data-theme')
+  })
 
-    await userEvent.click(toggle)
+  it('offers system, light and dark and remembers the choice', async () => {
+    render(<ThemeSelect />)
+    const select = screen.getByTestId('theme-select')
+    expect(select).toHaveValue('system')
 
-    expect(toggle).toHaveAttribute('aria-pressed', 'true')
-    expect(document.documentElement).toHaveClass('dark')
+    await userEvent.selectOptions(select, 'dark')
+
+    expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
     expect(localStorage.getItem('theme')).toBe('dark')
 
-    await userEvent.click(toggle)
+    await userEvent.selectOptions(select, 'light')
 
-    expect(document.documentElement).not.toHaveClass('dark')
+    expect(document.documentElement).toHaveAttribute('data-theme', 'light')
     expect(localStorage.getItem('theme')).toBe('light')
+
+    await userEvent.selectOptions(select, 'system')
+
+    expect(document.documentElement).not.toHaveAttribute('data-theme')
+    expect(localStorage.getItem('theme')).toBeNull()
   })
 
   it('starts from the stored choice', () => {
     localStorage.setItem('theme', 'dark')
 
-    const { result } = renderHook(() => useTheme())
+    render(<ThemeSelect />)
 
-    expect(result.current.theme).toBe('dark')
-    expect(document.documentElement).toHaveClass('dark')
+    expect(screen.getByTestId('theme-select')).toHaveValue('dark')
   })
 
-  it('exposes a toggle function', () => {
+  it('exposes the current choice and a setter', () => {
     const { result } = renderHook(() => useTheme())
+    expect(result.current.theme).toBe('system')
 
-    act(() => result.current.toggleTheme())
+    act(() => result.current.setTheme('dark'))
 
     expect(result.current.theme).toBe('dark')
-  })
-
-  it('renders the dark variant', () => {
-    render(<ThemeToggle variant="onDark" />)
-
-    expect(screen.getByTestId('theme-toggle')).toBeInTheDocument()
+    expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
   })
 })
 

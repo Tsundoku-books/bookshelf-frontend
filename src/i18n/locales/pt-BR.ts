@@ -2,7 +2,7 @@
 // translation resource shape; `en.ts` must mirror its keys.
 const ptBR = {
   common: {
-    appName: 'BookShelf',
+    appName: 'Tsundoku',
     email: 'E-mail',
     emailPlaceholder: 'seu@email.com',
     password: 'Senha',
@@ -10,8 +10,10 @@ const ptBR = {
     cancel: 'Cancelar',
   },
   theme: {
-    toDark: 'Ativar modo escuro',
-    toLight: 'Ativar modo claro',
+    label: 'Tema',
+    system: 'Sistema',
+    light: 'Claro',
+    dark: 'Escuro',
   },
   bookStatus: {
     to_read: 'Para ler',

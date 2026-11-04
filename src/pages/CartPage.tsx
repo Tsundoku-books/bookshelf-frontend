@@ -10,7 +10,7 @@ import { marketplaceService } from '../services/marketplace.service'
 import type { ShippingAddress, ShippingMethod } from '../types/marketplace'
 
 const FIELD =
-  'w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent'
+  'ts-input'
 
 const EMPTY_ADDRESS: ShippingAddress = {
   recipient: '',
@@ -73,12 +73,12 @@ function SellerCheckout({ sellerId, sellerName, lines }: { sellerId: string; sel
   return (
     <form
       onSubmit={placeOrder}
-      className="space-y-4 rounded-xl bg-white p-4 shadow-sm"
+      className="ts-card space-y-4 p-4"
       data-testid={`cart-seller-${sellerId}`}
     >
-      <h3 className="font-semibold text-gray-900">{t('cart.seller', { name: sellerName })}</h3>
+      <h3 className="font-semibold text-heading">{t('cart.seller', { name: sellerName })}</h3>
 
-      <ul className="divide-y divide-gray-100">
+      <ul className="divide-y divide-border">
         {lines.map(({ listing, quantity }) => (
           <li
             key={listing.id}
@@ -86,8 +86,8 @@ function SellerCheckout({ sellerId, sellerName, lines }: { sellerId: string; sel
             data-testid={`cart-item-${listing.id}`}
           >
             <div className="min-w-0">
-              <p className="font-medium text-gray-900">{listing.book.title}</p>
-              <p className="text-xs text-gray-500">{formatBRL(listing.priceCents)}</p>
+              <p className="font-medium text-text">{listing.book.title}</p>
+              <p className="text-xs text-text-muted">{formatBRL(listing.priceCents)}</p>
             </div>
             <div className="flex items-center gap-2">
               <input
@@ -97,7 +97,7 @@ function SellerCheckout({ sellerId, sellerName, lines }: { sellerId: string; sel
                 value={quantity}
                 onChange={(e) => cart.setQuantity(listing.id, Number(e.target.value) || 1)}
                 aria-label={t('cart.quantity')}
-                className="w-16 rounded-lg border border-gray-300 px-2 py-1 text-sm"
+                className="w-16 rounded-lg border border-border px-2 py-1 text-sm"
                 data-testid={`cart-quantity-${listing.id}`}
               />
               <Button
@@ -115,7 +115,7 @@ function SellerCheckout({ sellerId, sellerName, lines }: { sellerId: string; sel
       </ul>
 
       <fieldset className="space-y-2">
-        <legend className="text-sm font-medium text-gray-700">{t('cart.shippingMethod')}</legend>
+        <legend className="text-sm font-medium text-text">{t('cart.shippingMethod')}</legend>
         <label className="flex items-center gap-2 text-sm">
           <input
             type="radio"
@@ -126,7 +126,7 @@ function SellerCheckout({ sellerId, sellerName, lines }: { sellerId: string; sel
           />
           {t('cart.ship')}
         </label>
-        <label className={`flex items-center gap-2 text-sm ${canPickUp ? '' : 'text-gray-400'}`}>
+        <label className={`flex items-center gap-2 text-sm ${canPickUp ? '' : 'text-text-muted'}`}>
           <input
             type="radio"
             name={`method-${sellerId}`}
@@ -137,13 +137,13 @@ function SellerCheckout({ sellerId, sellerName, lines }: { sellerId: string; sel
           />
           {t('cart.pickup')}
         </label>
-        {!canPickUp && <p className="text-xs text-gray-500">{t('cart.pickupUnavailable')}</p>}
+        {!canPickUp && <p className="text-xs text-text-muted">{t('cart.pickupUnavailable')}</p>}
       </fieldset>
 
       {method === 'ship' && (
         <div className="grid gap-3 sm:grid-cols-2">
           {ADDRESS_FIELDS.map((field) => (
-            <label key={field} className="text-sm text-gray-700">
+            <label key={field} className="text-sm text-text">
               {t(`cart.address.${field}`)}
               <input
                 className={FIELD}
@@ -174,12 +174,12 @@ function SellerCheckout({ sellerId, sellerName, lines }: { sellerId: string; sel
       </dl>
 
       {error && (
-        <p className="text-sm text-red-600" role="alert" data-testid={`cart-error-${sellerId}`}>
+        <p className="text-sm text-danger" role="alert" data-testid={`cart-error-${sellerId}`}>
           {error}
         </p>
       )}
 
-      <Button type="submit" disabled={busy} data-testid={`cart-checkout-${sellerId}`}>
+      <Button variant="cta" type="submit" disabled={busy} data-testid={`cart-checkout-${sellerId}`}>
         {busy ? t('cart.placing') : t('cart.placeOrder')}
       </Button>
     </form>
@@ -192,18 +192,18 @@ export function CartPage() {
   const groups = groupBySeller(lines)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" data-testid="cart-page">
+    <div className="min-h-screen bg-background" data-testid="cart-page">
       <AppHeader />
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-gray-900">{t('cart.title')}</h2>
+        <h2 className="text-3xl font-bold text-heading">{t('cart.title')}</h2>
 
         {groups.length === 0 ? (
           <div className="space-y-3">
-            <p className="text-gray-500" data-testid="cart-empty">
+            <p className="text-text-muted" data-testid="cart-empty">
               {t('cart.empty')}
             </p>
-            <Link to="/store" className="text-sm font-medium text-purple-600 hover:underline">
+            <Link to="/store" className="text-sm font-medium text-heading hover:underline">
               {t('cart.goToStore')}
             </Link>
           </div>

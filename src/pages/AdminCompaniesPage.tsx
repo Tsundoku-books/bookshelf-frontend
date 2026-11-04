@@ -77,13 +77,13 @@ export function AdminCompaniesPage() {
   const error = actionError || (loaded && !loading ? loaded.error : '')
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" data-testid="admin-companies-page">
+    <div className="min-h-screen bg-background" data-testid="admin-companies-page">
       <AppHeader />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-1">{t('adminCompanies.title')}</h2>
-          <p className="text-gray-600">{t('adminCompanies.subtitle')}</p>
+          <h2 className="text-3xl font-bold text-heading mb-1">{t('adminCompanies.title')}</h2>
+          <p className="text-text-muted">{t('adminCompanies.subtitle')}</p>
         </div>
 
         <div className="flex gap-2" role="group" aria-label={t('adminCompanies.title')}>
@@ -102,13 +102,13 @@ export function AdminCompaniesPage() {
         </div>
 
         {error && (
-          <p className="text-sm text-red-600" role="alert" data-testid="admin-error">
+          <p className="text-sm text-danger" role="alert" data-testid="admin-error">
             {error}
           </p>
         )}
 
         {!loading && !error && companies.length === 0 ? (
-          <p className="text-gray-500" data-testid="admin-companies-empty">
+          <p className="text-text-muted" data-testid="admin-companies-empty">
             {t('adminCompanies.empty')}
           </p>
         ) : (
@@ -116,13 +116,13 @@ export function AdminCompaniesPage() {
             {companies.map((company) => (
               <li
                 key={company.id}
-                className="bg-white rounded-xl shadow-sm p-4 flex items-start justify-between gap-4"
+                className="ts-card p-4 flex items-start justify-between gap-4"
                 data-testid={`admin-company-${company.id}`}
               >
                 <div>
-                  <p className="font-semibold text-gray-900">{company.tradeName || company.legalName}</p>
-                  <p className="text-sm text-gray-600">{company.legalName}</p>
-                  <p className="text-sm text-gray-500">
+                  <p className="font-semibold text-text">{company.tradeName || company.legalName}</p>
+                  <p className="text-sm text-text-muted">{company.legalName}</p>
+                  <p className="text-sm text-text-muted">
                     {formatCnpj(company.cnpj)} · {company.address.city}/{company.address.state} · {company.email}
                   </p>
                 </div>
