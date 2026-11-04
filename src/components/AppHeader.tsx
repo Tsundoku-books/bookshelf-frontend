@@ -19,11 +19,13 @@ export function AppHeader() {
   return (
     <header className="bg-surface border-b border-border shadow-sm" data-testid="app-header">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-        <Link to={homePathFor(roles)} className="flex items-center space-x-3">
-          <img src={logoOnLight} alt="Tsundoku" className="ts-only-light h-8" />
-          <img src={logoOnDark} alt="" className="ts-only-dark h-8" />
-          {user && <p className="text-xs text-text-muted">{user.name}</p>}
-        </Link>
+        <h1 className="m-0">
+          <Link to={homePathFor(roles)} className="flex items-center space-x-3">
+            <img src={logoOnLight} alt="Tsundoku" className="ts-only-light h-8" />
+            <img src={logoOnDark} alt="" className="ts-only-dark h-8" />
+            {user && <span className="text-xs font-normal text-text-muted">{user.name}</span>}
+          </Link>
+        </h1>
         <div className="flex items-center gap-3">
           <nav className="hidden items-center gap-4 sm:flex" aria-label={t('nav.main')}>
             {hasRole('reader') && (
