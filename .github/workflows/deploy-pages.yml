@@ -20,6 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Require the API URL
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+        # An unset variable reaches the build as an empty string, which beats
+        # .env.production and bakes a relative "/api" into the bundle.
+        run: |
+          [ -n "$VITE_API_URL" ] || { echo "::error::Repository variable VITE_API_URL is not set"; exit 1; }
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
