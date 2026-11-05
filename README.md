@@ -158,7 +158,7 @@ access token with **Actions: read and write** on the two test repositories.
 
 ## Deployment
 
-Every push to `main` triggers
+Every push to `master` triggers
 [`deploy-pages.yml`](.github/workflows/deploy-pages.yml), which builds the app
 and publishes it to GitHub Pages under `/bookshelf-frontend/`. To deploy your
 own copy:

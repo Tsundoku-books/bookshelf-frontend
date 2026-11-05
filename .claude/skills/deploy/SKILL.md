@@ -10,12 +10,12 @@ description: >-
 
 Hosting is **GitHub Pages**, served under `https://<org>.github.io/bookshelf-frontend/`.
 Deploy is automatic: `.github/workflows/deploy-pages.yml` runs on every push to
-`main` (and via `workflow_dispatch`).
+`master` (and via `workflow_dispatch`).
 
 ## The pipeline
 
 ```
-push to main
+push to master
   → build job: npm ci → npm run build (env: VITE_API_URL from repo Variable) → upload dist/
   → deploy job: actions/deploy-pages
 ```

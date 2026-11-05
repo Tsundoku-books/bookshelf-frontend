@@ -10,7 +10,7 @@ Single-page frontend for a personal book library. React 18 + Vite + TypeScript +
 Tailwind + shadcn/ui (Radix) + axios + react-i18next. JWT auth held in
 `AuthContext` (localStorage-backed). Talks to **`bookshelf-api`** (separate repo,
 deployed on Render). Deployed to **GitHub Pages** under `/bookshelf-frontend/` by
-GitHub Actions on every push to `main`.
+GitHub Actions on every push to `master`.
 
 This repo is part of a **test-automation portfolio**: end-to-end suites
 (Playwright, Robot Framework) live in their own repos and drive this UI through
@@ -92,7 +92,7 @@ public/          404.html — SPA-routing fallback for GitHub Pages
 | `npm run test:coverage` | Same, with v8 coverage and thresholds (used by CI and the deploy gate) |
 
 Deploy is automatic: `.github/workflows/deploy-pages.yml` runs `npm ci`, lint, typecheck, unit
-tests and `npm run build`, then publishes `dist/` to Pages on every push to `main` (Pages source =
+tests and `npm run build`, then publishes `dist/` to Pages on every push to `master` (Pages source =
 "GitHub Actions"). A failing check blocks the deploy. `.github/workflows/ci.yml` runs the same on
 pull requests and other branches. To redeploy without a code change, trigger the deploy workflow from
 the Actions tab (`workflow_dispatch`). See the `deploy` skill.
@@ -100,7 +100,7 @@ the Actions tab (`workflow_dispatch`). See the `deploy` skill.
 ## Git & deploy
 
 - Conventional Commits (`type(scope): summary`), matching the existing history.
-- `main` **auto-deploys to GitHub Pages**.
+- `master` **auto-deploys to GitHub Pages**.
 - No `CHANGELOG.md` and no version tags in this repo (the API repo has them).
   `package.json` `version` is static.
 - A `bookshelf-api` contract change can break this app. The coupling points are
