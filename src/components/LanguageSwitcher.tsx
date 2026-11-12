@@ -15,9 +15,9 @@ const VARIANT_STYLES: Record<Variant, { group: string; active: string; inactive:
     inactive: 'text-text-muted hover:text-text',
   },
   onDark: {
-    group: 'border-on-primary/30 bg-on-primary/10',
+    group: 'border-on-hero/30 bg-on-hero/10',
     active: 'bg-surface text-heading shadow-sm',
-    inactive: 'text-on-primary/70 hover:text-on-primary',
+    inactive: 'text-on-hero/70 hover:text-on-hero',
   },
 }
 

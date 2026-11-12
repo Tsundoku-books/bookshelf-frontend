@@ -20,10 +20,10 @@ const STYLES: Record<Variant, { option: string; active: string; hint: string; la
     label: 'text-text',
   },
   onDark: {
-    option: 'border-on-primary/30 bg-on-primary/10 hover:border-on-primary/60',
-    active: 'border-on-primary bg-on-primary/25',
-    hint: 'text-on-primary/70',
-    label: 'text-on-primary',
+    option: 'border-on-hero/30 bg-on-hero/10 hover:border-on-hero/60',
+    active: 'border-on-hero bg-on-hero/25',
+    hint: 'text-on-hero/70',
+    label: 'text-on-hero',
   },
 }
 

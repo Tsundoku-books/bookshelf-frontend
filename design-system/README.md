@@ -55,8 +55,8 @@ Components never use these brand tokens directly. They use semantic tokens that 
 
 Not on the sheet: a proposal derived from the same palette, so the brand reads the same in both themes.
 
-- The page turns to `ink` (#0F1F1B) and text to `warm-cream`; cards and fields sit on a slightly lighter green surface (#1A2C27).
-- Sage takes over as the primary color (`primary` = `sage-green`, with `ink` text on it); headings become a light sage (#B5CCC3).
+- The page turns to a neutral near-black (#101312) and text to an off-white (#E6E9E8), as in common dark UIs; cards and fields sit on a slightly lighter neutral surface (#1A1E1D).
+- Sage takes over as the primary color (`primary` = `sage-green`, with `ink` text on it); headings become a light grey-sage (#C9D3CF).
 - `cta` stays `terracotta` with `white` text in both themes, so calls to action look identical.
 - Logos: use the `-on-dark` files on dark backgrounds. Code that shows a logo renders both and marks them `ts-only-light` / `ts-only-dark`.
 - The theme follows the system setting (`prefers-color-scheme`) unless the page sets `data-theme="light"` or `data-theme="dark"` on `<html>`.

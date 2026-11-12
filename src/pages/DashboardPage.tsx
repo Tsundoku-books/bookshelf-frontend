@@ -192,13 +192,13 @@ export function DashboardPage() {
               </div>
             </div>
 
-            <div className="bg-primary p-8 rounded-2xl shadow-xl text-on-primary mb-8">
+            <div className="bg-hero border border-on-hero/15 p-8 rounded-2xl shadow-xl text-on-hero mb-8">
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="text-center md:text-left">
                   <h3 className="text-2xl font-bold mb-2">
                     {libraryEmpty ? t('dashboard.cta.titleEmpty') : t('dashboard.cta.titleMore')}
                   </h3>
-                  <p className="text-on-primary/90 mb-4">
+                  <p className="text-on-hero/90 mb-4">
                     {libraryEmpty
                       ? t('dashboard.cta.subtitleEmpty')
                       : t('dashboard.cta.subtitleMore')}
@@ -215,8 +215,8 @@ export function DashboardPage() {
                   </Button>
                 </div>
                 <div className="flex-shrink-0">
-                  <div className="w-32 h-32 bg-on-primary/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                    <BookOpen className="w-16 h-16 text-on-primary" />
+                  <div className="w-32 h-32 bg-on-hero/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <BookOpen className="w-16 h-16 text-on-hero" />
                   </div>
                 </div>
               </div>

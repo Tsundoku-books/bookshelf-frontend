@@ -35,6 +35,8 @@ export default {
           heading: token("--heading"),
           primary: token("--primary"),
           "on-primary": token("--on-primary"),
+          hero: token("--hero"),
+          "on-hero": token("--on-hero"),
           secondary: token("--secondary"),
           "on-secondary": token("--on-secondary"),
           accent: token("--accent"),

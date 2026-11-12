@@ -41,12 +41,12 @@ export function RegisterPage() {
 
   return (
     <div
-      className="relative min-h-screen flex items-center justify-center bg-primary p-4"
+      className="relative min-h-screen flex items-center justify-center bg-hero p-4"
       data-testid="register-page"
     >
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-on-primary/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-on-primary/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-on-hero/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-on-hero/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       <div className="absolute right-4 top-4 z-20 flex items-center gap-2">
@@ -54,20 +54,20 @@ export function RegisterPage() {
         <LanguageSwitcher variant="onDark" />
       </div>
 
-      <div className="relative bg-on-primary/10 backdrop-blur-xl p-8 rounded-2xl shadow-2xl max-w-md w-full border border-on-primary/20 animate-fadeIn">
+      <div className="relative bg-on-hero/10 backdrop-blur-xl p-8 rounded-2xl shadow-2xl max-w-md w-full border border-on-hero/20 animate-fadeIn">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
-            <div className="bg-on-primary/20 backdrop-blur-sm p-4 rounded-2xl">
-              <User className="w-12 h-12 text-on-primary" />
+            <div className="bg-on-hero/20 backdrop-blur-sm p-4 rounded-2xl">
+              <User className="w-12 h-12 text-on-hero" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-on-primary mb-2">{t('register.title')}</h1>
-          <p className="text-on-primary/80 text-sm">{t('register.subtitle')}</p>
+          <h1 className="text-4xl font-bold text-on-hero mb-2">{t('register.title')}</h1>
+          <p className="text-on-hero/80 text-sm">{t('register.subtitle')}</p>
         </div>
 
         {error && (
           <div
-            className="mb-4 p-3 bg-danger/20 border border-danger/50 rounded-lg text-on-primary text-sm text-center"
+            className="mb-4 p-3 bg-danger/20 border border-danger/50 rounded-lg text-on-hero text-sm text-center"
             data-testid="error-message"
             role="alert"
           >
@@ -77,11 +77,11 @@ export function RegisterPage() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-on-primary/90 mb-2">
+            <label htmlFor="name" className="block text-sm font-medium text-on-hero/90 mb-2">
               {t('register.fullName')}
             </label>
             <div className="relative flex items-center">
-              <User className="absolute left-3 w-5 h-5 text-on-primary/50 pointer-events-none" />
+              <User className="absolute left-3 z-10 w-5 h-5 text-on-hero/60 pointer-events-none" />
               <input
                 id="name"
                 type="text"
@@ -89,7 +89,7 @@ export function RegisterPage() {
                 onChange={(e) => setName(e.target.value)}
                 data-testid="name-input"
                 aria-label={t('register.nameAriaLabel')}
-                className="w-full pl-11 pr-4 py-3 bg-on-primary/20 backdrop-blur-sm border border-on-primary/30 rounded-lg text-on-primary placeholder-on-primary/70 focus:ring-2 focus:ring-on-primary/50 focus:border-transparent transition-all"
+                className="w-full pl-11 pr-4 py-3 bg-on-hero/10 backdrop-blur-sm border border-on-hero/30 rounded-lg text-on-hero placeholder-on-hero/70 focus:ring-2 focus:ring-on-hero/50 focus:border-transparent transition-all"
                 placeholder={t('register.fullNamePlaceholder')}
                 required
               />
@@ -97,11 +97,11 @@ export function RegisterPage() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-on-primary/90 mb-2">
+            <label htmlFor="email" className="block text-sm font-medium text-on-hero/90 mb-2">
               {t('common.email')}
             </label>
             <div className="relative flex items-center">
-              <Mail className="absolute left-3 w-5 h-5 text-on-primary/50 pointer-events-none" />
+              <Mail className="absolute left-3 z-10 w-5 h-5 text-on-hero/60 pointer-events-none" />
               <input
                 id="email"
                 type="email"
@@ -109,7 +109,7 @@ export function RegisterPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 data-testid="email-input"
                 aria-label={t('register.emailAriaLabel')}
-                className="w-full pl-11 pr-4 py-3 bg-on-primary/20 backdrop-blur-sm border border-on-primary/30 rounded-lg text-on-primary placeholder-on-primary/70 focus:ring-2 focus:ring-on-primary/50 focus:border-transparent transition-all"
+                className="w-full pl-11 pr-4 py-3 bg-on-hero/10 backdrop-blur-sm border border-on-hero/30 rounded-lg text-on-hero placeholder-on-hero/70 focus:ring-2 focus:ring-on-hero/50 focus:border-transparent transition-all"
                 placeholder={t('common.emailPlaceholder')}
                 required
               />
@@ -117,11 +117,11 @@ export function RegisterPage() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-on-primary/90 mb-2">
+            <label htmlFor="password" className="block text-sm font-medium text-on-hero/90 mb-2">
               {t('common.password')}
             </label>
             <div className="relative flex items-center">
-              <Lock className="absolute left-3 w-5 h-5 text-on-primary/50 pointer-events-none" />
+              <Lock className="absolute left-3 z-10 w-5 h-5 text-on-hero/60 pointer-events-none" />
               <input
                 id="password"
                 type="password"
@@ -129,18 +129,18 @@ export function RegisterPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 data-testid="password-input"
                 aria-label={t('register.passwordAriaLabel')}
-                className="w-full pl-11 pr-4 py-3 bg-on-primary/20 backdrop-blur-sm border border-on-primary/30 rounded-lg text-on-primary placeholder-on-primary/70 focus:ring-2 focus:ring-on-primary/50 focus:border-transparent transition-all"
+                className="w-full pl-11 pr-4 py-3 bg-on-hero/10 backdrop-blur-sm border border-on-hero/30 rounded-lg text-on-hero placeholder-on-hero/70 focus:ring-2 focus:ring-on-hero/50 focus:border-transparent transition-all"
                 placeholder={t('common.passwordPlaceholder')}
                 required
                 minLength={6}
               />
             </div>
-            <p className="text-xs text-on-primary/60 mt-1">{t('register.passwordHint')}</p>
+            <p className="text-xs text-on-hero/60 mt-1">{t('register.passwordHint')}</p>
           </div>
 
           <fieldset className="space-y-2" data-testid="register-roles">
-            <legend className="text-sm font-medium text-on-primary/90">{t('register.rolesTitle')}</legend>
-            <p className="text-xs text-on-primary/60">{t('register.rolesHint')}</p>
+            <legend className="text-sm font-medium text-on-hero/90">{t('register.rolesTitle')}</legend>
+            <p className="text-xs text-on-hero/60">{t('register.rolesHint')}</p>
             <RoleSelector
               value={roles}
               onChange={setRoles}
@@ -161,9 +161,9 @@ export function RegisterPage() {
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-on-primary/80 text-sm">
+          <p className="text-on-hero/80 text-sm">
             {t('register.haveAccount')}{' '}
-            <Link to="/login" className="text-on-primary font-semibold hover:underline transition-all">
+            <Link to="/login" className="text-on-hero font-semibold hover:underline transition-all">
               {t('register.signIn')}
             </Link>
           </p>
