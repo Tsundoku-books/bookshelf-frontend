@@ -53,7 +53,7 @@ describe('RegisterPage', () => {
   const fillAccount = async () => {
     await userEvent.type(screen.getByTestId('name-input'), 'Ana Silva')
     await userEvent.type(screen.getByTestId('email-input'), 'ana@test.com')
-    await userEvent.type(screen.getByTestId('password-input'), 'secret1')
+    await userEvent.type(screen.getByTestId('password-input'), 'secret12')
     await userEvent.click(screen.getByTestId('accept-terms-checkbox'))
   }
 
@@ -72,7 +72,7 @@ describe('RegisterPage', () => {
     await fillAccount()
     await userEvent.click(screen.getByTestId('register-button'))
 
-    expect(register).toHaveBeenCalledWith('Ana Silva', 'ana@test.com', 'secret1', ['reader'])
+    expect(register).toHaveBeenCalledWith('Ana Silva', 'ana@test.com', 'secret12', ['reader'])
   })
 
   it('registers with every chosen role', async () => {
@@ -84,7 +84,7 @@ describe('RegisterPage', () => {
     await userEvent.click(screen.getByTestId('register-role-seller'))
     await userEvent.click(screen.getByTestId('register-button'))
 
-    expect(register).toHaveBeenCalledWith('Ana Silva', 'ana@test.com', 'secret1', ['reader', 'buyer', 'seller'])
+    expect(register).toHaveBeenCalledWith('Ana Silva', 'ana@test.com', 'secret12', ['reader', 'buyer', 'seller'])
   })
 
   it('does not submit without any role and explains why', async () => {

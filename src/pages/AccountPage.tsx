@@ -187,7 +187,7 @@ export function AccountPage() {
                   className="ts-input"
                   data-testid="profile-new-password"
                   autoComplete="new-password"
-                  minLength={6}
+                  minLength={8}
                   required
                 />
                 <p className="mt-1 text-xs text-text-muted">{t('profile.passwordHint')}</p>

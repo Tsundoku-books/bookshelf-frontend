@@ -135,7 +135,7 @@ export function RegisterPage() {
                 className="w-full pl-11 pr-4 py-3 bg-on-hero/10 backdrop-blur-sm border border-on-hero/30 rounded-lg text-on-hero placeholder-on-hero/70 focus:ring-2 focus:ring-on-hero/50 focus:border-transparent transition-all"
                 placeholder={t('common.passwordPlaceholder')}
                 required
-                minLength={6}
+                minLength={8}
               />
             </div>
             <p className="text-xs text-on-hero/60 mt-1">{t('register.passwordHint')}</p>
