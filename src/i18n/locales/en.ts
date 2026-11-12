@@ -203,22 +203,68 @@ const en: typeof ptBR = {
     genericError: 'Failed to sign in',
   },
   register: {
-    title: 'Create Account',
-    subtitle: 'Start your digital library today',
+    title: 'Welcome to Tsundoku',
     fullName: 'Full Name',
     fullNamePlaceholder: 'John Smith',
     nameAriaLabel: 'Full name',
     emailAriaLabel: 'Email for sign up',
     passwordAriaLabel: 'Password (minimum 6 characters)',
     passwordHint: 'Minimum 6 characters',
-    submit: 'Create Free Account',
-    submitting: 'Creating account...',
+    submit: 'Sign up',
+    submitting: 'Signing up...',
+    testNotice: 'Test project: sign up with fictitious data, never with real data.',
+    acceptPrefix: 'I have read and accept the',
+    acceptLink: 'Terms of Service and Privacy Policy',
     haveAccount: 'Already have an account?',
     signIn: 'Sign in',
     genericError: 'Failed to create account',
     rolesTitle: 'How do you plan to use it?',
     rolesHint: 'You can change this later in your account',
     rolesRequired: 'Choose at least one option',
+  },
+  terms: {
+    back: 'Back to sign up',
+    title: 'Terms of Service and Privacy Policy',
+    updated: 'Version of November 12, 2026',
+    notice: 'Test project: do not use real data and do not use it day to day.',
+    sections: {
+      purpose: {
+        title: '1. Purpose of the project',
+        body: 'Tsundoku is a demonstration and test project. It exists for test-automation training and practice, manual testing, API testing and similar activities. It is not a commercial product, offers no guarantee that it works, and must not be used as a real personal library or store in everyday life.',
+      },
+      noRealData: {
+        title: '2. Do not use real data',
+        body: 'Sign up with fictitious data only: an invented name, a test email (for example a disposable address or an example domain) and a password you do not use anywhere else. Do not enter your tax ID, company ID, address, phone number, bank details or any genuine personal or sensitive information in any field, including books, listings, companies and orders.',
+      },
+      account: {
+        title: '3. Your account and acceptable use',
+        body: 'You are responsible for keeping the password of your test account safe. Do not try to access other people’s data, overload the service, bypass its protections or use it for unlawful purposes. Accounts may be suspended or removed at any time, without notice.',
+      },
+      dataReset: {
+        title: '4. Data may be erased',
+        body: 'The environment may be reset, changed or shut down without notice, and all data (accounts, books, listings, orders) may be erased or lost. Do not keep anything here that you cannot afford to lose. There are no backups and no availability promise.',
+      },
+      marketplace: {
+        title: '5. Simulated store and payments',
+        body: 'The store is a simulation. No real charge is made, no generated Pix code can be paid and no product is actually sold or shipped. Sellers, listings and orders exist for demonstration only.',
+      },
+      privacy: {
+        title: '6. Data we collect (Privacy Policy)',
+        body: 'To make the service work we store your name, email, your password in protected form (never as plain text), the roles you chose, the books and other records you create, and the date and version of these terms you accepted. We use this data only to run the test environment; we do not sell it or share it for commercial purposes. The service runs on third-party cloud providers (hosting and database), which store the data on the project’s behalf.',
+      },
+      rights: {
+        title: '7. Your rights',
+        body: 'Under Brazil’s LGPD you may request confirmation, access, correction or deletion of your data. Since this is a test environment with fictitious data, you may ask the project owner to delete it at any time through the Tsundoku repository on GitHub. Some of the information can also be edited on your account page.',
+      },
+      liability: {
+        title: '8. No warranty and limitation of liability',
+        body: 'The service is provided “as is”, without warranties of any kind. To the extent permitted by law, the project owner is not liable for losses or damages arising from use, unavailability or loss of data, especially if real data is entered against what these terms ask.',
+      },
+      changes: {
+        title: '9. Changes',
+        body: 'These terms may be updated. The current version is shown at the top of this page, and sign-up records the version accepted. Continuing to use the service means you accept the current version.',
+      },
+    },
   },
   dashboard: {
     userLabel: 'User',

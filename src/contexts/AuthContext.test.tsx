@@ -130,6 +130,7 @@ describe('AuthProvider', () => {
       email: 'ana@test.com',
       password: 'secret1',
       roles: ['buyer'],
+      acceptTerms: true,
     })
     expect(await screen.findByText('/account')).toBeInTheDocument()
   })

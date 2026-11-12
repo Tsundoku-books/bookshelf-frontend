@@ -54,6 +54,7 @@ describe('RegisterPage', () => {
     await userEvent.type(screen.getByTestId('name-input'), 'Ana Silva')
     await userEvent.type(screen.getByTestId('email-input'), 'ana@test.com')
     await userEvent.type(screen.getByTestId('password-input'), 'secret1')
+    await userEvent.click(screen.getByTestId('accept-terms-checkbox'))
   }
 
   it('starts with the library selected, as before roles existed', () => {
@@ -95,6 +96,14 @@ describe('RegisterPage', () => {
 
     expect(register).not.toHaveBeenCalled()
     expect(screen.getByTestId('error-message')).toHaveTextContent('Escolha pelo menos uma opção')
+  })
+
+  it('keeps the submit button disabled until the terms are accepted', async () => {
+    renderPage(<RegisterPage />)
+
+    expect(screen.getByTestId('register-button')).toBeDisabled()
+    await userEvent.click(screen.getByTestId('accept-terms-checkbox'))
+    expect(screen.getByTestId('register-button')).toBeEnabled()
   })
 
   it('shows the localised API error', async () => {

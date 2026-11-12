@@ -18,6 +18,7 @@ export function RegisterPage() {
   const [password, setPassword] = useState('')
   // Library only by default, which is what the account did before roles existed.
   const [roles, setRoles] = useState<SelfServiceRole[]>(['reader'])
+  const [accepted, setAccepted] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -56,13 +57,7 @@ export function RegisterPage() {
 
       <div className="relative bg-on-hero/10 backdrop-blur-xl p-8 rounded-2xl shadow-2xl max-w-md w-full border border-on-hero/20 animate-fadeIn">
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <div className="bg-on-hero/20 backdrop-blur-sm p-4 rounded-2xl">
-              <User className="w-12 h-12 text-on-hero" />
-            </div>
-          </div>
-          <h1 className="text-4xl font-bold text-on-hero mb-2">{t('register.title')}</h1>
-          <p className="text-on-hero/80 text-sm">{t('register.subtitle')}</p>
+          <h1 className="text-4xl font-bold text-on-hero">{t('register.title')}</h1>
         </div>
 
         {error && (
@@ -74,6 +69,14 @@ export function RegisterPage() {
             {error}
           </div>
         )}
+
+        <div
+          role="note"
+          className="mb-4 p-3 bg-warning/20 border border-warning/50 rounded-lg text-on-hero text-sm text-center"
+          data-testid="register-test-notice"
+        >
+          {t('register.testNotice')}
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
@@ -150,9 +153,31 @@ export function RegisterPage() {
             />
           </fieldset>
 
+          <label className="flex items-start gap-2 text-sm text-on-hero/90">
+            <input
+              type="checkbox"
+              checked={accepted}
+              onChange={(e) => setAccepted(e.target.checked)}
+              data-testid="accept-terms-checkbox"
+              className="mt-1"
+              required
+            />
+            <span>
+              {t('register.acceptPrefix')}{' '}
+              <Link
+                to="/terms"
+                target="_blank"
+                className="font-semibold underline"
+                data-testid="terms-link"
+              >
+                {t('register.acceptLink')}
+              </Link>
+            </span>
+          </label>
+
           <Button
             type="submit"
-            disabled={loading}
+            disabled={loading || !accepted}
             variant="cta" className="w-full py-6 text-base font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
             data-testid="register-button"
           >

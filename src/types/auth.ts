@@ -22,6 +22,7 @@ export interface RegisterRequest {
   email: string;
   password: string;
   roles?: SelfServiceRole[];
+  acceptTerms: true;
 }
 
 export interface AuthResponse {

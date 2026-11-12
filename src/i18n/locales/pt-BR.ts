@@ -201,22 +201,68 @@ const ptBR = {
     genericError: 'Erro ao fazer login',
   },
   register: {
-    title: 'Criar Conta',
-    subtitle: 'Comece sua biblioteca digital hoje',
+    title: 'Bem-vindo ao Tsundoku',
     fullName: 'Nome Completo',
     fullNamePlaceholder: 'João Silva',
     nameAriaLabel: 'Nome completo',
     emailAriaLabel: 'E-mail para cadastro',
     passwordAriaLabel: 'Senha (mínimo 6 caracteres)',
     passwordHint: 'Mínimo 6 caracteres',
-    submit: 'Criar Conta Grátis',
-    submitting: 'Criando conta...',
+    submit: 'Cadastrar',
+    submitting: 'Cadastrando...',
+    testNotice: 'Projeto de testes: cadastre-se com dados fictícios, nunca com dados reais.',
+    acceptPrefix: 'Li e aceito os',
+    acceptLink: 'Termos de Serviço e a Política de Privacidade',
     haveAccount: 'Já tem uma conta?',
     signIn: 'Entrar',
     genericError: 'Erro ao criar conta',
     rolesTitle: 'Como você pretende usar?',
     rolesHint: 'Você pode mudar isso depois na sua conta',
     rolesRequired: 'Escolha pelo menos uma opção',
+  },
+  terms: {
+    back: 'Voltar ao cadastro',
+    title: 'Termos de Serviço e Política de Privacidade',
+    updated: 'Versão de 12 de novembro de 2026',
+    notice: 'Projeto de testes: não use dados reais e não use no dia a dia.',
+    sections: {
+      purpose: {
+        title: '1. Finalidade do projeto',
+        body: 'O Tsundoku é um projeto de demonstração e de testes. Ele existe para treinamento e prática de automação de testes, testes manuais, testes de API e atividades semelhantes. Não é um produto comercial, não oferece garantia de funcionamento e não deve ser usado como biblioteca pessoal ou loja de verdade no dia a dia.',
+      },
+      noRealData: {
+        title: '2. Não use dados reais',
+        body: 'Cadastre-se apenas com dados fictícios: nome inventado, e-mail de teste (por exemplo, um endereço descartável ou de domínio de exemplo) e uma senha que você não usa em nenhum outro lugar. Não informe CPF, CNPJ, endereço, telefone, dados bancários ou qualquer informação pessoal ou sensível verdadeira em nenhum campo, incluindo livros, anúncios, empresas e pedidos.',
+      },
+      account: {
+        title: '3. Sua conta e uso aceitável',
+        body: 'Você é responsável por manter a senha da conta de teste em segurança. Não tente acessar dados de outras pessoas, sobrecarregar o serviço, burlar suas proteções ou usá-lo para fins ilícitos. Contas podem ser suspensas ou removidas a qualquer momento, sem aviso.',
+      },
+      dataReset: {
+        title: '4. Dados podem ser apagados',
+        body: 'O ambiente pode ser reiniciado, alterado ou desativado sem aviso, e todos os dados (contas, livros, anúncios, pedidos) podem ser apagados ou perdidos. Não guarde aqui nada que você não possa perder. Não há backup nem promessa de disponibilidade.',
+      },
+      marketplace: {
+        title: '5. Loja e pagamentos simulados',
+        body: 'A loja é uma simulação. Nenhuma cobrança real é feita, nenhum código Pix gerado é pagável e nenhum produto é de fato vendido ou enviado. Vendedores, anúncios e pedidos existem apenas para demonstração.',
+      },
+      privacy: {
+        title: '6. Dados que coletamos (Política de Privacidade)',
+        body: 'Para o serviço funcionar, guardamos nome, e-mail, a senha em forma protegida (nunca em texto puro), os papéis escolhidos, os livros e demais registros que você criar e a data e a versão destes termos que você aceitou. Usamos esses dados somente para operar o ambiente de testes; não os vendemos nem os compartilhamos para fins comerciais. O serviço roda em provedores de nuvem de terceiros (hospedagem e banco de dados), que armazenam os dados em nome do projeto.',
+      },
+      rights: {
+        title: '7. Seus direitos',
+        body: 'Conforme a LGPD, você pode pedir confirmação, acesso, correção ou exclusão dos seus dados. Como o ambiente é de testes e os dados são fictícios, a exclusão pode ser pedida a qualquer momento ao responsável pelo projeto, pelo repositório do Tsundoku no GitHub. Parte das informações também pode ser editada na página da conta.',
+      },
+      liability: {
+        title: '8. Ausência de garantia e limitação de responsabilidade',
+        body: 'O serviço é oferecido “como está”, sem garantias de qualquer tipo. Na extensão permitida pela lei, o responsável pelo projeto não responde por perdas, danos ou prejuízos decorrentes do uso, da indisponibilidade ou da perda de dados, especialmente se dados reais forem informados contra o que estes termos orientam.',
+      },
+      changes: {
+        title: '9. Alterações',
+        body: 'Estes termos podem ser atualizados. A versão vigente aparece no topo desta página, e o cadastro registra a versão aceita. Continuar usando o serviço significa concordar com a versão vigente.',
+      },
+    },
   },
   dashboard: {
     userLabel: 'Usuário',

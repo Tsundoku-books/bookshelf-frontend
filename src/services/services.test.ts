@@ -31,13 +31,20 @@ describe('authService', () => {
   it('registers with the chosen roles', async () => {
     http.post.mockResolvedValue({ data: { token: 't' } })
 
-    await authService.register({ name: 'Ana', email: 'a@b.co', password: 'secret1', roles: ['reader', 'buyer'] })
+    await authService.register({
+      name: 'Ana',
+      email: 'a@b.co',
+      password: 'secret1',
+      roles: ['reader', 'buyer'],
+      acceptTerms: true,
+    })
 
     expect(http.post).toHaveBeenCalledWith('/auth/register', {
       name: 'Ana',
       email: 'a@b.co',
       password: 'secret1',
       roles: ['reader', 'buyer'],
+      acceptTerms: true,
     })
   })
 

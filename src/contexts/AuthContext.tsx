@@ -66,7 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     password: string,
     roles?: SelfServiceRole[],
   ) => {
-    const response = await authService.register({ name, email, password, roles })
+    const response = await authService.register({ name, email, password, roles, acceptTerms: true })
     applySession(response)
     navigate(homePathFor(rolesOf(response.user)))
   }

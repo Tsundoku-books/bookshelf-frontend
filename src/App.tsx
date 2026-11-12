@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './contexts/AuthContext'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
+import { TermsPage } from './pages/TermsPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { AccountPage } from './pages/AccountPage'
 import { CompanyFormPage } from './pages/CompanyFormPage'
@@ -24,6 +25,7 @@ function App() {
     <Routes>
       <Route path="/login" element={!isAuthenticated ? <LoginPage /> : <Navigate to={homePathFor(roles)} />} />
       <Route path="/register" element={!isAuthenticated ? <RegisterPage /> : <Navigate to={homePathFor(roles)} />} />
+      <Route path="/terms" element={<TermsPage />} />
       <Route
         path="/dashboard"
         element={
