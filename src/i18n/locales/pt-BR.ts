@@ -574,6 +574,7 @@ const ptBR = {
     CANNOT_SUSPEND_SELF: 'Você não pode suspender a própria conta.',
     LAST_ADMIN: 'O último administrador ativo não pode ser removido nem suspenso.',
     ACCOUNT_SUSPENDED: 'Esta conta está suspensa. Fale com um administrador.',
+    RATE_LIMITED: 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.',
     INVALID_CURRENT_PASSWORD: 'A senha atual está incorreta.',
     PASSWORD_UNCHANGED: 'A nova senha deve ser diferente da atual.',
     ROLE_REQUIRED_MINIMUM: 'A conta precisa de pelo menos um uso ativo.',

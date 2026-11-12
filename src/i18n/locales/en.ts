@@ -576,6 +576,7 @@ const en: typeof ptBR = {
     CANNOT_SUSPEND_SELF: 'You cannot suspend your own account.',
     LAST_ADMIN: 'The last active admin cannot be removed or suspended.',
     ACCOUNT_SUSPENDED: 'This account is suspended. Contact an administrator.',
+    RATE_LIMITED: 'Too many attempts in a short time. Wait a few minutes and try again.',
     INVALID_CURRENT_PASSWORD: 'The current password is incorrect.',
     PASSWORD_UNCHANGED: 'The new password must be different from the current one.',
     ROLE_REQUIRED_MINIMUM: 'The account needs at least one active use.',

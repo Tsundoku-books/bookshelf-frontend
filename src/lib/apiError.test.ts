@@ -22,6 +22,12 @@ describe('getApiErrorMessage', () => {
     )
   })
 
+  it('explains a rate limit in Portuguese', () => {
+    expect(getApiErrorMessage(apiError({ code: 'RATE_LIMITED', error: 'Too many requests.' }))).toContain(
+      'Muitas tentativas',
+    )
+  })
+
   it('falls back to the backend message, then the error message, then the fallback key', () => {
     expect(getApiErrorMessage(apiError({ error: 'Something odd' }))).toBe('Something odd')
     expect(getApiErrorMessage(new Error('Network Error'))).toBe('Network Error')
