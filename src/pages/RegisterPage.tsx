@@ -167,6 +167,7 @@ export function RegisterPage() {
               <Link
                 to="/terms"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="font-semibold underline"
                 data-testid="terms-link"
               >
