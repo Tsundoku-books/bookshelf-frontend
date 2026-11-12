@@ -1,13 +1,48 @@
 /// <reference types="vitest/config" />
-import { defineConfig } from 'vite'
+import { createHash } from 'crypto'
+import { defineConfig, loadEnv, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-export default defineConfig({
+// GitHub Pages cannot send response headers, so the policy ships as a <meta> tag. The two inline scripts in
+// index.html are allowed by hash. Skipped when VITE_API_URL is unset (E2E and local builds), since the
+// allowed API origin is unknown then.
+function contentSecurityPolicy(apiUrl: string | undefined): Plugin {
+  return {
+    name: 'content-security-policy',
+    apply: 'build',
+    transformIndexHtml: {
+      order: 'post',
+      handler(html) {
+        if (!apiUrl) return html
+        const inlineScripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(
+          (match) => `'sha256-${createHash('sha256').update(match[1]).digest('base64')}'`,
+        )
+        const policy = [
+          "default-src 'self'",
+          `script-src 'self' ${inlineScripts.join(' ')}`,
+          "style-src 'self' 'unsafe-inline'",
+          "img-src 'self' data: https:",
+          "font-src 'self' data:",
+          `connect-src 'self' ${new URL(apiUrl).origin} https://www.googleapis.com`,
+          "manifest-src 'self'",
+          "worker-src 'self'",
+          "object-src 'none'",
+          "base-uri 'self'",
+          "form-action 'self'",
+        ].join('; ')
+        return html.replace('<meta charset="UTF-8" />', `$&
+    <meta http-equiv="Content-Security-Policy" content="${policy}" />`)
+      },
+    },
+  }
+}
+
+export default defineConfig(({ mode }) => ({
   // GitHub Pages serves the app at https://tsundoku-books.github.io/bookshelf-frontend/.
   // Everywhere else (dev, Docker, E2E suites) it is served from the root.
   base: process.env.GITHUB_PAGES === 'true' ? '/bookshelf-frontend/' : '/',
-  plugins: [react()],
+  plugins: [react(), contentSecurityPolicy(loadEnv(mode, process.cwd(), 'VITE_').VITE_API_URL)],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -45,4 +80,4 @@ export default defineConfig({
       },
     },
   },
-})
+}))
