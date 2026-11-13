@@ -210,7 +210,6 @@ const ptBR = {
     passwordHint: 'Mínimo 8 caracteres',
     next: 'Continuar',
     back: 'Voltar',
-    step: 'Etapa {{current}} de {{total}}',
     submit: 'Cadastrar',
     submitting: 'Cadastrando...',
     testNotice: 'Projeto de testes: cadastre-se com dados fictícios, nunca com dados reais.',

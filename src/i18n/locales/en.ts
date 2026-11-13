@@ -212,7 +212,6 @@ const en: typeof ptBR = {
     passwordHint: 'Minimum 8 characters',
     next: 'Continue',
     back: 'Back',
-    step: 'Step {{current}} of {{total}}',
     submit: 'Sign up',
     submitting: 'Signing up...',
     testNotice: 'Test project: sign up with fictitious data, never with real data.',

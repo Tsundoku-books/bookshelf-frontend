@@ -20,8 +20,8 @@ const STYLES: Record<Variant, { option: string; active: string; hint: string; la
     label: 'text-text',
   },
   onDark: {
-    option: 'border-on-hero/30 bg-on-hero/10 hover:border-on-hero/60',
-    active: 'border-on-hero bg-on-hero/25',
+    option: 'border-transparent',
+    active: 'border-transparent',
     hint: 'text-on-hero/70',
     label: 'text-on-hero',
   },

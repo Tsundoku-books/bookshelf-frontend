@@ -68,7 +68,6 @@ describe('RegisterPage', () => {
     expect(screen.getByTestId('name-input')).toBeInTheDocument()
     expect(screen.queryByTestId('register-roles')).not.toBeInTheDocument()
     expect(screen.queryByTestId('accept-terms-checkbox')).not.toBeInTheDocument()
-    expect(screen.getByTestId('register-step')).toHaveTextContent('Etapa 1 de 2')
   })
 
   it('moves to the usage step and can go back keeping what was typed', async () => {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { User, Mail, Lock } from 'lucide-react'
@@ -84,12 +84,9 @@ export function RegisterPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          <p className="text-xs text-on-hero/60 text-center" data-testid="register-step">
-            {t('register.step', { current: step, total: 2 })}
-          </p>
-
+          {/* Distinct keys: otherwise React reuses the Continuar button as Voltar and the browser submits the form on the same click. */}
           {step === 1 ? (
-            <>
+            <Fragment key="account">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-on-hero/90 mb-2">
                 {t('register.fullName')}
@@ -161,9 +158,9 @@ export function RegisterPage() {
               >
                 {t('register.next')}
               </Button>
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment key="usage">
             <fieldset className="space-y-2" data-testid="register-roles">
               <legend className="text-sm font-medium text-on-hero/90">{t('register.rolesTitle')}</legend>
               <p className="text-xs text-on-hero/60">{t('register.rolesHint')}</p>
@@ -218,7 +215,7 @@ export function RegisterPage() {
               >
                 {t('register.back')}
               </Button>
-            </>
+            </Fragment>
           )}
         </form>
 
