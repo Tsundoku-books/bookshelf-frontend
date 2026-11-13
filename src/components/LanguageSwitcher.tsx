@@ -1,29 +1,16 @@
 import { useTranslation } from 'react-i18next'
 import { SUPPORTED_LANGUAGES, type SupportedLanguage } from '../i18n'
 
-type Variant = 'onLight' | 'onDark'
+import { SEGMENTED_STYLES, type SegmentedVariant } from './segmentedStyles'
 
 const LABEL_KEYS: Record<SupportedLanguage, 'language.ptBR' | 'language.en'> = {
   'pt-BR': 'language.ptBR',
   en: 'language.en',
 }
 
-const VARIANT_STYLES: Record<Variant, { group: string; active: string; inactive: string }> = {
-  onLight: {
-    group: 'border-border bg-background',
-    active: 'bg-surface text-heading shadow-sm',
-    inactive: 'text-text-muted hover:text-text',
-  },
-  onDark: {
-    group: 'border-on-hero/30 bg-on-hero/10',
-    active: 'bg-surface text-heading shadow-sm',
-    inactive: 'text-on-hero/70 hover:text-on-hero',
-  },
-}
-
-export function LanguageSwitcher({ variant = 'onLight' }: { variant?: Variant }) {
+export function LanguageSwitcher({ variant = 'onLight' }: { variant?: SegmentedVariant }) {
   const { i18n, t } = useTranslation()
-  const styles = VARIANT_STYLES[variant]
+  const styles = SEGMENTED_STYLES[variant]
   // `resolvedLanguage` already maps values like "en-US" to a supported language.
   const resolved = i18n.resolvedLanguage ?? ''
   const current: SupportedLanguage = (SUPPORTED_LANGUAGES as readonly string[]).includes(resolved)

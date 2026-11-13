@@ -56,7 +56,7 @@ export function RegisterPage() {
       </div>
 
       <div className="absolute right-4 top-4 z-20 flex items-center gap-2">
-        <ThemeSelect />
+        <ThemeSelect variant="onDark" />
         <LanguageSwitcher variant="onDark" />
       </div>
 

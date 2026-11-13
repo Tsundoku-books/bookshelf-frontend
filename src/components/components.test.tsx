@@ -101,20 +101,20 @@ describe('ThemeSelect and useTheme', () => {
 
   it('offers system, light and dark and remembers the choice', async () => {
     render(<ThemeSelect />)
-    const select = screen.getByTestId('theme-select')
-    expect(select).toHaveValue('system')
+    expect(screen.getByTestId('theme-system')).toHaveAttribute('aria-pressed', 'true')
 
-    await userEvent.selectOptions(select, 'dark')
+    await userEvent.click(screen.getByTestId('theme-dark'))
 
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
     expect(localStorage.getItem('theme')).toBe('dark')
+    expect(screen.getByTestId('theme-dark')).toHaveAttribute('aria-pressed', 'true')
 
-    await userEvent.selectOptions(select, 'light')
+    await userEvent.click(screen.getByTestId('theme-light'))
 
     expect(document.documentElement).toHaveAttribute('data-theme', 'light')
     expect(localStorage.getItem('theme')).toBe('light')
 
-    await userEvent.selectOptions(select, 'system')
+    await userEvent.click(screen.getByTestId('theme-system'))
 
     expect(document.documentElement).not.toHaveAttribute('data-theme')
     expect(localStorage.getItem('theme')).toBeNull()
@@ -125,7 +125,8 @@ describe('ThemeSelect and useTheme', () => {
 
     render(<ThemeSelect />)
 
-    expect(screen.getByTestId('theme-select')).toHaveValue('dark')
+    expect(screen.getByTestId('theme-dark')).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByTestId('theme-system')).toHaveAttribute('aria-pressed', 'false')
   })
 
   it('exposes the current choice and a setter', () => {
