@@ -41,6 +41,7 @@ const en: typeof ptBR = {
     orders: 'My orders',
     sell: 'Sell',
     sales: 'Sales',
+    playground: 'Playground',
   },
   account: {
     title: 'My account',
@@ -279,6 +280,45 @@ const en: typeof ptBR = {
       title: 'Ready to try it?',
       body: 'Create an account with fictitious data and explore the shelf, the shop and the testing tools.',
       button: 'Create account',
+    },
+  },
+  playground: {
+    title: 'Bug playground',
+    intro:
+      'Switch on bugs in your own account to practice manual, API and automation testing. Each bug is a clue: find out what is wrong.',
+    notice: 'Bugs only affect what you do with this account. Nothing changes for other users, and none of them is a real security flaw.',
+    banner_one: '{{count}} playground bug is on in this account.',
+    banner_other: '{{count}} playground bugs are on in this account.',
+    bannerLink: 'Manage',
+    activeCount_one: '{{count}} bug on',
+    activeCount_other: '{{count}} bugs on',
+    clear: 'Switch all off',
+    empty: 'No bugs available right now.',
+    saveError: 'Could not save the active bugs',
+    layers: { api: 'API', ui: 'Interface' },
+    areas: { books: 'Books', stats: 'Statistics', dashboard: 'Dashboard' },
+    typo: { dashboardHeading: 'My Bokos' },
+    bugs: {
+      'api-create-book-status-200': {
+        title: 'Creating books',
+        hint: 'Watch the API response when a book is created.',
+      },
+      'api-stats-total-off-by-one': {
+        title: 'Library count',
+        hint: 'Compare the statistics numbers with your shelf.',
+      },
+      'api-slow-book-list': {
+        title: 'Book list',
+        hint: 'Watch the response time when the shelf loads.',
+      },
+      'ui-cover-without-alt': {
+        title: 'Book covers',
+        hint: 'Browse the shelf with a screen reader or inspect the images.',
+      },
+      'ui-dashboard-title-typo': {
+        title: 'Dashboard text',
+        hint: 'Read the dashboard headings carefully.',
+      },
     },
   },
   terms: {

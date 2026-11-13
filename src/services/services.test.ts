@@ -6,6 +6,7 @@ import { companiesService } from './companies.service'
 import { adminCatalogService } from './adminCatalog.service'
 import { adminUsersService } from './adminUsers.service'
 import { meService } from './me.service'
+import { playgroundService } from './playground.service'
 
 vi.mock('./api', () => ({
   default: { get: vi.fn(), post: vi.fn(), put: vi.fn(), patch: vi.fn(), delete: vi.fn() },
@@ -242,5 +243,23 @@ describe('companiesService', () => {
 
     expect(http.patch).toHaveBeenCalledWith('/admin/companies/c1/verification', { verified: true })
     expect(company.verified).toBe(true)
+  })
+})
+
+describe('playgroundService', () => {
+  it('lists the bugs of the account', async () => {
+    http.get.mockResolvedValue({ data: { bugs: [{ id: 'api-slow-book-list', enabled: false }] } })
+
+    expect(await playgroundService.list()).toEqual([{ id: 'api-slow-book-list', enabled: false }])
+    expect(http.get).toHaveBeenCalledWith('/playground/bugs')
+  })
+
+  it('replaces the set of enabled bugs', async () => {
+    http.put.mockResolvedValue({ data: { message: 'ok', bugs: [{ id: 'api-slow-book-list', enabled: true }] } })
+
+    const bugs = await playgroundService.setEnabled(['api-slow-book-list'])
+
+    expect(http.put).toHaveBeenCalledWith('/playground/bugs', { enabled: ['api-slow-book-list'] })
+    expect(bugs[0].enabled).toBe(true)
   })
 })

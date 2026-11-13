@@ -12,6 +12,7 @@ import { DeleteConfirmModal } from '../components/DeleteConfirmModal'
 import { useAuth } from '../contexts/AuthContext'
 import { useBookLibrary } from '../hooks/useBookLibrary'
 import { booksService } from '../services/books.service'
+import { usePlayground } from '../contexts/PlaygroundContext'
 import { getApiErrorMessage } from '../lib/apiError'
 import { SORT_OPTIONS, type SortKey } from '../lib/bookOptions'
 import type { Book, BookStatus } from '../types/book'
@@ -22,6 +23,7 @@ const SEARCH_DEBOUNCE_MS = 300
 export function DashboardPage() {
   const { t } = useTranslation()
   const { user } = useAuth()
+  const { isOn } = usePlayground()
 
   const [showAddBookModal, setShowAddBookModal] = useState(false)
   const [bookToEdit, setBookToEdit] = useState<Book | null>(null)
@@ -234,7 +236,7 @@ export function DashboardPage() {
               </div>
             ) : (
               <div className="ts-card p-6">
-                <h3 className="text-xl font-bold text-heading mb-4">{t('dashboard.bookList.heading')}</h3>
+                <h3 className="text-xl font-bold text-heading mb-4">{isOn('ui-dashboard-title-typo') ? t('playground.typo.dashboardHeading') : t('dashboard.bookList.heading')}</h3>
 
                 <BookFilters
                   search={searchInput}

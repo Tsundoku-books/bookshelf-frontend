@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { BookOpen } from 'lucide-react'
+import { usePlayground } from '../contexts/PlaygroundContext'
 
 interface BookCoverProps {
   url: string
@@ -11,6 +12,7 @@ interface BookCoverProps {
 /** Cover thumbnail that falls back to a placeholder when the image cannot load. */
 export function BookCover({ url, alt, className = 'h-20 w-14', testId }: BookCoverProps) {
   const [failedUrl, setFailedUrl] = useState<string | null>(null)
+  const { isOn } = usePlayground()
 
   if (failedUrl === url) {
     return (
@@ -26,7 +28,7 @@ export function BookCover({ url, alt, className = 'h-20 w-14', testId }: BookCov
   return (
     <img
       src={url}
-      alt={alt}
+      alt={isOn('ui-cover-without-alt') ? '' : alt}
       loading="lazy"
       onError={() => setFailedUrl(url)}
       className={`${className} flex-shrink-0 rounded object-cover shadow-sm`}

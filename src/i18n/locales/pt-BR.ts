@@ -39,6 +39,7 @@ const ptBR = {
     orders: 'Meus pedidos',
     sell: 'Vender',
     sales: 'Vendas',
+    playground: 'Playground',
   },
   account: {
     title: 'Minha conta',
@@ -277,6 +278,45 @@ const ptBR = {
       title: 'Pronto para experimentar?',
       body: 'Crie uma conta com dados fictícios e explore a estante, o sebo e as ferramentas de teste.',
       button: 'Criar conta',
+    },
+  },
+  playground: {
+    title: 'Playground de bugs',
+    intro:
+      'Ative bugs na sua própria conta para praticar testes manuais, de API e de automação. Cada bug é uma pista: descubra o que está errado.',
+    notice: 'Os bugs só afetam o que você faz com esta conta. Nada muda para outros usuários, e nenhum deles é uma falha de segurança real.',
+    banner_one: '{{count}} bug do playground ativo nesta conta.',
+    banner_other: '{{count}} bugs do playground ativos nesta conta.',
+    bannerLink: 'Gerenciar',
+    activeCount_one: '{{count}} bug ativo',
+    activeCount_other: '{{count}} bugs ativos',
+    clear: 'Desativar todos',
+    empty: 'Nenhum bug disponível no momento.',
+    saveError: 'Não foi possível salvar os bugs ativos',
+    layers: { api: 'API', ui: 'Interface' },
+    areas: { books: 'Livros', stats: 'Estatísticas', dashboard: 'Painel' },
+    typo: { dashboardHeading: 'Meus Lviros' },
+    bugs: {
+      'api-create-book-status-200': {
+        title: 'Cadastro de livros',
+        hint: 'Observe a resposta da API ao criar um livro.',
+      },
+      'api-stats-total-off-by-one': {
+        title: 'Contagem da biblioteca',
+        hint: 'Compare os números das estatísticas com a sua estante.',
+      },
+      'api-slow-book-list': {
+        title: 'Listagem de livros',
+        hint: 'Observe o tempo de resposta ao carregar a estante.',
+      },
+      'ui-cover-without-alt': {
+        title: 'Capas dos livros',
+        hint: 'Navegue pela estante com um leitor de tela ou inspecione as imagens.',
+      },
+      'ui-dashboard-title-typo': {
+        title: 'Texto do painel',
+        hint: 'Leia os títulos do painel com atenção.',
+      },
     },
   },
   terms: {

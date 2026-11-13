@@ -4,6 +4,7 @@ import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
 import { TermsPage } from './pages/TermsPage'
 import { AboutPage } from './pages/AboutPage'
+import { PlaygroundPage } from './pages/PlaygroundPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { AccountPage } from './pages/AccountPage'
 import { CompanyFormPage } from './pages/CompanyFormPage'
@@ -28,6 +29,14 @@ function App() {
       <Route path="/register" element={!isAuthenticated ? <RegisterPage /> : <Navigate to={homePathFor(roles)} />} />
       <Route path="/terms" element={<TermsPage />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route
+        path="/playground"
+        element={
+          <RequireAuth>
+            <PlaygroundPage />
+          </RequireAuth>
+        }
+      />
       <Route
         path="/dashboard"
         element={
