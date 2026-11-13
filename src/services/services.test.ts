@@ -185,10 +185,11 @@ describe('meService', () => {
   })
 
   it('changes the password', async () => {
-    http.patch.mockResolvedValue({ data: { message: 'ok' } })
+    http.patch.mockResolvedValue({ data: { message: 'ok', token: 'fresh' } })
 
-    await meService.changePassword('old-pass', 'new-pass')
+    const result = await meService.changePassword('old-pass', 'new-pass')
 
+    expect(result.token).toBe('fresh')
     expect(http.patch).toHaveBeenCalledWith('/me/password', { currentPassword: 'old-pass', newPassword: 'new-pass' })
   })
 

@@ -157,7 +157,7 @@ describe('AccountPage profile', () => {
   })
 
   it('changes the password and clears the fields', async () => {
-    service.changePassword.mockResolvedValue(undefined)
+    service.changePassword.mockResolvedValue({ message: 'ok', token: 'fresh-after-password', user: session(['reader']).user })
     renderPage()
 
     await userEvent.type(screen.getByTestId('profile-current-password'), 'old-secret')
@@ -165,6 +165,7 @@ describe('AccountPage profile', () => {
     await userEvent.click(screen.getByTestId('profile-password-save'))
 
     expect(service.changePassword).toHaveBeenCalledWith('old-secret', 'new-secret')
+    expect(applySession).toHaveBeenCalledWith(expect.objectContaining({ token: 'fresh-after-password' }))
     expect(await screen.findByTestId('profile-password-saved')).toBeInTheDocument()
     expect(screen.getByTestId('profile-current-password')).toHaveValue('')
     expect(screen.getByTestId('profile-new-password')).toHaveValue('')

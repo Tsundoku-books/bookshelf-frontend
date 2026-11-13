@@ -89,7 +89,8 @@ export function AccountPage() {
     setPasswordStatus('saving')
     setPasswordError('')
     try {
-      await meService.changePassword(currentPassword, newPassword)
+      const session = await meService.changePassword(currentPassword, newPassword)
+      if (session.token) applySession(session)
       setCurrentPassword('')
       setNewPassword('')
       setPasswordStatus('saved')

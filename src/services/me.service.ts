@@ -13,8 +13,10 @@ export const meService = {
     return response.data;
   },
 
-  async changePassword(currentPassword: string, newPassword: string): Promise<void> {
-    await api.patch('/me/password', { currentPassword, newPassword });
+  /** Ends the other sessions, so the response carries the fresh token this one must switch to. */
+  async changePassword(currentPassword: string, newPassword: string): Promise<AuthResponse> {
+    const response = await api.patch<AuthResponse>('/me/password', { currentPassword, newPassword });
+    return response.data;
   },
 
   /** Adds/removes roles. The response carries a fresh token because roles live in the JWT. */
