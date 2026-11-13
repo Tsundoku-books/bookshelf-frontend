@@ -1,5 +1,34 @@
 version: 2
 updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    # Safe updates arrive together in one PR. Majors are never grouped, so each one gets its own PR and
+    # CI tells which upgrade breaks. Security updates are not affected by `ignore`.
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # Structural packages whose majors need code migrations; upgrade them one at a time on purpose.
+      - dependency-name: react
+        update-types: ['version-update:semver-major']
+      - dependency-name: react-dom
+        update-types: ['version-update:semver-major']
+      - dependency-name: vite
+        update-types: ['version-update:semver-major']
+      - dependency-name: tailwindcss
+        update-types: ['version-update:semver-major']
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major']
+      - dependency-name: eslint
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
+
   # Workflow actions are pinned by commit SHA; this keeps the pins current.
   - package-ecosystem: github-actions
     directory: /
