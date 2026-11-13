@@ -42,3 +42,23 @@ input:autofill {
   -webkit-text-fill-color: var(--on-hero);
   caret-color: var(--on-hero);
 }
+
+.brand-logo-dark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .brand-logo-light {
+    display: none;
+  }
+  :root:not([data-theme='light']) .brand-logo-dark {
+    display: inline;
+  }
+}
+
+:root[data-theme='dark'] .brand-logo-light {
+  display: none;
+}
+:root[data-theme='dark'] .brand-logo-dark {
+  display: inline;
+}

@@ -222,6 +222,63 @@ const ptBR = {
     rolesHint: 'Você pode mudar isso depois na sua conta',
     rolesRequired: 'Escolha pelo menos uma opção',
   },
+  publicNav: {
+    label: 'Navegação principal',
+    about: 'Sobre',
+  },
+  footer: {
+    label: 'Links do rodapé',
+    about: 'Sobre o projeto',
+    terms: 'Termos e Privacidade',
+    note: 'Projeto de portfólio e playground de QA. Todos os dados são fictícios.',
+  },
+  authLayout: {
+    panelLabel: 'Sobre o Tsundoku',
+    tagline: 'Sua estante de leituras, com um sebo dentro.',
+    nameMeaning: 'Tsundoku: palavra japonesa para a pilha de livros que você ainda pretende ler.',
+    items: {
+      library: 'Acompanhe suas leituras e monte sua estante',
+      store: 'Compre e venda livros usados no sebo (simulado, sem dinheiro de verdade)',
+      qa: 'Pratique testes manuais, de API e de automação em um ambiente feito para isso',
+    },
+    whyLink: 'Por que Tsundoku?',
+  },
+  about: {
+    title: 'Sobre o Tsundoku',
+    intro: 'Uma rede de leitura com um sebo dentro, e um playground para quem quer praticar qualidade de software.',
+    backToLogin: 'Voltar ao login',
+    backToApp: 'Voltar ao app',
+    linksLabel: 'Links do projeto',
+    termsLink: 'Termos de Serviço e Política de Privacidade',
+    githubLink: 'Código no GitHub',
+    sections: {
+      name: {
+        title: 'O que significa o nome',
+        body: 'Tsundoku (積ん読) é a palavra japonesa para a pilha de livros que a gente compra e ainda pretende ler. O projeto parte dessa ideia: ajudar a transformar a pilha em uma estante organizada.',
+      },
+      what: {
+        title: 'O que é',
+        body: 'O Tsundoku é uma rede de leitura com um sebo dentro. Você cataloga seus livros, acompanha o que está lendo e, se quiser, compra e vende exemplares usados de outras pessoas.',
+      },
+      features: {
+        title: 'O que dá para fazer',
+        body: '• Biblioteca pessoal: cadastre livros, marque o status de leitura (para ler, lendo, lido), avalie e veja suas estatísticas.\n• Catálogo compartilhado: os livros são reaproveitados entre os usuários, com busca no Google Books.\n• Sebo: anuncie exemplares usados, monte um carrinho e faça pedidos. Os pagamentos são simulados.\n• Administração: gestão de usuários, catálogo, empresas e pedidos, para quem tem esse papel.',
+      },
+      qa: {
+        title: 'Um playground de QA',
+        body: 'Além de ser um app de livros, o Tsundoku é um ambiente de prática de qualidade. Ele tem interface web, uma API REST documentada, identificadores de teste estáveis nos elementos e dados que podem ser recriados à vontade.\n\nServe para treinar testes manuais, testes de API, automação de interface (como Playwright e Robot Framework), acessibilidade e integração contínua. As suítes de automação do projeto ficam em repositórios próprios.',
+      },
+      data: {
+        title: 'Tudo aqui é de mentira',
+        body: 'Este é um projeto de portfólio e de testes. Use sempre dados fictícios: nenhum pagamento é real, nenhum produto é enviado e os dados podem ser apagados a qualquer momento. Os detalhes estão nos Termos de Serviço e na Política de Privacidade.',
+      },
+    },
+    cta: {
+      title: 'Pronto para experimentar?',
+      body: 'Crie uma conta com dados fictícios e explore a estante, o sebo e as ferramentas de teste.',
+      button: 'Criar conta',
+    },
+  },
   terms: {
     back: 'Voltar ao cadastro',
     title: 'Termos de Serviço e Política de Privacidade',

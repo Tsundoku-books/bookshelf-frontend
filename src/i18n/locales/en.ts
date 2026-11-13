@@ -224,6 +224,63 @@ const en: typeof ptBR = {
     rolesHint: 'You can change this later in your account',
     rolesRequired: 'Choose at least one option',
   },
+  publicNav: {
+    label: 'Main navigation',
+    about: 'About',
+  },
+  footer: {
+    label: 'Footer links',
+    about: 'About the project',
+    terms: 'Terms and Privacy',
+    note: 'Portfolio project and QA playground. All data is fictitious.',
+  },
+  authLayout: {
+    panelLabel: 'About Tsundoku',
+    tagline: 'Your reading shelf, with a second-hand bookshop inside.',
+    nameMeaning: 'Tsundoku: Japanese for the pile of books you still mean to read.',
+    items: {
+      library: 'Track your reading and build your shelf',
+      store: 'Buy and sell second-hand books in the shop (simulated, no real money)',
+      qa: 'Practice manual, API and automation testing in an environment built for it',
+    },
+    whyLink: 'Why Tsundoku?',
+  },
+  about: {
+    title: 'About Tsundoku',
+    intro: 'A reading network with a second-hand bookshop inside, and a playground for anyone who wants to practice software quality.',
+    backToLogin: 'Back to sign in',
+    backToApp: 'Back to the app',
+    linksLabel: 'Project links',
+    termsLink: 'Terms of Service and Privacy Policy',
+    githubLink: 'Code on GitHub',
+    sections: {
+      name: {
+        title: 'What the name means',
+        body: 'Tsundoku (積ん読) is the Japanese word for the pile of books you buy and still mean to read. The project starts from that idea: helping turn the pile into an organized shelf.',
+      },
+      what: {
+        title: 'What it is',
+        body: 'Tsundoku is a reading network with a second-hand bookshop inside. You catalog your books, keep track of what you are reading and, if you want, buy and sell used copies from other people.',
+      },
+      features: {
+        title: 'What you can do',
+        body: '• Personal library: add books, set the reading status (to read, reading, read), rate them and see your statistics.\n• Shared catalog: books are reused across users, with Google Books search.\n• Shop: list used copies, build a cart and place orders. Payments are simulated.\n• Administration: management of users, catalog, companies and orders, for those who hold that role.',
+      },
+      qa: {
+        title: 'A QA playground',
+        body: 'Besides being a book app, Tsundoku is a practice environment for quality. It has a web interface, a documented REST API, stable test identifiers on the elements and data that can be recreated freely.\n\nIt is meant for practicing manual testing, API testing, UI automation (such as Playwright and Robot Framework), accessibility and continuous integration. The project’s automation suites live in their own repositories.',
+      },
+      data: {
+        title: 'Everything here is fake',
+        body: 'This is a portfolio and testing project. Always use fictitious data: no payment is real, no product is shipped and data can be erased at any time. The details are in the Terms of Service and the Privacy Policy.',
+      },
+    },
+    cta: {
+      title: 'Ready to try it?',
+      body: 'Create an account with fictitious data and explore the shelf, the shop and the testing tools.',
+      button: 'Create account',
+    },
+  },
   terms: {
     back: 'Back to sign up',
     title: 'Terms of Service and Privacy Policy',

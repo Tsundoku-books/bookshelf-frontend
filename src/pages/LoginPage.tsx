@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { BookOpen, Mail, Lock } from 'lucide-react'
+import { Mail, Lock } from 'lucide-react'
 import { Button } from '../components/ui/button'
-import { LanguageSwitcher } from '../components/LanguageSwitcher'
-import { ThemeSelect } from '../components/ThemeSelect'
+import { AuthLayout } from '../components/AuthLayout'
 import { useAuth } from '../contexts/AuthContext'
 import { getApiErrorMessage } from '../lib/apiError'
 
@@ -31,27 +30,8 @@ export function LoginPage() {
   }
 
   return (
-    <div
-      className="relative min-h-screen flex items-center justify-center bg-hero p-4"
-      data-testid="login-page"
-    >
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-on-hero/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-on-hero/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-
-      <div className="absolute right-4 top-4 z-20 flex items-center gap-2">
-        <ThemeSelect variant="onDark" />
-        <LanguageSwitcher variant="onDark" />
-      </div>
-
-      <div className="relative bg-on-hero/10 backdrop-blur-xl p-8 rounded-2xl shadow-2xl max-w-md w-full border border-on-hero/20 animate-fadeIn">
+    <AuthLayout testId="login-page">
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <div className="bg-on-hero/20 backdrop-blur-sm p-4 rounded-2xl">
-              <BookOpen className="w-12 h-12 text-on-hero" />
-            </div>
-          </div>
           <h1 className="text-4xl font-bold text-on-hero mb-2">{t('common.appName')}</h1>
           <p className="text-on-hero/80 text-sm">{t('login.subtitle')}</p>
         </div>
@@ -125,7 +105,6 @@ export function LoginPage() {
             </Link>
           </p>
         </div>
-      </div>
-    </div>
+    </AuthLayout>
   )
 }

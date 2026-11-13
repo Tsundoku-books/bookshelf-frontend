@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { LanguageSwitcher } from '../components/LanguageSwitcher'
-import { ThemeSelect } from '../components/ThemeSelect'
+import { PublicControls } from '../components/PublicControls'
+import { PublicFooter } from '../components/PublicFooter'
 
 const SECTIONS = [
   'purpose',
@@ -29,16 +29,13 @@ export function TermsPage() {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-surface" data-testid="terms-page">
-      <div className="max-w-3xl mx-auto px-4 py-8">
+    <div className="flex min-h-screen flex-col bg-surface" data-testid="terms-page">
+      <div className="max-w-3xl mx-auto w-full flex-1 px-4 py-8">
         <div className="flex items-center justify-between mb-8">
           <Link to="/register" className="text-primary font-medium hover:underline" data-testid="terms-back-link">
             {t('terms.back')}
           </Link>
-          <div className="flex items-center gap-2">
-            <ThemeSelect />
-            <LanguageSwitcher />
-          </div>
+          <PublicControls />
         </div>
 
         <h1 className="text-3xl font-bold text-text mb-2">{t('terms.title')}</h1>
@@ -64,6 +61,7 @@ export function TermsPage() {
           ))}
         </div>
       </div>
+      <PublicFooter />
     </div>
   )
 }

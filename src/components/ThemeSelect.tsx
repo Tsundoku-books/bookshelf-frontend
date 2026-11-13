@@ -34,7 +34,7 @@ export function ThemeSelect({ variant = 'onLight' }: { variant?: SegmentedVarian
             aria-label={t(labelKey)}
             title={t(labelKey)}
             data-testid={`theme-${choice}`}
-            className={`rounded-md p-1.5 transition-colors ${isActive ? styles.active : styles.inactive}`}
+            className={`rounded-md px-2 py-1 transition-colors ${isActive ? styles.active : styles.inactive}`}
           >
             <Icon className="h-4 w-4" aria-hidden="true" />
           </button>

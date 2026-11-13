@@ -42,6 +42,17 @@ describe('LoginPage', () => {
     await waitFor(() => expect(screen.getByTestId('login-button')).toBeEnabled())
   })
 
+  it('shows the brand panel, the About link and the footer around the form', () => {
+    renderPage(<LoginPage />)
+
+    expect(screen.getByTestId('auth-brand-panel')).toBeInTheDocument()
+    expect(screen.getByTestId('auth-brand-item-qa')).toBeInTheDocument()
+    expect(screen.getByTestId('auth-why-link')).toHaveAttribute('href', '/about')
+    expect(screen.getByTestId('about-link')).toHaveAttribute('href', '/about')
+    expect(screen.getByTestId('public-footer')).toBeInTheDocument()
+    expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
+  })
+
   it('links to the registration page', () => {
     renderPage(<LoginPage />)
 
@@ -61,6 +72,13 @@ describe('RegisterPage', () => {
     await fillAccount()
     await userEvent.click(screen.getByTestId('accept-terms-checkbox'))
   }
+
+  it('uses the same layout as the login', () => {
+    renderPage(<RegisterPage />)
+
+    expect(screen.getByTestId('auth-brand-panel')).toBeInTheDocument()
+    expect(screen.getByTestId('public-footer')).toBeInTheDocument()
+  })
 
   it('asks only for the account data on the first step', () => {
     renderPage(<RegisterPage />)

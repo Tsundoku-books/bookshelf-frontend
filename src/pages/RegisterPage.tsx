@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { User, Mail, Lock } from 'lucide-react'
 import { Button } from '../components/ui/button'
-import { LanguageSwitcher } from '../components/LanguageSwitcher'
-import { ThemeSelect } from '../components/ThemeSelect'
+import { AuthLayout } from '../components/AuthLayout'
 import { RoleSelector } from '../components/RoleSelector'
 import { useAuth } from '../contexts/AuthContext'
 import { getApiErrorMessage } from '../lib/apiError'
@@ -46,21 +45,7 @@ export function RegisterPage() {
   }
 
   return (
-    <div
-      className="relative min-h-screen flex items-center justify-center bg-hero p-4"
-      data-testid="register-page"
-    >
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-on-hero/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-on-hero/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-
-      <div className="absolute right-4 top-4 z-20 flex items-center gap-2">
-        <ThemeSelect variant="onDark" />
-        <LanguageSwitcher variant="onDark" />
-      </div>
-
-      <div className="relative bg-on-hero/10 backdrop-blur-xl p-8 rounded-2xl shadow-2xl max-w-md w-full border border-on-hero/20 animate-fadeIn">
+    <AuthLayout testId="register-page">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-on-hero">{t('register.title')}</h1>
         </div>
@@ -227,7 +212,6 @@ export function RegisterPage() {
             </Link>
           </p>
         </div>
-      </div>
-    </div>
+    </AuthLayout>
   )
 }
