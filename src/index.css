@@ -23,3 +23,14 @@
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out;
 }
+
+/* Browsers repaint autofilled inputs with their own light background, which hides the white icons and
+   text on the hero screens. A very long transition keeps the original colours. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:autofill {
+  transition:
+    background-color 600000s 0s,
+    color 600000s 0s;
+}

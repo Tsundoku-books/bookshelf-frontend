@@ -203,13 +203,16 @@ const en: typeof ptBR = {
     genericError: 'Failed to sign in',
   },
   register: {
-    title: 'Welcome to Tsundoku',
+    title: 'Welcome',
     fullName: 'Full Name',
     fullNamePlaceholder: 'John Smith',
     nameAriaLabel: 'Full name',
     emailAriaLabel: 'Email for sign up',
     passwordAriaLabel: 'Password (minimum 8 characters)',
     passwordHint: 'Minimum 8 characters',
+    next: 'Continue',
+    back: 'Back',
+    step: 'Step {{current}} of {{total}}',
     submit: 'Sign up',
     submitting: 'Signing up...',
     testNotice: 'Test project: sign up with fictitious data, never with real data.',
@@ -225,44 +228,86 @@ const en: typeof ptBR = {
   terms: {
     back: 'Back to sign up',
     title: 'Terms of Service and Privacy Policy',
-    updated: 'Version of November 12, 2026',
+    updated: 'Version of November 13, 2026',
     notice: 'Test project: do not use real data and do not use it day to day.',
+    intro:
+      'Please read carefully. By creating an account on Tsundoku you state that you have read, understood and agree to these terms and to the privacy policy that is part of them.',
     sections: {
       purpose: {
-        title: '1. Purpose of the project',
-        body: 'Tsundoku is a demonstration and test project. It exists for test-automation training and practice, manual testing, API testing and similar activities. It is not a commercial product, offers no guarantee that it works, and must not be used as a real personal library or store in everyday life.',
+        title: '1. Purpose and nature of the project',
+        body: 'Tsundoku is a demonstration and testing project. It exists for training and practice in test automation, manual testing, API testing, accessibility and similar activities.\n\nIt is not a commercial product, it is not for profit, it offers no guarantee that it will work and it must not be used as a real personal library or store day to day. The library, catalog, store and admin features exist to give people something to test.',
+      },
+      acceptance: {
+        title: '2. Acceptance of these terms',
+        body: 'These terms and the privacy policy apply to anyone who accesses or uses Tsundoku, with or without an account. When you sign up, you tick that you accept them, and the system records the date and the version accepted. If you disagree with any point, do not create an account and do not use the service.\n\nTo use the service you state that you have the legal capacity to accept these terms. If you are under 18, use it only with the knowledge and permission of your legal guardian.',
       },
       noRealData: {
-        title: '2. Do not use real data',
-        body: 'Sign up with fictitious data only: an invented name, a test email (for example a disposable address or an example domain) and a password you do not use anywhere else. Do not enter your tax ID, company ID, address, phone number, bank details or any genuine personal or sensitive information in any field, including books, listings, companies and orders.',
+        title: '3. Do not use real data',
+        body: 'Sign up only with fictitious data: an invented name, a test email (for example a disposable address or an example domain) and a password you do not use anywhere else.\n\nDo not enter a tax ID, company ID, address, phone number, bank details, card details or any real personal or sensitive information in any field, including books, listings, companies and orders. Do not enter other people’s data.\n\nIf you enter real data anyway, you do so at your own risk, and the project cannot protect it the way a production service would.',
       },
       account: {
-        title: '3. Your account and acceptable use',
-        body: 'You are responsible for keeping the password of your test account safe. Do not try to access other people’s data, overload the service, bypass its protections or use it for unlawful purposes. Accounts may be suspended or removed at any time, without notice.',
+        title: '4. Sign-up, account and password',
+        body: 'The sign-up data must be fictitious (see section 3) but consistent: an email with a valid format and a password you can remember. One email can have only one account, and the email is not verified.\n\nYou are responsible for keeping the password of your test account safe and for everything done with it. The password must be 8 to 72 bytes long. Change it if you suspect misuse: changing the password ends the other open sessions.\n\nYou choose how you plan to use the service (reader, buyer, seller) and can change it on the account page. Some functions, such as administration, cannot be chosen by someone signing up.',
       },
-      dataReset: {
-        title: '4. Data may be erased',
-        body: 'The environment may be reset, changed or shut down without notice, and all data (accounts, books, listings, orders) may be erased or lost. Do not keep anything here that you cannot afford to lose. There are no backups and no availability promise.',
+      cost: {
+        title: '5. Cost',
+        body: 'Using Tsundoku is free. Nothing is charged and no real payment method should be entered. The store uses simulated payments, described in section 8.',
+      },
+      conduct: {
+        title: '6. Code of conduct',
+        body: 'When using the service, you agree not to:\n\n• access, try to access or change other people’s accounts and data;\n• overload the service with abnormal request volumes, or try to take it down or make it unavailable;\n• bypass or offensively test the protections (rate limits, authentication, validation) beyond what an ordinary functional test requires;\n• use the service for unlawful purposes, fraud, harassment or to publish offensive, discriminatory, violent or illegal content;\n• send viruses, malicious code or content that could harm the service or third parties;\n• create accounts in bulk or collect data from the service automatically for any purpose other than legitimate automation testing.\n\nAutomated tests at moderate volume, such as those run by UI and API automation tools, are the expected use of the project.',
+      },
+      userContent: {
+        title: '7. Content you create',
+        body: 'Books, listings, companies, orders and other records you create are your responsibility. Create only fictitious content or content of your own.\n\nDo not publish texts, images or covers protected by third-party copyright without permission. Cover links are only accepted from a few known image servers, and you should prefer test or freely licensed images.\n\nYou keep the rights to what you create, but you grant the project a free, limited license to store, display and process that content inside the environment, only to run the service. The book catalog is shared among users, so what you add to it can be seen by other people and reviewed or hidden by the administration.',
       },
       marketplace: {
-        title: '5. Simulated store and payments',
-        body: 'The store is a simulation. No real charge is made, no generated Pix code can be paid and no product is actually sold or shipped. Sellers, listings and orders exist for demonstration only.',
+        title: '8. Store and simulated payments',
+        body: 'The store is a simulation. No real charge is made, no generated Pix code can be paid and no product is actually sold or shipped. Sellers, listings, shipping and orders exist for demonstration only.\n\nDo not try to pay, transfer or receive real money through the service. Anyone or any page asking for real payment on behalf of Tsundoku has no connection with the project.',
+      },
+      security: {
+        title: '9. Security and reporting flaws',
+        body: 'The project takes reasonable security measures, such as protected password storage, encrypted connections, rate limits and protection against account misuse, but, being a test environment, it does not promise the security of a production service.\n\nIf you find a security flaw, report it privately through the vulnerability reporting feature of the project repository on GitHub, without opening a public report and without exploiting it beyond what is needed to demonstrate it. Details are in the SECURITY.md file of the repository.',
+      },
+      sanctions: {
+        title: '10. Sanctions',
+        body: 'Anyone who violates these terms may have content hidden or removed, the account suspended or closed and access blocked, without prior notice and at the discretion of the project owner. Test accounts may also be removed at any time for maintenance.',
+      },
+      dataReset: {
+        title: '11. Data can be erased, and availability',
+        body: 'The environment may be restarted, changed or shut down without notice, and all data (accounts, books, listings, orders) may be erased or lost. Do not keep anything here that you cannot lose. There is no guaranteed backup and no promise of availability, performance or continuity of the service.',
       },
       privacy: {
-        title: '6. Data we collect (Privacy Policy)',
-        body: 'To make the service work we store your name, email, your password in protected form (never as plain text), the roles you chose, the books and other records you create, and the date and version of these terms you accepted. We use this data only to run the test environment; we do not sell it or share it for commercial purposes. The service runs on third-party cloud providers (hosting and database), which store the data on the project’s behalf.',
+        title: '12. Data we collect (Privacy Policy)',
+        body: 'For the service to work, we store:\n\n• sign-up data: name, email, the password in protected form (never in plain text), the roles you chose, and the date and version of these terms that you accepted;\n• what you create: books, ratings, listings, companies, test addresses, cart items and orders;\n• technical records: date and time of requests and the IP address, used by the hosting provider and by the API itself for security, to limit excess requests and to investigate problems.\n\nIn your browser, the service stores the session token, basic account data, and the language and theme you chose. We do not use advertising cookies, behavior analytics or third-party trackers.',
+      },
+      privacyUse: {
+        title: '13. How we use and share data',
+        body: 'We use data only to run the test environment, protect the service and comply with legal obligations. We do not sell or share data for commercial or advertising purposes.\n\nThe service runs on third-party cloud providers (site hosting, API hosting and database), which store and process data on behalf of the project and may be located in other countries. The data may also be accessed by the project owner and people they authorize, for maintenance and testing.\n\nData is kept while the environment exists or until the account or the environment is deleted, whichever comes first.',
       },
       rights: {
-        title: '7. Your rights',
-        body: 'Under Brazil’s LGPD you may request confirmation, access, correction or deletion of your data. Since this is a test environment with fictitious data, you may ask the project owner to delete it at any time through the Tsundoku repository on GitHub. Some of the information can also be edited on your account page.',
+        title: '14. Your rights',
+        body: 'Under the Brazilian General Data Protection Law (LGPD), you can ask for confirmation that we process your data, access, correction, anonymization, portability, information about sharing and deletion of the data, and you can withdraw your consent.\n\nBecause the environment is for testing and the data must be fictitious, deletion can be requested at any time from the project owner through the Tsundoku repository on GitHub. Part of the information can also be edited on the account page.',
+      },
+      intellectualProperty: {
+        title: '15. Intellectual property',
+        body: 'The Tsundoku code is public and follows the license stated in the project repository. The name, brand and visual identity of Tsundoku belong to the project. Content created by users belongs to its authors, subject to section 7.\n\nIt is forbidden to use the service to extract, copy or redistribute the catalog or other users’ data.',
       },
       liability: {
-        title: '8. No warranty and limitation of liability',
-        body: 'The service is provided “as is”, without warranties of any kind. To the extent permitted by law, the project owner is not liable for losses or damages arising from use, unavailability or loss of data, especially if real data is entered against what these terms ask.',
+        title: '16. No warranty and limitation of liability',
+        body: 'The service is provided “as is”, without warranties of any kind, express or implied, including fitness for a particular purpose or error-free operation.\n\nTo the extent permitted by law, the project owner is not liable for losses, damages or harm arising from use, unavailability, security flaws or loss of data, especially if real data is entered against what these terms advise. You are responsible for damage you cause to third parties or to the service by violating these terms.',
       },
       changes: {
-        title: '9. Changes',
-        body: 'These terms may be updated. The current version is shown at the top of this page, and sign-up records the version accepted. Continuing to use the service means you accept the current version.',
+        title: '17. Changes and duration',
+        body: 'These terms apply for an indefinite period and may be updated at any time. The current version is shown at the top of this page, and sign-up records the version accepted. Relevant changes will be indicated on this page. Continuing to use the service means you accept the current version.',
+      },
+      law: {
+        title: '18. Governing law and venue',
+        body: 'These terms are governed by the laws of the Federative Republic of Brazil. To resolve disputes, the courts of the user’s domicile are chosen where the law so requires and, in all other cases, the courts of the project owner’s domicile.',
+      },
+      severability: {
+        title: '19. Severability',
+        body: 'If any provision of these terms is found invalid or cannot be enforced, the others remain in force. The project not demanding compliance with a point at a given time does not mean it waives that right.',
       },
     },
   },

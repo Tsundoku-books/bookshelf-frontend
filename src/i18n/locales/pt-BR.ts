@@ -201,13 +201,16 @@ const ptBR = {
     genericError: 'Erro ao fazer login',
   },
   register: {
-    title: 'Bem-vindo ao Tsundoku',
+    title: 'Bem-vindo',
     fullName: 'Nome Completo',
     fullNamePlaceholder: 'João Silva',
     nameAriaLabel: 'Nome completo',
     emailAriaLabel: 'E-mail para cadastro',
     passwordAriaLabel: 'Senha (mínimo 8 caracteres)',
     passwordHint: 'Mínimo 8 caracteres',
+    next: 'Continuar',
+    back: 'Voltar',
+    step: 'Etapa {{current}} de {{total}}',
     submit: 'Cadastrar',
     submitting: 'Cadastrando...',
     testNotice: 'Projeto de testes: cadastre-se com dados fictícios, nunca com dados reais.',
@@ -223,44 +226,86 @@ const ptBR = {
   terms: {
     back: 'Voltar ao cadastro',
     title: 'Termos de Serviço e Política de Privacidade',
-    updated: 'Versão de 12 de novembro de 2026',
+    updated: 'Versão de 13 de novembro de 2026',
     notice: 'Projeto de testes: não use dados reais e não use no dia a dia.',
+    intro:
+      'Leia com atenção. Ao criar uma conta no Tsundoku você declara que leu, entendeu e concorda com estes termos e com a política de privacidade que fazem parte deles.',
     sections: {
       purpose: {
-        title: '1. Finalidade do projeto',
-        body: 'O Tsundoku é um projeto de demonstração e de testes. Ele existe para treinamento e prática de automação de testes, testes manuais, testes de API e atividades semelhantes. Não é um produto comercial, não oferece garantia de funcionamento e não deve ser usado como biblioteca pessoal ou loja de verdade no dia a dia.',
+        title: '1. Finalidade e natureza do projeto',
+        body: 'O Tsundoku é um projeto de demonstração e de testes. Ele existe para treinamento e prática de automação de testes, testes manuais, testes de API, acessibilidade e atividades semelhantes.\n\nNão é um produto comercial, não tem fins lucrativos, não oferece garantia de funcionamento e não deve ser usado como biblioteca pessoal ou loja de verdade no dia a dia. Os recursos de biblioteca, catálogo, loja e administração existem para dar o que testar.',
+      },
+      acceptance: {
+        title: '2. Aceitação destes termos',
+        body: 'Estes termos e a política de privacidade valem para quem acessa ou usa o Tsundoku, com ou sem conta. Ao se cadastrar, você marca que os aceita, e o sistema registra a data e a versão aceitas. Se você não concorda com algum ponto, não crie uma conta nem use o serviço.\n\nPara usar o serviço, você declara ter capacidade legal para aceitar estes termos. Se for menor de 18 anos, use apenas com a ciência e a autorização de quem for legalmente responsável por você.',
       },
       noRealData: {
-        title: '2. Não use dados reais',
-        body: 'Cadastre-se apenas com dados fictícios: nome inventado, e-mail de teste (por exemplo, um endereço descartável ou de domínio de exemplo) e uma senha que você não usa em nenhum outro lugar. Não informe CPF, CNPJ, endereço, telefone, dados bancários ou qualquer informação pessoal ou sensível verdadeira em nenhum campo, incluindo livros, anúncios, empresas e pedidos.',
+        title: '3. Não use dados reais',
+        body: 'Cadastre-se apenas com dados fictícios: nome inventado, e-mail de teste (por exemplo, um endereço descartável ou de domínio de exemplo) e uma senha que você não usa em nenhum outro lugar.\n\nNão informe CPF, CNPJ, endereço, telefone, dados bancários, dados de cartão ou qualquer informação pessoal ou sensível verdadeira em nenhum campo, incluindo livros, anúncios, empresas e pedidos. Não informe dados de outras pessoas.\n\nSe você informar dados reais mesmo assim, faz isso por sua conta e risco, e o projeto não tem como protegê-los como um serviço de produção protegeria.',
       },
       account: {
-        title: '3. Sua conta e uso aceitável',
-        body: 'Você é responsável por manter a senha da conta de teste em segurança. Não tente acessar dados de outras pessoas, sobrecarregar o serviço, burlar suas proteções ou usá-lo para fins ilícitos. Contas podem ser suspensas ou removidas a qualquer momento, sem aviso.',
+        title: '4. Cadastro, conta e senha',
+        body: 'Os dados do cadastro devem ser fictícios (veja a seção 3), mas consistentes: um e-mail com formato válido e uma senha que você consiga lembrar. Um e-mail pode ter uma única conta, e o e-mail não é verificado.\n\nVocê é responsável por manter a senha da conta de teste em segurança e por tudo o que for feito com ela. A senha deve ter de 8 a 72 bytes. Troque-a se suspeitar de uso indevido: ao trocar a senha, as outras sessões abertas são encerradas.\n\nVocê escolhe como pretende usar o serviço (leitor, comprador, vendedor) e pode mudar isso na página da conta. Algumas funções, como a administração, não podem ser escolhidas por quem se cadastra.',
       },
-      dataReset: {
-        title: '4. Dados podem ser apagados',
-        body: 'O ambiente pode ser reiniciado, alterado ou desativado sem aviso, e todos os dados (contas, livros, anúncios, pedidos) podem ser apagados ou perdidos. Não guarde aqui nada que você não possa perder. Não há backup nem promessa de disponibilidade.',
+      cost: {
+        title: '5. Custo',
+        body: 'O uso do Tsundoku é gratuito. Nada é cobrado de você e nenhum meio de pagamento real deve ser informado. A loja usa pagamentos simulados, descritos na seção 8.',
+      },
+      conduct: {
+        title: '6. Código de conduta',
+        body: 'Ao usar o serviço, você se compromete a não:\n\n• acessar, tentar acessar ou alterar contas e dados de outras pessoas;\n• sobrecarregar o serviço com volumes anormais de requisições, nem tentar derrubá-lo ou deixá-lo indisponível;\n• burlar ou testar de forma ofensiva as proteções (limites de requisições, autenticação, validações) fora do que um teste funcional comum exige;\n• usar o serviço para fins ilícitos, para fraude, para assédio ou para publicar conteúdo ofensivo, discriminatório, violento ou ilegal;\n• enviar vírus, códigos maliciosos ou conteúdo que possa danificar o serviço ou terceiros;\n• criar contas em massa ou coletar dados do serviço de forma automatizada para outros fins que não os testes legítimos de automação.\n\nTestes automatizados em volume moderado, como os de ferramentas de automação de interface e de API, são o uso esperado do projeto.',
+      },
+      userContent: {
+        title: '7. Conteúdo que você cadastra',
+        body: 'Livros, anúncios, empresas, pedidos e demais registros que você criar são de sua responsabilidade. Cadastre apenas conteúdo fictício ou de sua autoria.\n\nNão publique textos, imagens ou capas protegidos por direitos autorais de terceiros sem autorização. Os links de capa só são aceitos de alguns servidores de imagens conhecidos, e você deve preferir imagens de teste ou de uso livre.\n\nVocê mantém os direitos sobre o que cria, mas concede ao projeto uma licença gratuita e limitada para armazenar, exibir e processar esse conteúdo dentro do ambiente, apenas para o funcionamento do serviço. O catálogo de livros é compartilhado entre os usuários, então o que você cadastrar nele pode ser visto por outras pessoas e revisado ou ocultado pela administração.',
       },
       marketplace: {
-        title: '5. Loja e pagamentos simulados',
-        body: 'A loja é uma simulação. Nenhuma cobrança real é feita, nenhum código Pix gerado é pagável e nenhum produto é de fato vendido ou enviado. Vendedores, anúncios e pedidos existem apenas para demonstração.',
+        title: '8. Loja e pagamentos simulados',
+        body: 'A loja é uma simulação. Nenhuma cobrança real é feita, nenhum código Pix gerado é pagável e nenhum produto é de fato vendido ou enviado. Vendedores, anúncios, frete e pedidos existem apenas para demonstração.\n\nNão tente pagar, transferir ou receber dinheiro de verdade por meio do serviço. Qualquer pessoa ou página que peça pagamento real em nome do Tsundoku não tem relação com o projeto.',
+      },
+      security: {
+        title: '9. Segurança e relato de falhas',
+        body: 'O projeto adota medidas razoáveis de segurança, como senhas armazenadas de forma protegida, conexões criptografadas, limites de requisições e proteção contra uso indevido de contas, mas, por ser um ambiente de testes, não promete a segurança de um serviço de produção.\n\nSe você encontrar uma falha de segurança, relate de forma privada pelo recurso de relato de vulnerabilidades do repositório do projeto no GitHub, sem abrir um relato público e sem explorá-la além do necessário para demonstrá-la. Detalhes estão no arquivo SECURITY.md do repositório.',
+      },
+      sanctions: {
+        title: '10. Sanções',
+        body: 'Quem violar estes termos pode ter o conteúdo ocultado ou removido, a conta suspensa ou encerrada, e o acesso bloqueado, sem aviso prévio e a critério do responsável pelo projeto. Contas de teste também podem ser removidas a qualquer momento por manutenção.',
+      },
+      dataReset: {
+        title: '11. Dados podem ser apagados e disponibilidade',
+        body: 'O ambiente pode ser reiniciado, alterado ou desativado sem aviso, e todos os dados (contas, livros, anúncios, pedidos) podem ser apagados ou perdidos. Não guarde aqui nada que você não possa perder. Não há backup garantido nem promessa de disponibilidade, de desempenho ou de continuidade do serviço.',
       },
       privacy: {
-        title: '6. Dados que coletamos (Política de Privacidade)',
-        body: 'Para o serviço funcionar, guardamos nome, e-mail, a senha em forma protegida (nunca em texto puro), os papéis escolhidos, os livros e demais registros que você criar e a data e a versão destes termos que você aceitou. Usamos esses dados somente para operar o ambiente de testes; não os vendemos nem os compartilhamos para fins comerciais. O serviço roda em provedores de nuvem de terceiros (hospedagem e banco de dados), que armazenam os dados em nome do projeto.',
+        title: '12. Dados que coletamos (Política de Privacidade)',
+        body: 'Para o serviço funcionar, guardamos:\n\n• dados do cadastro: nome, e-mail, a senha em forma protegida (nunca em texto puro), os papéis escolhidos, e a data e a versão destes termos que você aceitou;\n• o que você cria: livros, avaliações, anúncios, empresas, endereços de teste, itens do carrinho e pedidos;\n• registros técnicos: data e hora das requisições e o endereço IP, usados pelo provedor de hospedagem e pela própria API para segurança, para limitar o excesso de requisições e para investigar problemas.\n\nNo seu navegador, o serviço guarda o token de sessão, os dados básicos da conta, o idioma e o tema escolhidos. Não usamos cookies de publicidade, análise de comportamento nem rastreadores de terceiros.',
+      },
+      privacyUse: {
+        title: '13. Como usamos e compartilhamos os dados',
+        body: 'Usamos os dados somente para operar o ambiente de testes, proteger o serviço e cumprir obrigações legais. Não vendemos nem compartilhamos dados para fins comerciais ou de publicidade.\n\nO serviço roda em provedores de nuvem de terceiros (hospedagem do site, hospedagem da API e banco de dados), que armazenam e processam os dados em nome do projeto e podem estar em outros países. Os dados também podem ser acessados pelo responsável pelo projeto e por pessoas por ele autorizadas, para manutenção e testes.\n\nOs dados são mantidos enquanto o ambiente existir ou até a exclusão da conta ou do ambiente, o que ocorrer primeiro.',
       },
       rights: {
-        title: '7. Seus direitos',
-        body: 'Conforme a LGPD, você pode pedir confirmação, acesso, correção ou exclusão dos seus dados. Como o ambiente é de testes e os dados são fictícios, a exclusão pode ser pedida a qualquer momento ao responsável pelo projeto, pelo repositório do Tsundoku no GitHub. Parte das informações também pode ser editada na página da conta.',
+        title: '14. Seus direitos',
+        body: 'Conforme a Lei Geral de Proteção de Dados (LGPD), você pode pedir confirmação de que tratamos seus dados, acesso, correção, anonimização, portabilidade, informação sobre compartilhamento e a exclusão dos dados, além de revogar o seu consentimento.\n\nComo o ambiente é de testes e os dados devem ser fictícios, a exclusão pode ser pedida a qualquer momento ao responsável pelo projeto, pelo repositório do Tsundoku no GitHub. Parte das informações também pode ser editada na página da conta.',
+      },
+      intellectualProperty: {
+        title: '15. Propriedade intelectual',
+        body: 'O código do Tsundoku é público e segue a licença indicada no repositório do projeto. A marca, o nome e a identidade visual do Tsundoku pertencem ao projeto. O conteúdo cadastrado por usuários pertence aos seus autores, observado o que consta na seção 7.\n\nÉ proibido usar o serviço para extrair, copiar ou redistribuir o catálogo ou os dados de outros usuários.',
       },
       liability: {
-        title: '8. Ausência de garantia e limitação de responsabilidade',
-        body: 'O serviço é oferecido “como está”, sem garantias de qualquer tipo. Na extensão permitida pela lei, o responsável pelo projeto não responde por perdas, danos ou prejuízos decorrentes do uso, da indisponibilidade ou da perda de dados, especialmente se dados reais forem informados contra o que estes termos orientam.',
+        title: '16. Ausência de garantia e limitação de responsabilidade',
+        body: 'O serviço é oferecido “como está”, sem garantias de qualquer tipo, expressas ou implícitas, inclusive de adequação a um fim específico ou de funcionamento sem erros.\n\nNa extensão permitida pela lei, o responsável pelo projeto não responde por perdas, danos ou prejuízos decorrentes do uso, da indisponibilidade, de falhas de segurança ou da perda de dados, especialmente se dados reais forem informados contra o que estes termos orientam. Você responde pelos danos que causar a terceiros ou ao serviço por violar estes termos.',
       },
       changes: {
-        title: '9. Alterações',
-        body: 'Estes termos podem ser atualizados. A versão vigente aparece no topo desta página, e o cadastro registra a versão aceita. Continuar usando o serviço significa concordar com a versão vigente.',
+        title: '17. Alterações e vigência',
+        body: 'Estes termos valem por prazo indeterminado e podem ser atualizados a qualquer momento. A versão vigente aparece no topo desta página, e o cadastro registra a versão aceita. Mudanças relevantes serão indicadas nesta página. Continuar usando o serviço significa concordar com a versão vigente.',
+      },
+      law: {
+        title: '18. Legislação aplicável e foro',
+        body: 'Estes termos são regidos pelas leis da República Federativa do Brasil. Para resolver conflitos, fica eleito o foro do domicílio do usuário quando a lei assim determinar e, nos demais casos, o foro do domicílio do responsável pelo projeto.',
+      },
+      severability: {
+        title: '19. Autonomia das disposições',
+        body: 'Se alguma disposição destes termos for considerada inválida ou não puder ser aplicada, as demais continuam em vigor. O fato de o projeto não exigir o cumprimento de algum ponto em determinado momento não significa renúncia a esse direito.',
       },
     },
   },

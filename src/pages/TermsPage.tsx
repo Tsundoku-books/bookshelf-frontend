@@ -5,21 +5,31 @@ import { ThemeSelect } from '../components/ThemeSelect'
 
 const SECTIONS = [
   'purpose',
+  'acceptance',
   'noRealData',
   'account',
-  'dataReset',
+  'cost',
+  'conduct',
+  'userContent',
   'marketplace',
+  'security',
+  'sanctions',
+  'dataReset',
   'privacy',
+  'privacyUse',
   'rights',
+  'intellectualProperty',
   'liability',
   'changes',
+  'law',
+  'severability',
 ] as const
 
 export function TermsPage() {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-background" data-testid="terms-page">
+    <div className="min-h-screen bg-surface" data-testid="terms-page">
       <div className="max-w-3xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-8">
           <Link to="/register" className="text-primary font-medium hover:underline" data-testid="terms-back-link">
@@ -41,11 +51,15 @@ export function TermsPage() {
           {t('terms.notice')}
         </div>
 
+        <p className="mb-8 text-text-muted leading-relaxed" data-testid="terms-intro">
+          {t('terms.intro')}
+        </p>
+
         <div className="space-y-6">
           {SECTIONS.map((key) => (
             <section key={key} data-testid={`terms-section-${key}`}>
               <h2 className="text-xl font-semibold text-text mb-2">{t(`terms.sections.${key}.title`)}</h2>
-              <p className="text-text-muted leading-relaxed">{t(`terms.sections.${key}.body`)}</p>
+              <p className="text-text-muted leading-relaxed whitespace-pre-line">{t(`terms.sections.${key}.body`)}</p>
             </section>
           ))}
         </div>

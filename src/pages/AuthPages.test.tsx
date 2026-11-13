@@ -54,11 +54,38 @@ describe('RegisterPage', () => {
     await userEvent.type(screen.getByTestId('name-input'), 'Ana Silva')
     await userEvent.type(screen.getByTestId('email-input'), 'ana@test.com')
     await userEvent.type(screen.getByTestId('password-input'), 'secret12')
+    await userEvent.click(screen.getByTestId('register-next-button'))
+  }
+
+  const reachUsageStep = async () => {
+    await fillAccount()
     await userEvent.click(screen.getByTestId('accept-terms-checkbox'))
   }
 
-  it('starts with the library selected, as before roles existed', () => {
+  it('asks only for the account data on the first step', () => {
     renderPage(<RegisterPage />)
+
+    expect(screen.getByTestId('name-input')).toBeInTheDocument()
+    expect(screen.queryByTestId('register-roles')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('accept-terms-checkbox')).not.toBeInTheDocument()
+    expect(screen.getByTestId('register-step')).toHaveTextContent('Etapa 1 de 2')
+  })
+
+  it('moves to the usage step and can go back keeping what was typed', async () => {
+    renderPage(<RegisterPage />)
+
+    await fillAccount()
+    expect(screen.getByTestId('register-roles')).toBeInTheDocument()
+    await userEvent.click(screen.getByTestId('register-back-button'))
+
+    expect(screen.getByTestId('name-input')).toHaveValue('Ana Silva')
+    expect(screen.getByTestId('email-input')).toHaveValue('ana@test.com')
+  })
+
+  it('starts with the library selected, as before roles existed', async () => {
+    renderPage(<RegisterPage />)
+
+    await fillAccount()
 
     expect(screen.getByTestId('register-role-reader')).toBeChecked()
     expect(screen.getByTestId('register-role-buyer')).not.toBeChecked()
@@ -69,7 +96,7 @@ describe('RegisterPage', () => {
     register.mockResolvedValue(undefined)
     renderPage(<RegisterPage />)
 
-    await fillAccount()
+    await reachUsageStep()
     await userEvent.click(screen.getByTestId('register-button'))
 
     expect(register).toHaveBeenCalledWith('Ana Silva', 'ana@test.com', 'secret12', ['reader'])
@@ -79,7 +106,7 @@ describe('RegisterPage', () => {
     register.mockResolvedValue(undefined)
     renderPage(<RegisterPage />)
 
-    await fillAccount()
+    await reachUsageStep()
     await userEvent.click(screen.getByTestId('register-role-buyer'))
     await userEvent.click(screen.getByTestId('register-role-seller'))
     await userEvent.click(screen.getByTestId('register-button'))
@@ -90,7 +117,7 @@ describe('RegisterPage', () => {
   it('does not submit without any role and explains why', async () => {
     renderPage(<RegisterPage />)
 
-    await fillAccount()
+    await reachUsageStep()
     await userEvent.click(screen.getByTestId('register-role-reader'))
     await userEvent.click(screen.getByTestId('register-button'))
 
@@ -101,6 +128,8 @@ describe('RegisterPage', () => {
   it('keeps the submit button disabled until the terms are accepted', async () => {
     renderPage(<RegisterPage />)
 
+    await fillAccount()
+
     expect(screen.getByTestId('register-button')).toBeDisabled()
     await userEvent.click(screen.getByTestId('accept-terms-checkbox'))
     expect(screen.getByTestId('register-button')).toBeEnabled()
@@ -110,7 +139,7 @@ describe('RegisterPage', () => {
     register.mockRejectedValue({ response: { data: { code: 'EMAIL_ALREADY_REGISTERED', error: 'x' } } })
     renderPage(<RegisterPage />)
 
-    await fillAccount()
+    await reachUsageStep()
     await userEvent.click(screen.getByTestId('register-button'))
 
     expect(await screen.findByTestId('error-message')).toHaveTextContent('Este e-mail já está cadastrado.')
