@@ -236,7 +236,7 @@ export function DashboardPage() {
               </div>
             ) : (
               <div className="ts-card p-6">
-                <h3 className="text-xl font-bold text-heading mb-4">{isOn('ui-dashboard-title-typo') ? t('playground.typo.dashboardHeading') : t('dashboard.bookList.heading')}</h3>
+                <h3 className="text-xl font-bold text-heading mb-4" data-testid="book-list-heading">{isOn('ui-dashboard-title-typo') ? t('playground.typo.dashboardHeading') : t('dashboard.bookList.heading')}</h3>
 
                 <BookFilters
                   search={searchInput}
