@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildQuery, mapVolume } from './googleBooks.service'
+import { buildQuery, mapOpenLibraryDoc, mapVolume } from './googleBooks.service'
 
 describe('buildQuery', () => {
   it('searches ISBN-looking input as an ISBN, ignoring hyphens and spaces', () => {
@@ -67,5 +67,37 @@ describe('mapVolume', () => {
   it('drops volumes without a title', () => {
     expect(mapVolume({ id: 'vol3', volumeInfo: {} })).toBeNull()
     expect(mapVolume({ id: 'vol4' })).toBeNull()
+  })
+})
+
+describe('mapOpenLibraryDoc', () => {
+  it('maps a document, preferring ISBN-13 and translating the language code', () => {
+    expect(
+      mapOpenLibraryDoc({
+        key: '/works/OL1W',
+        title: 'Dom Casmurro',
+        author_name: ['Machado de Assis'],
+        isbn: ['8575201174', '9788575201176'],
+        publisher: ['Ática'],
+        first_publish_year: 1899,
+        number_of_pages_median: 269,
+        language: ['xxx', 'por'],
+        cover_i: 647501,
+      }),
+    ).toEqual({
+      id: '/works/OL1W',
+      title: 'Dom Casmurro',
+      author: 'Machado de Assis',
+      isbn: '9788575201176',
+      publisher: 'Ática',
+      publishedYear: 1899,
+      pages: 269,
+      language: 'pt',
+      coverUrl: 'https://covers.openlibrary.org/b/id/647501-M.jpg',
+    })
+  })
+
+  it('drops documents without a title', () => {
+    expect(mapOpenLibraryDoc({ key: '/works/OL2W' })).toBeNull()
   })
 })

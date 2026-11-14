@@ -24,7 +24,7 @@ function contentSecurityPolicy(apiUrl: string | undefined): Plugin {
           "style-src 'self' 'unsafe-inline'",
           "img-src 'self' data: https:",
           "font-src 'self' data:",
-          `connect-src 'self' ${new URL(apiUrl).origin} https://www.googleapis.com`,
+          `connect-src 'self' ${new URL(apiUrl).origin} https://www.googleapis.com https://openlibrary.org`,
           "manifest-src 'self'",
           "worker-src 'self'",
           "object-src 'none'",

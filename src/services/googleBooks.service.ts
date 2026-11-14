@@ -4,6 +4,8 @@ import axios from 'axios';
 // axios instance so the API's Authorization header is never sent to Google.
 const client = axios.create({ baseURL: 'https://www.googleapis.com/books/v1' });
 
+const openLibrary = axios.create({ baseURL: 'https://openlibrary.org' });
+
 const MAX_RESULTS = 8;
 
 export interface BookSuggestion {
@@ -70,6 +72,59 @@ export function mapVolume(volume: GoogleVolume): BookSuggestion | null {
   };
 }
 
+interface OpenLibraryDoc {
+  key: string;
+  title?: string;
+  author_name?: string[];
+  isbn?: string[];
+  publisher?: string[];
+  first_publish_year?: number;
+  number_of_pages_median?: number;
+  language?: string[];
+  cover_i?: number;
+}
+
+const LANGUAGE_CODES: Record<string, string> = {
+  por: 'pt',
+  eng: 'en',
+  spa: 'es',
+  fre: 'fr',
+  ita: 'it',
+  ger: 'de',
+};
+
+export function mapOpenLibraryDoc(doc: OpenLibraryDoc): BookSuggestion | null {
+  if (!doc.title) return null;
+
+  const language = doc.language?.map((code) => LANGUAGE_CODES[code]).find(Boolean);
+
+  return {
+    id: doc.key,
+    title: doc.title,
+    author: doc.author_name?.join(', ') ?? '',
+    isbn: doc.isbn?.find((value) => value.length === 13) ?? doc.isbn?.[0],
+    publisher: doc.publisher?.[0],
+    publishedYear: doc.first_publish_year,
+    pages: doc.number_of_pages_median,
+    language,
+    coverUrl: doc.cover_i ? `https://covers.openlibrary.org/b/id/${doc.cover_i}-M.jpg` : undefined,
+  };
+}
+
+async function searchOpenLibrary(input: string): Promise<BookSuggestion[]> {
+  const query = buildQuery(input);
+  const response = await openLibrary.get<{ docs?: OpenLibraryDoc[] }>('/search.json', {
+    params: {
+      q: query.startsWith('isbn:') ? query : input.trim(),
+      limit: MAX_RESULTS,
+      fields: 'key,title,author_name,isbn,publisher,first_publish_year,number_of_pages_median,language,cover_i',
+    },
+  });
+  return (response.data.docs ?? [])
+    .map(mapOpenLibraryDoc)
+    .filter((suggestion): suggestion is BookSuggestion => suggestion !== null);
+}
+
 /** Turns a free-text query into a Google Books `q`; ISBN-looking input is searched as an ISBN. */
 export function buildQuery(input: string): string {
   const query = input.trim();
@@ -79,11 +134,16 @@ export function buildQuery(input: string): string {
 
 export const googleBooksService = {
   async search(input: string): Promise<BookSuggestion[]> {
-    const response = await client.get<{ items?: GoogleVolume[] }>('/volumes', {
-      params: { q: buildQuery(input), maxResults: MAX_RESULTS, printType: 'books' },
-    });
-    return (response.data.items ?? [])
-      .map(mapVolume)
-      .filter((suggestion): suggestion is BookSuggestion => suggestion !== null);
+    try {
+      const response = await client.get<{ items?: GoogleVolume[] }>('/volumes', {
+        params: { q: buildQuery(input), maxResults: MAX_RESULTS, printType: 'books' },
+      });
+      return (response.data.items ?? [])
+        .map(mapVolume)
+        .filter((suggestion): suggestion is BookSuggestion => suggestion !== null);
+    } catch {
+      // The keyless Google quota is shared by every anonymous caller and often runs out (HTTP 429).
+      return searchOpenLibrary(input);
+    }
   },
 };
