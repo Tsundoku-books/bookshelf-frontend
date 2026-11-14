@@ -475,8 +475,12 @@ const en: typeof ptBR = {
   bookForm: {
     createTitle: 'Add Book',
     editTitle: 'Edit Book',
-    subtitle: 'Fill in the book details',
     close: 'Close',
+    modes: {
+      label: 'How to add',
+      manual: 'Manual entry',
+      import: 'Search online',
+    },
     fields: {
       title: 'Title',
       titlePlaceholder: 'e.g. 1984',
@@ -506,14 +510,14 @@ const en: typeof ptBR = {
       coverPreviewAlt: 'Cover preview',
     },
     import: {
-      title: 'Import from Google Books',
+      title: 'Search for the book online',
       hint: 'Search by title, author or ISBN to fill in the form',
       placeholder: 'E.g. Dom Casmurro or 9788535914849',
-      ariaLabel: 'Search Google Books',
+      ariaLabel: 'Search for the book online',
       search: 'Search',
       searching: 'Searching...',
       empty: 'No results found',
-      error: 'Could not search Google Books',
+      error: 'Could not search for the book online',
       unknownAuthor: 'Unknown author',
     },
     submitCreate: 'Add',

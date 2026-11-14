@@ -1,7 +1,7 @@
 import { Alert } from './Alert'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { BookOpen, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { Button } from './ui/button'
 import { BookCover } from './BookCover'
 import { GoogleBooksSearch } from './GoogleBooksSearch'
@@ -51,6 +51,7 @@ function BookForm({ onClose, bookToEdit, onSuccess }: Omit<BookModalProps, 'isOp
   const [coverUrl, setCoverUrl] = useState(bookToEdit?.coverUrl ?? '')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [mode, setMode] = useState<'manual' | 'import'>('manual')
 
   const applySuggestion = (suggestion: BookSuggestion) => {
     setTitle(suggestion.title)
@@ -63,6 +64,7 @@ function BookForm({ onClose, bookToEdit, onSuccess }: Omit<BookModalProps, 'isOp
     setLanguage(suggestion.language ?? '')
     setDescription(suggestion.description ?? '')
     setCoverUrl(suggestion.coverUrl ?? '')
+    setMode('manual')
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -138,13 +140,9 @@ function BookForm({ onClose, bookToEdit, onSuccess }: Omit<BookModalProps, 'isOp
         </button>
 
         <div className="mb-6">
-          <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-            <BookOpen className="w-6 h-6 text-heading" />
-          </div>
           <h2 className="text-2xl font-bold text-heading">
             {bookToEdit ? t('bookForm.editTitle') : t('bookForm.createTitle')}
           </h2>
-          <p className="text-text-muted text-sm mt-1">{t('bookForm.subtitle')}</p>
         </div>
 
         {error && (
@@ -153,8 +151,35 @@ function BookForm({ onClose, bookToEdit, onSuccess }: Omit<BookModalProps, 'isOp
           </Alert>
         )}
 
-        {!bookToEdit && <GoogleBooksSearch onSelect={applySuggestion} disabled={loading} />}
+        {!bookToEdit && (
+          <div
+            role="tablist"
+            aria-label={t('bookForm.modes.label')}
+            className="mb-6 inline-flex rounded-lg border border-border bg-background p-1"
+          >
+            {(['manual', 'import'] as const).map((value) => (
+              <button
+                key={value}
+                type="button"
+                role="tab"
+                aria-selected={mode === value}
+                onClick={() => setMode(value)}
+                data-testid={`book-mode-${value}`}
+                className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+                  mode === value ? 'bg-surface text-heading shadow-sm' : 'text-text-muted hover:text-text'
+                }`}
+              >
+                {t(`bookForm.modes.${value}`)}
+              </button>
+            ))}
+          </div>
+        )}
 
+        {!bookToEdit && mode === 'import' && (
+          <GoogleBooksSearch onSelect={applySuggestion} disabled={loading} />
+        )}
+
+        {(bookToEdit || mode === 'manual') && (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -381,6 +406,7 @@ function BookForm({ onClose, bookToEdit, onSuccess }: Omit<BookModalProps, 'isOp
             </Button>
           </div>
         </form>
+        )}
       </div>
     </div>
   )

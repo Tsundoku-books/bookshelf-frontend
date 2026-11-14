@@ -70,6 +70,7 @@ describe('BookModal', () => {
 
   it('pre-fills the form when editing', () => {
     setup(existing)
+    expect(screen.queryByTestId('google-books-search')).not.toBeInTheDocument()
     expect(screen.getByLabelText(/Título/)).toHaveValue('Dom Casmurro')
     expect(screen.getByTestId('book-rating-input')).toHaveValue('5')
     expect(screen.getByTestId('book-notes-input')).toHaveValue('Ler de novo')
@@ -105,6 +106,8 @@ describe('BookModal', () => {
     ])
     setup()
 
+    expect(screen.queryByTestId('google-books-search')).not.toBeInTheDocument()
+    await userEvent.click(screen.getByTestId('book-mode-import'))
     await userEvent.type(screen.getByTestId('google-books-query'), 'dom casmurro')
     await userEvent.click(screen.getByTestId('google-books-search-button'))
     await userEvent.click(await screen.findByTestId('google-books-result-0'))
@@ -161,7 +164,7 @@ describe('BookModal', () => {
 
   it('does not offer the import when editing', () => {
     setup(existing)
-    expect(screen.queryByTestId('google-books-search')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('book-mode-import')).not.toBeInTheDocument()
   })
 
   it('clears the cover on edit when the URL is emptied', async () => {

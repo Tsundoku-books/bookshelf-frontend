@@ -473,8 +473,12 @@ const ptBR = {
   bookForm: {
     createTitle: 'Adicionar Livro',
     editTitle: 'Editar Livro',
-    subtitle: 'Preencha os dados do livro',
     close: 'Fechar',
+    modes: {
+      label: 'Como cadastrar',
+      manual: 'Cadastro manual',
+      import: 'Buscar online',
+    },
     fields: {
       title: 'Título',
       titlePlaceholder: 'Ex: 1984',
@@ -504,14 +508,14 @@ const ptBR = {
       coverPreviewAlt: 'Pré-visualização da capa',
     },
     import: {
-      title: 'Importar do Google Books',
+      title: 'Buscar o livro online',
       hint: 'Busque por título, autor ou ISBN para preencher o formulário',
       placeholder: 'Ex: Dom Casmurro ou 9788535914849',
-      ariaLabel: 'Buscar no Google Books',
+      ariaLabel: 'Buscar o livro online',
       search: 'Buscar',
       searching: 'Buscando...',
       empty: 'Nenhum resultado encontrado',
-      error: 'Não foi possível buscar no Google Books',
+      error: 'Não foi possível buscar o livro online',
       unknownAuthor: 'Autor desconhecido',
     },
     submitCreate: 'Adicionar',
