@@ -309,6 +309,14 @@ const en: typeof ptBR = {
         title: 'Library count',
         hint: 'Compare the statistics numbers with your shelf.',
       },
+      'api-pagination-total-pages-floor': {
+        title: 'Shelf pagination',
+        hint: 'Check that the number of pages matches the number of books.',
+      },
+      'api-list-ignores-status-filter': {
+        title: 'Status filter',
+        hint: 'Filter the shelf by status and compare with what shows up.',
+      },
       'api-slow-book-list': {
         title: 'Book list',
         hint: 'Watch the response time when the shelf loads.',

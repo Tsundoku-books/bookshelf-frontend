@@ -311,6 +311,14 @@ const ptBR = {
         title: 'Listagem de livros',
         hint: 'Observe o tempo de resposta ao carregar a estante.',
       },
+      'api-pagination-total-pages-floor': {
+        title: 'Paginação da estante',
+        hint: 'Confira se o total de páginas bate com a quantidade de livros.',
+      },
+      'api-list-ignores-status-filter': {
+        title: 'Filtro por status',
+        hint: 'Filtre a estante por status e compare com o que aparece.',
+      },
       'ui-cover-without-alt': {
         title: 'Capas dos livros',
         hint: 'Navegue pela estante com um leitor de tela ou inspecione as imagens.',
