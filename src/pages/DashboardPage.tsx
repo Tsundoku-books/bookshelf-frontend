@@ -9,7 +9,6 @@ import { BookCard } from '../components/BookCard'
 import { BookFilters } from '../components/BookFilters'
 import { Pagination } from '../components/Pagination'
 import { DeleteConfirmModal } from '../components/DeleteConfirmModal'
-import { useAuth } from '../contexts/AuthContext'
 import { useBookLibrary } from '../hooks/useBookLibrary'
 import { booksService } from '../services/books.service'
 import { usePlayground } from '../contexts/PlaygroundContext'
@@ -22,7 +21,6 @@ const SEARCH_DEBOUNCE_MS = 300
 
 export function DashboardPage() {
   const { t } = useTranslation()
-  const { user } = useAuth()
   const { isOn } = usePlayground()
 
   const [showAddBookModal, setShowAddBookModal] = useState(false)
@@ -111,13 +109,6 @@ export function DashboardPage() {
       <AppHeader />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-heading mb-2">
-            {t('dashboard.greeting', { name: user?.name || t('dashboard.greetingFallbackName') })}
-          </h2>
-          <p className="text-text-muted">{t('dashboard.subtitle')}</p>
-        </div>
-
         {visibleError && (
           <Alert tone="danger" role="alert" testId="dashboard-error" className="mb-6">
             {visibleError}
@@ -138,59 +129,55 @@ export function DashboardPage() {
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               <div
-                className="ts-card p-6 hover:shadow-md transition-all border border-border group cursor-pointer"
+                className="ts-card p-6"
                 data-testid="stats-total"
               >
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-text-muted text-sm font-medium">{t('dashboard.stats.totalLabel')}</p>
-                  <div className="p-2 bg-background rounded-lg group-hover:bg-primary/5 transition-colors">
-                    <BookOpen className="w-5 h-5 text-text-muted group-hover:text-heading transition-colors" />
+                  <div className="p-2 bg-background rounded-lg">
+                    <BookOpen className="w-5 h-5 text-text-muted" />
                   </div>
                 </div>
-                <p className="text-4xl font-bold text-text mb-2">{stats?.total || 0}</p>
-                <p className="text-xs text-text-muted">{t('dashboard.stats.totalCaption')}</p>
+                <p className="text-4xl font-bold text-text">{stats?.total || 0}</p>
               </div>
 
               <div
-                className="ts-card p-6 hover:shadow-md transition-all group cursor-pointer"
+                className="ts-card p-6"
                 data-testid="stats-to-read"
               >
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-text-muted text-sm font-medium">{t('dashboard.stats.toReadLabel')}</p>
-                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
-                    <BookMarked className="w-5 h-5 text-heading group-hover:text-heading/80 transition-colors" />
+                  <div className="p-2 bg-background rounded-lg">
+                    <BookMarked className="w-5 h-5 text-text-muted" />
                   </div>
                 </div>
-                <p className="text-4xl font-bold text-text mb-2">{stats?.byStatus.toRead || 0}</p>
-                <p className="text-xs text-text-muted">{t('dashboard.stats.toReadCaption')}</p>
+                <p className="text-4xl font-bold text-text">{stats?.byStatus.toRead || 0}</p>
               </div>
 
               <div
-                className="ts-card p-6 hover:shadow-md transition-all group cursor-pointer"
+                className="ts-card p-6"
                 data-testid="stats-reading"
               >
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-text-muted text-sm font-medium">{t('dashboard.stats.readingLabel')}</p>
-                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
-                    <BookOpenCheck className="w-5 h-5 text-heading group-hover:text-heading/80 transition-colors" />
+                  <div className="p-2 bg-background rounded-lg">
+                    <BookOpenCheck className="w-5 h-5 text-text-muted" />
                   </div>
                 </div>
-                <p className="text-4xl font-bold text-text mb-2">{stats?.byStatus.reading || 0}</p>
-                <p className="text-xs text-text-muted">{t('dashboard.stats.readingCaption')}</p>
+                <p className="text-4xl font-bold text-text">{stats?.byStatus.reading || 0}</p>
               </div>
 
               <div
-                className="ts-card p-6 hover:shadow-md transition-all group cursor-pointer"
+                className="ts-card p-6"
                 data-testid="stats-read"
               >
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-text-muted text-sm font-medium">{t('dashboard.stats.readLabel')}</p>
-                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
-                    <TrendingUp className="w-5 h-5 text-heading group-hover:text-heading/80 transition-colors" />
+                  <div className="p-2 bg-background rounded-lg">
+                    <TrendingUp className="w-5 h-5 text-text-muted" />
                   </div>
                 </div>
-                <p className="text-4xl font-bold text-text mb-2">{stats?.byStatus.read || 0}</p>
-                <p className="text-xs text-text-muted">{t('dashboard.stats.readCaption')}</p>
+                <p className="text-4xl font-bold text-text">{stats?.byStatus.read || 0}</p>
               </div>
             </div>
 
@@ -224,17 +211,7 @@ export function DashboardPage() {
               </div>
             </div>
 
-            {libraryEmpty ? (
-              <div className="ts-card p-12 text-center">
-                <div className="max-w-md mx-auto">
-                  <div className="w-20 h-20 bg-background rounded-full flex items-center justify-center mx-auto mb-4">
-                    <BookOpen className="w-10 h-10 text-text-muted" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-heading mb-2">{t('dashboard.empty.title')}</h3>
-                  <p className="text-text-muted mb-6">{t('dashboard.empty.description')}</p>
-                </div>
-              </div>
-            ) : (
+            {libraryEmpty ? null : (
               <div className="ts-card p-6">
                 <h3 className="text-xl font-bold text-heading mb-4" data-testid="book-list-heading">{isOn('ui-dashboard-title-typo') ? t('playground.typo.dashboardHeading') : t('dashboard.bookList.heading')}</h3>
 
