@@ -40,12 +40,37 @@ describe('AppHeader', () => {
       </MemoryRouter>,
     )
 
-  it('shows the user and links to the library and the account for readers', () => {
+  it('shows the user and links to the library and the account for readers', async () => {
     renderHeader()
 
-    expect(screen.getByText('Ana')).toBeInTheDocument()
+    expect(screen.getByTestId('user-avatar')).toHaveTextContent('A')
     expect(screen.getByTestId('nav-library')).toHaveAttribute('href', '/dashboard')
+    expect(screen.queryByTestId('nav-account')).not.toBeInTheDocument()
+
+    await userEvent.click(screen.getByTestId('user-menu'))
+
     expect(screen.getByTestId('nav-account')).toHaveAttribute('href', '/account')
+    expect(screen.getByTestId('nav-playground')).toHaveAttribute('href', '/playground')
+  })
+
+  it('groups the bookstore links in their own menu and closes it with Escape', async () => {
+    roles = ['reader', 'buyer', 'seller']
+    renderHeader()
+
+    expect(screen.queryByTestId('nav-store')).not.toBeInTheDocument()
+    await userEvent.click(screen.getByTestId('marketplace-menu'))
+    for (const id of ['nav-store', 'nav-cart', 'nav-orders', 'nav-sell', 'nav-sales']) {
+      expect(screen.getByTestId(id)).toBeInTheDocument()
+    }
+
+    await userEvent.keyboard('{Escape}')
+    expect(screen.queryByTestId('nav-store')).not.toBeInTheDocument()
+  })
+
+  it('has no bookstore menu for readers only', () => {
+    renderHeader()
+
+    expect(screen.queryByTestId('marketplace-menu')).not.toBeInTheDocument()
   })
 
   it('hides the library link for accounts without the reader role', () => {
@@ -59,6 +84,7 @@ describe('AppHeader', () => {
   it('signs out', async () => {
     renderHeader()
 
+    await userEvent.click(screen.getByTestId('user-menu'))
     await userEvent.click(screen.getByRole('button', { name: 'Sair' }))
 
     expect(logout).toHaveBeenCalledTimes(1)

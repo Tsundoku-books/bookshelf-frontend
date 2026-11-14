@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logoOnLight from "../../design-system/assets/logo/logo-horizontal-on-light.svg";
 import logoOnDark from "../../design-system/assets/logo/logo-horizontal-on-dark.svg";
-import { Button } from "./ui/button";
+import { ChevronDown } from "lucide-react";
+import { Avatar } from "./Avatar";
+import { Menu, MENU_ITEM } from "./Menu";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeSelect } from "./ThemeSelect";
 import { BugsBanner } from "./BugsBanner";
@@ -35,95 +37,100 @@ export function AppHeader() {
                 className="ts-only-light h-8"
               />
               <img src={logoOnDark} alt="" className="ts-only-dark h-8" />
-              {user && (
-                <span className="text-xs font-normal text-text-muted">
-                  {user.name}
-                </span>
-              )}
             </Link>
           </h1>
           <div className="flex items-center gap-3">
-            <nav
-              className="hidden items-center gap-4 sm:flex"
-              aria-label={t("nav.main")}
-            >
+            <nav className="flex items-center gap-2" aria-label={t("nav.main")}>
               {hasRole("reader") && (
                 <Link
                   to="/dashboard"
-                  className={NAV_LINK}
+                  className={`${NAV_LINK} rounded-lg px-2 py-1.5 hover:bg-background`}
                   data-testid="nav-library"
                 >
                   {t("nav.library")}
                 </Link>
               )}
-              {hasRole("buyer") && (
-                <>
-                  <Link
-                    to="/store"
-                    className={NAV_LINK}
-                    data-testid="nav-store"
-                  >
-                    {t("nav.store")}
-                  </Link>
-                  <Link to="/cart" className={NAV_LINK} data-testid="nav-cart">
-                    {t("nav.cart")}
-                    {count > 0 && (
-                      <span
-                        className="ml-1 rounded-full bg-primary px-1.5 text-xs text-on-primary"
-                        data-testid="cart-count"
-                      >
-                        {count}
-                      </span>
-                    )}
-                  </Link>
-                  <Link
-                    to="/orders"
-                    className={NAV_LINK}
-                    data-testid="nav-orders"
-                  >
-                    {t("nav.orders")}
-                  </Link>
-                </>
+              {(hasRole("buyer") || hasRole("seller")) && (
+                <Menu
+                  label={t("nav.marketplace")}
+                  testId="marketplace-menu"
+                  trigger={
+                    <>
+                      {t("nav.marketplace")}
+                      {count > 0 && (
+                        <span className="rounded-full bg-primary px-1.5 text-xs text-on-primary" aria-hidden="true">
+                          {count}
+                        </span>
+                      )}
+                      <ChevronDown className="h-4 w-4" aria-hidden="true" />
+                    </>
+                  }
+                >
+                  {hasRole("buyer") && (
+                    <>
+                      <Link to="/store" className={MENU_ITEM} data-testid="nav-store">
+                        {t("nav.store")}
+                      </Link>
+                      <Link to="/cart" className={MENU_ITEM} data-testid="nav-cart">
+                        {t("nav.cart")}
+                        {count > 0 && (
+                          <span
+                            className="rounded-full bg-primary px-1.5 text-xs text-on-primary"
+                            data-testid="cart-count"
+                          >
+                            {count}
+                          </span>
+                        )}
+                      </Link>
+                      <Link to="/orders" className={MENU_ITEM} data-testid="nav-orders">
+                        {t("nav.orders")}
+                      </Link>
+                    </>
+                  )}
+                  {hasRole("seller") && (
+                    <>
+                      <Link to="/sell" className={MENU_ITEM} data-testid="nav-sell">
+                        {t("nav.sell")}
+                      </Link>
+                      <Link to="/sales" className={MENU_ITEM} data-testid="nav-sales">
+                        {t("nav.sales")}
+                      </Link>
+                    </>
+                  )}
+                </Menu>
               )}
-              {hasRole("seller") && (
-                <>
-                  <Link to="/sell" className={NAV_LINK} data-testid="nav-sell">
-                    {t("nav.sell")}
-                  </Link>
-                  <Link
-                    to="/sales"
-                    className={NAV_LINK}
-                    data-testid="nav-sales"
-                  >
-                    {t("nav.sales")}
-                  </Link>
-                </>
-              )}
-              <Link
-                to="/account"
-                className={NAV_LINK}
-                data-testid="nav-account"
-              >
-                {t("nav.account")}
-              </Link>
-              <Link
-                to="/playground"
-                className={NAV_LINK}
-                data-testid="nav-playground"
-              >
-                {t("nav.playground")}
-              </Link>
             </nav>
-            <ThemeSelect />
-            <LanguageSwitcher />
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={logout}
-              className="hover:bg-background"
-            >
-              {t("dashboard.logout")}
-            </Button>
+            {user && (
+              <Menu
+                label={t("nav.userMenu", { name: user.name })}
+                testId="user-menu"
+                trigger={
+                  <>
+                    <Avatar name={user.name} />
+                    <span className="hidden max-w-32 truncate sm:inline">{user.name}</span>
+                    <ChevronDown className="h-4 w-4" aria-hidden="true" />
+                  </>
+                }
+              >
+                <div className="px-3 py-2">
+                  <p className="truncate text-sm font-semibold text-heading">{user.name}</p>
+                  <p className="truncate text-xs text-text-muted">{user.email}</p>
+                </div>
+                <Link to="/account" className={MENU_ITEM} data-testid="nav-account">
+                  {t("nav.account")}
+                </Link>
+                <Link to="/playground" className={MENU_ITEM} data-testid="nav-playground">
+                  {t("nav.playground")}
+                </Link>
+                <div className="flex flex-col gap-2 border-t border-border px-3 py-3" data-keep-open>
+                  <ThemeSelect />
+                  <LanguageSwitcher />
+                </div>
+                <button type="button" onClick={logout} className={MENU_ITEM} data-testid="logout-button">
+                  {t("dashboard.logout")}
+                </button>
+              </Menu>
+            )}
           </div>
         </div>
       </header>
